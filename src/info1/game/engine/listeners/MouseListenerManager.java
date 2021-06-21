@@ -1,7 +1,6 @@
 package info1.game.engine.listeners;
 
 import info1.game.engine.GameEngine;
-import info1.game.engine.gameobjects.GameObject;
 import info1.game.engine.utils.Vector2D;
 
 import java.awt.*;
