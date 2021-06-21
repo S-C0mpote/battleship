@@ -49,7 +49,7 @@ public class GameEngine {
             draw();
 
             try {
-                Thread.sleep(1); // To bypass overheat
+                Thread.sleep(2); // To bypass overheat
             } catch (InterruptedException e) { e.printStackTrace(); }
         }
     }
