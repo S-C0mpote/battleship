@@ -2,25 +2,33 @@ package info1.game.engine;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class Scene {
 
-    private String name;
-    private List<GameObject> gameObjects = new ArrayList<>();
+    private final String name;
+    private final Map<Integer, GameObject> gameObjects = new TreeMap<>();
 
     public Scene(String name) {
         this.name = name;
     }
 
     public void addGameObject(GameObject gameObject){
-        gameObjects.add(gameObject);
+        gameObjects.put(gameObjects.size(), gameObject);
     }
 
-    public List<GameObject> getGameObjects(){
+    public void addGameObject(int zIndex, GameObject gameObject) {
+        gameObjects.put(zIndex, gameObject);
+    }
+
+    public Map<Integer, GameObject> getGameObjects(){
         return gameObjects;
     }
 
     public void removeGameObject(GameObject gameObject){
-        gameObjects.removeIf(go -> go.equals(gameObject));
+        gameObjects.forEach((i, go) -> {
+            if(gameObject.equals(go)) gameObjects.remove(i);
+        });
     }
 }

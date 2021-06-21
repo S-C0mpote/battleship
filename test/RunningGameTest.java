@@ -7,6 +7,8 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -31,7 +33,6 @@ public class RunningGameTest {
 
     @BeforeAll
     public static void init() throws Exception {
-
         joueur1 = new Player("Joueur"+Math.random());
         joueur2 = new Player("Joueur"+Math.random());
 

@@ -3,6 +3,7 @@ package info1.game.engine;
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
+import java.util.Map;
 
 public class GameEngine {
 
@@ -55,24 +56,19 @@ public class GameEngine {
     }
 
     public void update(double delta) {
-        List<GameObject> gameObjects = this.scene.getGameObjects();
-
-        for (GameObject gameObject : gameObjects) {
-            gameObject.update(delta);
-        }
+        Map<Integer, GameObject> gameObjects = this.scene.getGameObjects();
+        gameObjects.forEach((i, go) -> go.update(delta));
     }
 
     public void draw() {
-        List<GameObject> gameObjects = this.scene.getGameObjects();
+        Map<Integer, GameObject> gameObjects = this.scene.getGameObjects();
 
         Graphics2D g2d = gameCanvas.getGraphics2D();
 
         g2d.setColor(Color.BLACK);
         g2d.fillRect(0, 0, WIDTH, HEIGHT);
 
-        for (GameObject gameObject : gameObjects) {
-            gameObject.draw(g2d);
-        }
+        gameObjects.forEach((i, go) -> go.draw(g2d));
 
         gameCanvas.getBufferStrategy().show();
     }
