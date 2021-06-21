@@ -1,4 +1,4 @@
-package info1;
+package info1.game;
 
 import info1.game.engine.GameEngine;
 import info1.game.engine.Scene;
@@ -7,31 +7,30 @@ import info1.game.engine.gameobjects.Button;
 import info1.game.engine.gameobjects.Input;
 import info1.game.engine.gameobjects.MenuBackground;
 import info1.game.engine.utils.Vector2D;
+import info1.game.resources.Fonts;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 
 public class Game {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         GameEngine engine = new GameEngine();
-        Scene menu = Scenes.MENU.getScene();
+        engine.getGameCanvas().setFont(Fonts.MAIN);
 
         Input input = new Input(300, 50);
         input.setPosition(new Vector2D(200, 200));
 
-        Button startButton = new Button(300, 50, "Play", engine.getGameCanvas().getFont());
-        Button startButton2 = new Button(300, 50, "Play", engine.getGameCanvas().getFont());
+        Button startButton = new Button(300, 50, "Play", Fonts.MAIN);
         startButton.setPosition(new Vector2D(300, 300));
-        startButton2.setPosition(new Vector2D(350, 320));
 
         MenuBackground menuBackground = new MenuBackground();
 
+        Scene menu = Scenes.MENU.getScene();
         menu.addGameObject(-1, menuBackground);
         menu.addGameObject(startButton);
-        menu.addGameObject(startButton2);
         menu.addGameObject(input);
-
         engine.start(menu);
     }
 

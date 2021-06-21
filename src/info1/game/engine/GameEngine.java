@@ -33,6 +33,7 @@ public class GameEngine {
 
     public void start(Scene startScene) {
         gameCanvas.init();
+
         this.scene = startScene;
 
         double frameCount = 0;
