@@ -49,8 +49,8 @@ public class GameEngine {
 
             update((lastTime - firstTime) * 1000);
 
-            if (currentTime >= 1.0 / FPS_LIMIT) {
-                currentTime = 0;
+            while (currentTime >= 1.0 / FPS_LIMIT) {
+                currentTime -= 1.0 / FPS_LIMIT;
                 frameCount++;
 
                 draw();

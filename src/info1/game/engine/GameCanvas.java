@@ -5,7 +5,6 @@ import java.awt.image.BufferStrategy;
 
 public class GameCanvas extends Canvas {
 
-    private BufferStrategy bs;
     private Graphics2D g2d;
 
     public GameCanvas(int width, int height) {
@@ -20,8 +19,8 @@ public class GameCanvas extends Canvas {
 
     public void init() {
         createBufferStrategy(2);
-        bs = getBufferStrategy();
-        g2d = (Graphics2D) getBufferStrategy().getDrawGraphics();
+        BufferStrategy bs = getBufferStrategy();
+        g2d = (Graphics2D) bs.getDrawGraphics();
 
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
         g2d.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_SPEED);

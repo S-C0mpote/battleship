@@ -1,59 +1,43 @@
 package info1.game.engine.gameobjects;
 
 import info1.game.engine.GameEngine;
+import info1.game.resources.Images;
 
-
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 public class TitleMenu extends GameObject{
 
-    private static BufferedImage img;
-    private double y = 10;
-    private GameEngine gameEngine;
-    private final int WIDTH = 500, HEIGHT = 100;
-    private boolean direction = false;
-    private float vitesse = 28;
+    private final int WIDTH = 405;
+
+    private int direction = 1;
+    private float speed = 100;
 
     public TitleMenu(GameEngine gameEngine) {
-        if(img == null) {
-            try { img = ImageIO.read(new File("assets/ui/background.jpg")); }
-            catch (IOException e) { e.printStackTrace(); }
-        }
-        this.gameEngine = gameEngine;
+        this.position.x = (gameEngine.getGameCanvas().getWidth() / 2d) - WIDTH / 2d;
     }
 
     @Override
     public void update(double delta) {
-        if(y >= 60){
-            direction = false;
-            vitesse = 28;
+        if(position.y >= 30){
+            direction = 1;
+            speed = 90;
         }
 
-        if(y <= 9){
-            direction = true;
-            vitesse = 28;
+        if(position.y <= 0){
+            direction = -1;
+            speed = 90;
         }
 
-        if(direction) {
-            y += delta / (double) vitesse;
-            if(y >= 35)
-                vitesse *= 1.00000008;
-        }
-        else {
-            y -= delta / (double)vitesse;
+        if(direction == 1) position.y -= (delta / (double) speed);
+        if(direction == -1) position.y += (delta / (double) speed);
 
-            if(y <= 35)
-                vitesse *= 1.00000008;
-        }
+        if((position.y >= 15 && direction == -1) || (position.y <= 15 && direction == 1)) speed += delta / 11;
+        if((position.y < 15 && direction == -1) || (position.y > 15 && direction == 1)) speed -= delta / 10;
     }
 
     @Override
     public void draw(Graphics2D g2d) {
         g2d.setColor(Color.RED);
-        g2d.drawRect((gameEngine.getGameCanvas().getWidth()/2)-WIDTH/2, (int)y + 30, WIDTH,HEIGHT);
+        g2d.drawImage(Images.MENU_LOGO, (int) position.x, (int) position.y + 60, null);
     }
 }
