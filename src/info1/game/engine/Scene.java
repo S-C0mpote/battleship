@@ -6,22 +6,21 @@ import java.util.List;
 public class Scene {
 
     private String name;
-    private List<GameObject> listGo;
+    private List<GameObject> gameObjects = new ArrayList<>();
 
     public Scene(String name) {
         this.name = name;
-        this.listGo = new ArrayList<>();
     }
 
     public void addGameObject(GameObject gameObject){
-        listGo.add(gameObject);
+        gameObjects.add(gameObject);
     }
 
-    public List<GameObject> getGameObject(){
-        return listGo;
+    public List<GameObject> getGameObjects(){
+        return gameObjects;
     }
 
     public void removeGameObject(GameObject gameObject){
-        listGo.removeIf(go -> go.equals(gameObject));
+        gameObjects.removeIf(go -> go.equals(gameObject));
     }
 }

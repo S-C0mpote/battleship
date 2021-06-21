@@ -7,17 +7,23 @@ public class GameCanvas extends Canvas {
 
     private BufferStrategy bs;
 
-    public GameCanvas() {
+    public GameCanvas(int width, int height) {
+        setBackground(Color.BLUE);
+
+        Dimension size = new Dimension(width, height);
+
+        setSize(size);
+        setMaximumSize(size);
+        setMinimumSize(size);
+    }
+
+    public void init() {
         createBufferStrategy(2);
         bs = getBufferStrategy();
     }
 
-    public BufferStrategy getBs() {
-        return bs;
-    }
-
     public Graphics2D getGraphics2D() {
-        return (Graphics2D) super.getGraphics();
+        return (Graphics2D) super.getBufferStrategy().getDrawGraphics();
     }
 
 }
