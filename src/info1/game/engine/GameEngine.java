@@ -1,4 +1,4 @@
-package info1.gui;
+package info1.game.engine;
 
 public class GameEngine {
 

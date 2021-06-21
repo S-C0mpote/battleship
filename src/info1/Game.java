@@ -1,6 +1,6 @@
 package info1;
 
-import info1.gui.GameEngine;
+import info1.game.engine.GameEngine;
 
 public class Game {
 

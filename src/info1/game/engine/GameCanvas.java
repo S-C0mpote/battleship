@@ -1,4 +1,4 @@
-package info1.gui;
+package info1.game.engine;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
