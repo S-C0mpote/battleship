@@ -1,26 +1,18 @@
 package info1.game.engine.gameobjects;
 
-import info1.game.engine.GameEngine;
-import info1.game.engine.GameObject;
+import info1.game.engine.listeners.InteractiveGameObject;
+
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
-public class Button implements GameObject, MouseListener {
+public class Button extends InteractiveGameObject {
 
-    private GameEngine gameEngine;
-    private int x, y, width, height;
     private String name;
     private Font font;
     //Image plus tard
     private Color color = Color.CYAN;
 
-    public Button(GameEngine gameEngine, int x, int y, int width, int height, String name, Font font) {
-        this.gameEngine = gameEngine;
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
+    public Button(int width, int height, String name, Font font) {
+        this.size = new Dimension(width, height);
         this.name = name;
         this.font = font;
     }
@@ -34,32 +26,39 @@ public class Button implements GameObject, MouseListener {
 
         //TODO : image
         g2d.setColor(color);
-        g2d.fillRect(x, y, width, height);
+        g2d.fillRect((int) position.x, (int) position.y, size.width, size.height);
 
         //Draw button string
         FontMetrics metrics = g2d.getFontMetrics(font);
-        int xf = x + (width - metrics.stringWidth(name)) / 2;
-        int yf = y + ((height - metrics.getHeight()) / 2) + metrics.getAscent();
+        int xf = (int) position.x + (size.width - metrics.stringWidth(name)) / 2;
+        int yf = (int) position.y + ((size.height - metrics.getHeight()) / 2) + metrics.getAscent();
         g2d.setFont(font);
         g2d.setColor(Color.BLACK);
         g2d.drawString(name, xf, yf);
     }
 
-
-    public String getName(){return this.name;}
-
-    @Override
-    public void mouseClicked(MouseEvent e) {this.color = Color.RED;}
+    public String getName(){
+        return this.name;
+    }
 
     @Override
-    public void mousePressed(MouseEvent e) {}
+    public void mouseOver() {
+        color = Color.YELLOW;
+    }
 
     @Override
-    public void mouseReleased(MouseEvent e) {}
+    public void mouseExit() {
+        color = Color.CYAN;
+    }
 
     @Override
-    public void mouseEntered(MouseEvent e) {}
+    public void mousePressed() {
+        color = Color.ORANGE;
+    }
 
     @Override
-    public void mouseExited(MouseEvent e) {}
+    public void mouseReleased() {
+        color = Color.YELLOW;
+    }
+
 }

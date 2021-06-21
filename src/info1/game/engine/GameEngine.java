@@ -1,5 +1,8 @@
 package info1.game.engine;
 
+import info1.game.engine.gameobjects.GameObject;
+import info1.game.engine.listeners.MouseListenerManager;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.Map;
@@ -7,8 +10,10 @@ import java.util.Map;
 public class GameEngine {
 
     private final int WIDTH = 1280, HEIGHT = 720;
+    private final int FPS_LIMIT = 60;
     private final GameCanvas gameCanvas = new GameCanvas(WIDTH, HEIGHT);
     private final JFrame window = new JFrame("BattleShip");
+    private final MouseListenerManager mouseListener;
 
     private boolean running = true;
     private Scene scene = null;
@@ -20,37 +25,43 @@ public class GameEngine {
         window.setLocationRelativeTo(null);
         window.setVisible(true);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Initialisation du MouseListenerManager
+        mouseListener = new MouseListenerManager(this);
+        gameCanvas.addMouseListener(mouseListener);
     }
 
     public void start(Scene startScene) {
         gameCanvas.init();
         this.scene = startScene;
 
-        long current, last = System.currentTimeMillis();
-        double delta, accumulator = 0;
-        int frames = 0;
+        double frameCount = 0;
+        double firstTime, frameTime = 0;
+        double lastTime = System.nanoTime() / 1e9;
+        double currentTime = 0.0;
 
-        while (running) {
-            current = System.currentTimeMillis();
-            delta = (current - last) / 1000d;
-            last = System.currentTimeMillis();
+        while(running) {
+            firstTime = lastTime;
+            lastTime = System.nanoTime() / 1e9;
+            frameTime += lastTime - firstTime;
+            currentTime += lastTime - firstTime;
 
-            accumulator += delta;
+            update((lastTime - firstTime) * 1000);
 
-            while (accumulator >= 1) {
-                accumulator--;
-                window.setTitle("BattleShip - " + frames + " FPS");
-                frames = 0;
+            if (currentTime >= 1.0 / FPS_LIMIT) {
+                currentTime = 0;
+                frameCount++;
+
+                draw();
+                mouseListener.updateMousePosition();
             }
 
-            frames++;
+            if (frameTime >= 1) {
+                window.setTitle("BattleShip - " + frameCount + "FPS");
 
-            update(delta);
-            draw();
-
-            try {
-                Thread.sleep(2); // To bypass overheat
-            } catch (InterruptedException e) { e.printStackTrace(); }
+                frameTime = 0;
+                frameCount = 0;
+            }
         }
     }
 
@@ -73,4 +84,5 @@ public class GameEngine {
     }
 
     public GameCanvas getGameCanvas() { return gameCanvas; }
+    public Scene getCurrentScene() { return scene; }
 }

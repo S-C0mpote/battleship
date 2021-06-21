@@ -1,29 +1,19 @@
 package info1.game.engine.gameobjects;
 
-import info1.game.engine.GameEngine;
-import info1.game.engine.GameObject;
-
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
 
-public class Input implements GameObject, KeyListener {
+public class Input extends GameObject implements KeyListener {
 
-    private final GameEngine gameEngine;
     private final int padding = 5;
 
-    private int x, y, width, height;
+    private int width, height;
     private double accumulator = 0;
-
     private boolean bar = false;
-
     private String text = "";
 
-    public Input(GameEngine gameEngine, int x, int y, int width, int height) {
-        this.gameEngine = gameEngine;
-        this.x = x;
-        this.y = y;
+    public Input(int width, int height) {
         this.width = width;
         this.height = height;
     }
@@ -32,9 +22,8 @@ public class Input implements GameObject, KeyListener {
     public void update(double delta) {
         accumulator += delta;
 
-        if(accumulator > 0.5) {
+        if(accumulator > 500) {
             bar = !bar;
-
             accumulator = 0;
         }
     }
@@ -42,16 +31,11 @@ public class Input implements GameObject, KeyListener {
     @Override
     public void draw(Graphics2D g2d) {
         g2d.setColor(Color.RED);
-        g2d.fillRect(x, y, width, height);
+        g2d.fillRoundRect((int) position.x, (int) position.y, width, height, 50, 50);
 
         g2d.setColor(Color.BLACK);
         g2d.setFont(g2d.getFont().deriveFont(Font.BOLD, 20));
-        g2d.drawString(text + (bar ? "|" : ""), x + padding, y + height / 2);
-    }
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-
+        g2d.drawString(text + (bar ? "|" : ""), (int) position.x + padding, (int) position.y + height / 2);
     }
 
     @Override
@@ -67,21 +51,13 @@ public class Input implements GameObject, KeyListener {
     }
 
     @Override
-    public void keyReleased(KeyEvent e) {
+    public void keyReleased(KeyEvent e) {}
 
-    }
+    @Override
+    public void keyTyped(KeyEvent e) {}
 
     public String getText() { return text; }
     public void setText(String text) { this.text = text; }
 
-    public int getX() { return x; }
-    public int getY() { return y; }
-    public void setX(int x) { this.x = x; }
-    public void setY(int y) { this.y = y; }
-
-    public int getHeight() { return height; }
-    public int getWidth() { return width; }
-    public void setHeight(int height) { this.height = height; }
-    public void setWidth(int width) { this.width = width; }
 }
 
