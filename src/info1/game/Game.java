@@ -6,6 +6,7 @@ import info1.game.engine.Scenes;
 import info1.game.engine.gameobjects.Button;
 import info1.game.engine.gameobjects.Input;
 import info1.game.engine.gameobjects.MenuBackground;
+import info1.game.engine.gameobjects.TitleMenu;
 import info1.game.engine.utils.Vector2D;
 import info1.game.resources.Fonts;
 
@@ -26,11 +27,14 @@ public class Game {
         startButton.setPosition(new Vector2D(300, 300));
 
         MenuBackground menuBackground = new MenuBackground();
+        TitleMenu title = new TitleMenu(engine);
+
 
         Scene menu = Scenes.MENU.getScene();
         menu.addGameObject(-1, menuBackground);
         menu.addGameObject(startButton);
         menu.addGameObject(input);
+        menu.addGameObject(title);
         engine.start(menu);
     }
 
