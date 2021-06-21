@@ -72,4 +72,5 @@ public class GameEngine {
         gameCanvas.getBufferStrategy().show();
     }
 
+    public GameCanvas getGameCanvas() { return gameCanvas; }
 }

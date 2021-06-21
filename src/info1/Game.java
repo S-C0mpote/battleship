@@ -17,11 +17,11 @@ public class Game {
 
         Scene menu = Scenes.MENU.getScene();
 
-
         Input input = new Input(engine, 50, 50, 300, 50);
 
         menu.addGameObject(input);
 
+        engine.getGameCanvas().addKeyListener(input);
         engine.start(menu);
     }
 

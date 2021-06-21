@@ -31,13 +31,13 @@ public class Button implements GameObject, MouseListener {
         //Draw rectangle color
         g2d.setColor(Color.CYAN);
         g2d.fillRect(x, y, width, height);
-        g2d.setColor(Color.BLACK);
 
         //Draw button string
         FontMetrics metrics = g2d.getFontMetrics(font);
         int xf = x + (width - metrics.stringWidth(name)) / 2;
         int yf = y + ((height - metrics.getHeight()) / 2) + metrics.getAscent();
         g2d.setFont(font);
+        g2d.setColor(Color.BLACK);
         g2d.drawString(name, xf, yf);
     }
 
