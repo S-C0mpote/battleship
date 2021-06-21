@@ -12,6 +12,8 @@ public class Button implements GameObject, MouseListener {
     private int x, y, width, height;
     private String name;
     private Font font;
+    //Image plus tard
+    private Color color = Color.CYAN;
 
     public Button(GameEngine gameEngine, int x, int y, int width, int height, String name, Font font) {
         this.gameEngine = gameEngine;
@@ -29,7 +31,9 @@ public class Button implements GameObject, MouseListener {
     @Override
     public void draw(Graphics2D g2d) {
         //Draw rectangle color
-        g2d.setColor(Color.CYAN);
+
+        //TODO : image
+        g2d.setColor(color);
         g2d.fillRect(x, y, width, height);
 
         //Draw button string
@@ -42,16 +46,10 @@ public class Button implements GameObject, MouseListener {
     }
 
 
-    public void onButtonClick(Graphics2D g2d) {
-        g2d.setBackground(Color.RED);
-    }
-
     public String getName(){return this.name;}
 
     @Override
-    public void mouseClicked(MouseEvent e) {
-
-    }
+    public void mouseClicked(MouseEvent e) {this.color = Color.RED;}
 
     @Override
     public void mousePressed(MouseEvent e) {}

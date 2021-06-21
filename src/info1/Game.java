@@ -3,11 +3,8 @@ package info1;
 import info1.game.engine.GameEngine;
 import info1.game.engine.Scene;
 import info1.game.engine.Scenes;
-import info1.game.engine.gameobjects.Image;
-import info1.game.engine.gameobjects.Input;
-
-import javax.imageio.ImageIO;
-import java.io.File;
+import info1.game.engine.gameobjects.Button;
+import javax.swing.*;
 import java.io.IOException;
 
 public class Game {
@@ -17,11 +14,13 @@ public class Game {
 
         Scene menu = Scenes.MENU.getScene();
 
-        Input input = new Input(engine, 50, 50, 300, 50);
 
-        menu.addGameObject(input);
 
-        engine.getGameCanvas().addKeyListener(input);
+        //Leo Tests
+        Button button = new Button(engine, 50, 50, 300, 50, "GO", new JLabel().getFont());
+        menu.addGameObject(button);
+        engine.getGameCanvas().addMouseListener(button);
+
         engine.start(menu);
     }
 
