@@ -8,7 +8,7 @@ public class GameCanvas extends Canvas {
     private BufferStrategy bs;
 
     public GameCanvas(int width, int height) {
-        setBackground(Color.BLUE);
+        setBackground(Color.BLACK);
 
         Dimension size = new Dimension(width, height);
 
