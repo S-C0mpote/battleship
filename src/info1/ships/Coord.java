@@ -1,58 +1,69 @@
 package info1.ships;
 
 
+import java.util.Objects;
+
 /**
- * une implementation de l'interface ICoord manipulant des coordonnées alphanumériques comme "A1", "B6", "J3", etc.
+ * une implementation de l'interface ICoord manipulant des coordonnÃ©es alphanumÃ©riques comme "A1", "B6", "J3", etc.
  */
 
 public class Coord implements ICoord {
 
-    // TODO
+    private int x, y;
 
     /**
      * NB : LA SIGNATURE DU CONSTRUCTEUR DOIT ETRE RESPECTEE
      *
      * constructeur d'un objet Coord
-     * @param xy la coordonnée aphanumérique sous la forme d'une chaine de caractères
-     * @throws BadCoordException si la chaine de caractère ne permet pas de définir une coordonnée alphanumérique
+     * @param xy la coordonnÃ©e aphanumÃ©rique sous la forme d'une chaine de caractÃ¨res
+     * @throws BadCoordException si la chaine de caractÃ¨re ne permet pas de dÃ©finir une coordonnÃ©e alphanumÃ©rique
      */
     public Coord(String xy) throws BadCoordException {
-        // TODO
+        x = xy.charAt(0) - 64;
+
+        String yStr = xy.split(String.valueOf(xy.charAt(0)))[1];
+        y = Integer.parseInt(yStr);
+
+        if(x < 1 || y < 1 || x > 10 || y > 10){
+            throw new BadCoordException();
+        }
     }
 
     @Override
     public char getAlphaX() {
-        // TODO
-        return 'x';
+        return (char) (this.x + 64);
     }
 
     @Override
     public int getX() {
-        // TODO
-        return -1;
+        return x;
     }
 
     @Override
     public int getY() {
-        // TODO
-        return -1;
+        return y;
     }
 
     @Override
     public String toString() {
-        // TODO
-        return "" ;
+        return this.getAlphaX() + String.valueOf(this.y);
     }
 
     @Override
     public boolean equals(Object o) {
-        // TODO
-        return false;
+        if(this == o)
+            return true;
+        if(o == null || o.getClass()!= this.getClass()){
+            return false;
+        }
+
+        Coord c = (Coord) o;
+
+        return (this.x == c.getX() && this.y == c.getY());
     }
 
     @Override
     public int hashCode() {
-        // TODO
-        return -1;
+        return Objects.hash(x, y);
     }
 }
