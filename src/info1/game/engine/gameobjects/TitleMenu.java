@@ -40,12 +40,13 @@ public class TitleMenu extends GameObject{
 
         if(direction) {
             y += delta / (double) vitesse;
-
+            if(y >= 35)
+                vitesse *= 1.00000008;
         }
         else {
             y -= delta / (double)vitesse;
 
-            if(y <= 30)
+            if(y <= 35)
                 vitesse *= 1.00000008;
         }
     }
