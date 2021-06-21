@@ -16,10 +16,4 @@ public interface GameObject {
     */
     void draw(Graphics2D g2d);
 
-    /**
-    * Initialise la scène donnée
-    * @param engine la scène à initialiser
-    */
-    void init(GameEngine engine);
-
 }

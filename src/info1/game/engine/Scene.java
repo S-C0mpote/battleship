@@ -7,6 +7,7 @@ import java.util.TreeMap;
 
 public class Scene {
 
+
     private final String name;
     private final Map<Integer, GameObject> gameObjects = new TreeMap<>();
 

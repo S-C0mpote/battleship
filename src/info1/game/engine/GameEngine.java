@@ -2,7 +2,6 @@ package info1.game.engine;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
 import java.util.Map;
 
 public class GameEngine {
@@ -18,6 +17,7 @@ public class GameEngine {
         window.add(gameCanvas);
         window.pack();
         window.setResizable(false);
+        window.setLocationRelativeTo(null);
         window.setVisible(true);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
@@ -39,7 +39,6 @@ public class GameEngine {
 
             while (accumulator >= 1) {
                 accumulator--;
-                System.out.println("FPS: " + frames);
                 window.setTitle("BattleShip - " + frames + " FPS");
                 frames = 0;
             }
