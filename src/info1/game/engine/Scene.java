@@ -6,7 +6,7 @@ import java.util.List;
 public class Scene {
 
     private String name;
-    List<GameObject> listGo;
+    private List<GameObject> listGo;
 
     public Scene(String name) {
         this.name = name;
