@@ -3,11 +3,7 @@ package info1;
 import info1.game.engine.GameEngine;
 import info1.game.engine.Scene;
 import info1.game.engine.Scenes;
-import info1.game.engine.gameobjects.Button;
-import info1.game.engine.gameobjects.Input;
-
-import javax.swing.*;
-import java.awt.*;
+import info1.game.engine.gameobjects.*;
 
 public class Game {
 
@@ -18,13 +14,13 @@ public class Game {
 
 
         Input input = new Input(engine, 50, 50, 300, 50);
-        Button button = new Button(engine, 200, 200, 100, 30, "GO", new JLabel().getFont());
         menu.addGameObject(input);
-        menu.addGameObject(button);
-
+        Label label1 = new Label(engine, 1150, 20, 220, 50);
+        menu.addGameObject(label1);
+        Label label2 = new Label(engine, 1150, 700, 220, 50);
+        menu.addGameObject(label2);
 
         engine.start(menu);
-
     }
 
 }
