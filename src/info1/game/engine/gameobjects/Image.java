@@ -14,7 +14,6 @@ public class Image implements GameObject {
     private java.awt.Image background;
     private int x, y, width, height;
 
-
     public Image(GameEngine gameEngine, int x, int y, int width, int height) throws IOException {
         this.gameEngine = gameEngine;
         this.x = x;

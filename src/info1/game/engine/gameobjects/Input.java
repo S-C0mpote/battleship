@@ -15,10 +15,10 @@ public class Input implements GameObject, KeyListener {
 
     private int x, y, width, height;
     private double accumulator = 0;
+
     private boolean bar = false;
 
-
-    private String text = "test";
+    private String text = "";
 
     public Input(GameEngine gameEngine, int x, int y, int width, int height) {
         this.gameEngine = gameEngine;
@@ -45,6 +45,7 @@ public class Input implements GameObject, KeyListener {
         g2d.fillRect(x, y, width, height);
 
         g2d.setColor(Color.BLACK);
+        g2d.setFont(g2d.getFont().deriveFont(Font.BOLD, 20));
         g2d.drawString(text + (bar ? "|" : ""), x + padding, y + height / 2);
     }
 
@@ -55,6 +56,13 @@ public class Input implements GameObject, KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        if(e.getKeyCode() == 8 && !text.isEmpty()) {
+            text = text.substring(0, text.length() - 1);
+            return;
+        }
+
+        if(e.getKeyCode() < 20) return;
+
         text += e.getKeyChar();
     }
 
