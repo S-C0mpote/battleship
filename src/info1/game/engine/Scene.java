@@ -17,7 +17,7 @@ public class Scene {
         listGo.add(gameObject);
     }
 
-    public List<GameObject> getGameObject(String go){
+    public List<GameObject> getGameObject(){
         return listGo;
     }
 }
