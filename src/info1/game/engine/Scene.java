@@ -20,4 +20,8 @@ public class Scene {
     public List<GameObject> getGameObject(){
         return listGo;
     }
+
+    public void removeGameObject(GameObject gameObject){
+        listGo.removeIf(go -> go.equals(gameObject));
+    }
 }
