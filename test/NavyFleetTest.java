@@ -209,17 +209,20 @@ public class NavyFleetTest {
         f.add(new Destroyer("monTorpilleur", "H3", "H4"));
         f.add(new Destroyer("autreTorpilleur", "D9", "C9"));
         f.add(new Cruiser("autreCroiseur", "J8", "H8"));
+
+        System.out.println(f.asJSON().toString());
+
         assertEquals("[" +
                         "{\"bateau\":\"monSousMarin\"," +
                         "\"coordonnees\":[{\"x\":6,\"y\":9}]}," +
-                        "{\"bateau\":\"autreTorpilleur\"," +
-                        "\"coordonnees\":[{\"x\":3,\"y\":8},{\"x\":2,\"y\":8}]}," +
                         "{\"bateau\":\"monTorpilleur\"," +
                         "\"coordonnees\":[{\"x\":7,\"y\":2},{\"x\":7,\"y\":3}]}," +
-                        "{\"bateau\":\"autreCroiseur\"," +
-                        "\"coordonnees\":[{\"x\":9,\"y\":7},{\"x\":8,\"y\":7},{\"x\":7,\"y\":7}]}," +
+                        "{\"bateau\":\"autreTorpilleur\"," +
+                        "\"coordonnees\":[{\"x\":3,\"y\":8},{\"x\":2,\"y\":8}]}," +
                         "{\"bateau\":\"monCroiseur\"," +
                         "\"coordonnees\":[{\"x\":1,\"y\":7},{\"x\":1,\"y\":6},{\"x\":1,\"y\":5}]}," +
+                        "{\"bateau\":\"autreCroiseur\"," +
+                        "\"coordonnees\":[{\"x\":9,\"y\":7},{\"x\":8,\"y\":7},{\"x\":7,\"y\":7}]}," +
                         "{\"bateau\":\"monCuirasse\"," +
                         "\"coordonnees\":[{\"x\":1,\"y\":1},{\"x\":2,\"y\":1},{\"x\":3,\"y\":1},{\"x\":4,\"y\":1}]}," +
                         "{\"bateau\":\"monPorteAvion\"," +
@@ -237,7 +240,8 @@ public class NavyFleetTest {
         maFlotte.add(monTorpilleur);
         maFlotte.add(autreCroiseur);
         maFlotte.add(autreTorpilleur);
-        List<IShip> expected = Arrays.asList(monSousMarin, autreTorpilleur, monTorpilleur, autreCroiseur, monCroiseur, monCuirasse, monPorteAvion);
+        List<IShip> expected = Arrays.asList(monSousMarin, monTorpilleur, autreTorpilleur, monCroiseur, autreCroiseur, monCuirasse, monPorteAvion);
+        System.out.println(maFlotte);
         assertIterableEquals(expected, maFlotte.getShips());
     }
 
@@ -406,6 +410,7 @@ public class NavyFleetTest {
         maFlotte.add(monTorpilleur);
         maFlotte.add(autreTorpilleur);
         maFlotte.add(monSousMarin);
+
         assertTrue(maFlotte.isFrenchConfiguration());
     }
 

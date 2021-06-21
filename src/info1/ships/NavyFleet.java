@@ -1,7 +1,7 @@
 package info1.ships;
 
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Classe définissant une flotte de navires
@@ -9,65 +9,81 @@ import java.util.Set;
 
 public class NavyFleet implements INavyFleet {
 
-    // TODO
+    private final List<IShip> ships = new ArrayList<>();
 
+    private int size = 0;
+    private final int MAX_SIZE = 20;
 
     /**
      * NB : LA SIGNATURE DU CONSTRUCTEUR DOIT ETRE RESPECTEE
      *
      * Construit une nouvelle flotte
      */
-    public NavyFleet() {
-        // TODO
-    }
+    public NavyFleet() { }
 
     @Override
     public int remainingSize() {
-        // TODO
-        return -1;
+        return MAX_SIZE - size;
     }
 
     @Override
     public boolean isComplete() {
-        // TODO
-        return false;
+        return MAX_SIZE == size;
     }
 
 
     @Override
-    public int add(IShip IShip) {
-        // TODO
-        return -1;
+    public int add(IShip iShip) {
+        int size = iShip.getSize();
+
+        if(ships.contains(iShip)) return -1;
+        if(remainingSize() < size) return -2;
+
+        for(IShip ship : ships)
+            for(ICoord coord : ship.getCoords())
+                if (iShip.getCoords().contains(coord)) return -3;
+
+        this.size += size;
+
+        ships.add(iShip);
+        ships.sort(Comparator.comparingInt(a -> a.getCategory().getSize()));
+
+        return 0;
     }
 
     @Override
     public List<IShip> getShips() {
-        // TODO
-        return null;
+        return ships;
     }
 
     @Override
     public Set<IShip> getShips(ShipCategory shipCategory) {
-        // TODO
-        return null;
+        return ships.stream()
+                .filter(ship -> ship.getCategory().equals(shipCategory))
+                .collect(Collectors.toSet());
     }
 
     @Override
     public boolean isBelgianConfiguration() {
-        // TODO
-        return false;
+        return getShips(ShipCategory.AIRCRAFT_CARRIER).size() == 0
+                && getShips(ShipCategory.BATTLESHIP).size() == 1
+                && getShips(ShipCategory.CRUISER).size() == 2
+                && getShips(ShipCategory.DESTROYER).size() == 3
+                && getShips(ShipCategory.SUBMARINE).size() == 4;
     }
 
     @Override
     public boolean isFrenchConfiguration() {
-        // TODO
-        return false;
+        return getShips(ShipCategory.AIRCRAFT_CARRIER).size() == 1
+            && getShips(ShipCategory.BATTLESHIP).size() == 1
+            && getShips(ShipCategory.CRUISER).size() == 2
+            && getShips(ShipCategory.DESTROYER).size() == 2
+            && getShips(ShipCategory.SUBMARINE).size() == 1;
     }
 
 
     @Override
     public String toString() {
-        // TODO
-        return null;
+        return Arrays.toString(ships.toArray());
     }
 }
