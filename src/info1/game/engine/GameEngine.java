@@ -63,6 +63,8 @@ public class GameEngine {
                 frameTime = 0;
                 frameCount = 0;
             }
+
+            try { Thread.sleep(1); } catch (Exception ignored) {}
         }
     }
 
