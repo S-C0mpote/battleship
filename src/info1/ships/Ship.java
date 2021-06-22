@@ -115,7 +115,7 @@ public abstract class Ship implements IShip {
         return Objects.hash(front, back, name);
     }
 
-    public Direction getOrientation() {return direction;}
+    public Direction getOrientation() { return direction; }
 
     /**
      * @param x doit respecter 1 <= x <= 10

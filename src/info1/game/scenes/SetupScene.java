@@ -53,8 +53,7 @@ public class SetupScene {
             setup.addGameObject(shipObject);
         }
 
-        MenuBackground menuBackground = new MenuBackground();
-        setup.addGameObject(-1, menuBackground);
+        setup.addGameObject(-1, MenuScene.background);
         setup.addGameObject(fr_lang);
         setup.addGameObject(be_lang);
         setup.addGameObject(valider);

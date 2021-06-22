@@ -14,6 +14,8 @@ import java.awt.*;
 
 public class MenuScene {
 
+    public static MenuBackground background;
+
     public static void load(GameEngine engine) {
         Scene menu = Scenes.MENU.getScene();
 
@@ -51,8 +53,8 @@ public class MenuScene {
         codeInput.setLimit(10);
         menu.addGameObject(codeInput);
 
-        MenuBackground menuBackground = new MenuBackground();
-        menu.addGameObject(-1, menuBackground);
+        background = new MenuBackground();
+        menu.addGameObject(-1, background);
 
         TitleMenu title = new TitleMenu(engine);
         menu.addGameObject(title);

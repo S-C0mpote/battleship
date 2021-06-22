@@ -53,9 +53,11 @@ public class ShipObject extends InteractiveGameObject {
 
     public void refreshPosition(){
         if(ship.getOrientation() == Direction.GAUCHE || ship.getOrientation() == Direction.HAUT) {
+            System.out.println(ship.getBack());
             position.x = (ship.getBack().getX() - 1) * grid.getCellSize() + grid.getBase().x;
             position.y = (ship.getBack().getY() - 1 ) * grid.getCellSize() + grid.getBase().y;
         }else {
+            System.out.println(ship.getFront());
             position.x = (ship.getFront().getX() - 1) * grid.getCellSize() + grid.getBase().x;
             position.y = (ship.getFront().getY() - 1 ) * grid.getCellSize() + grid.getBase().y;
         }
