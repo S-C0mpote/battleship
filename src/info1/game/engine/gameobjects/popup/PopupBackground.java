@@ -18,6 +18,7 @@ public class PopupBackground extends InteractiveGameObject {
 
 
     public PopupBackground(GameEngine engine) {
+        this.size = new Dimension(1280, 720);
         this.engine = engine;
     }
 
@@ -28,7 +29,7 @@ public class PopupBackground extends InteractiveGameObject {
             if(opacity <= 0) {
                 opacity = 0;
                 closing = false;
-                //engine.getCurrentScene().removeGameObject(this);
+                engine.getCurrentScene().removeGameObject(this);
             }
         }
     }
@@ -37,16 +38,11 @@ public class PopupBackground extends InteractiveGameObject {
     public void draw(Graphics2D g2d) {
         if(opacity > 0) {
             g2d.setColor(new Color(0, 0, 0, opacity));
-            g2d.fillRect(0, 0, 1280, 720);
+            g2d.fillRect(0, 0, size.width, size.height);
         }
     }
 
     public void close() {
         closing = true;
-    }
-
-    @Override
-    public void mousePressed() {
-        System.out.println("test");
     }
 }

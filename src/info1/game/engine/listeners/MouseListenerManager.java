@@ -17,7 +17,7 @@ public class MouseListenerManager implements MouseListener {
     }
 
     public void updateMousePosition() {
-        Point p = gameEngine.getGameCanvas().getMousePosition();
+        Point p = gameEngine.getMousePosition();
 
         if(p == null) return;
 
@@ -48,8 +48,6 @@ public class MouseListenerManager implements MouseListener {
             if(e.getX() >= pos.x && e.getX() <= pos.x + size.width && e.getY() >= pos.y && e.getY() <= pos.y + size.height) {
                 igo.mousePressed();
                 return;
-            }else {
-                System.out.println(igo.getClass().getName());
             }
         }
     }

@@ -17,6 +17,7 @@ public class GameEngine {
 
     private boolean running = true;
     private Scene scene = null;
+    private Point mousePosition = gameCanvas.getMousePosition();
 
     public GameEngine() {
         window.add(gameCanvas);
@@ -53,8 +54,10 @@ public class GameEngine {
                 currentTime -= 1.0 / FPS_LIMIT;
                 frameCount++;
 
-                draw();
+                mousePosition = gameCanvas.getMousePosition();
                 mouseListener.updateMousePosition();
+
+                draw();
             }
 
             if (frameTime >= 1) {
@@ -68,12 +71,12 @@ public class GameEngine {
         }
     }
 
-    public void update(double delta) {
+    synchronized public void update(double delta) {
         Map<Integer, GameObject> gameObjects = this.scene.getGameObjects();
         gameObjects.forEach((i, go) -> go.update(delta));
     }
 
-    public void draw() {
+    synchronized public void draw() {
         Map<Integer, GameObject> gameObjects = this.scene.getGameObjects();
 
         Graphics2D g2d = gameCanvas.getGraphics2D();
@@ -88,4 +91,5 @@ public class GameEngine {
 
     public GameCanvas getGameCanvas() { return gameCanvas; }
     public Scene getCurrentScene() { return scene; }
+    public Point getMousePosition() { return mousePosition; }
 }

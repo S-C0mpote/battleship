@@ -41,9 +41,8 @@ public class PopupSignIn {
             background.close();
             modal.close();
         });
-    }
 
-    public void open() {
+
         menu.addGameObject(1000, background);
         menu.addGameObject(1001, modal);
         menu.addGameObject(1002, input);

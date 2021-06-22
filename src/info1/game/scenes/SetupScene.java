@@ -22,7 +22,7 @@ public class SetupScene {
 
 
         fr_lang.setPosition(new Vector2D(10, 660));
-        be_lang.setPosition(new Vector2D(25 + fr_lang.getSize().getWidth(), 660));
+        be_lang.setPosition(new Vector2D(25 + fr_lang.getSize().width, 660));
         valider.setPosition(new Vector2D(1280 - 200, 660));
         grid.setPosition(new Vector2D(300,120));
         instruction.setSize(new Dimension(1280, 100));
@@ -31,7 +31,6 @@ public class SetupScene {
         fr_lang.setClassicImg(Images.BUTTON_YELLOW);
         fr_lang.setOverImg(Images.BUTTON_YELLOW_OVER);
         fr_lang.setPressImg(Images.BUTTON_YELLOW_PRESS);
-
 
         be_lang.setClassicImg(Images.BUTTON_YELLOW);
         be_lang.setOverImg(Images.BUTTON_YELLOW_OVER);

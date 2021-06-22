@@ -34,7 +34,10 @@ public class PopupModal extends GameObject {
             if(position.y >= 720) {
                 position.y = 720;
                 closing = false;
-                //engine.getCurrentScene().removeGameObject(this);
+
+                engine.getCurrentScene().removeGameObject(this);
+                engine.getCurrentScene().removeGameObject(buttonLinked);
+                engine.getCurrentScene().removeGameObject(inputLinked);
             }
         }
     }
@@ -42,7 +45,6 @@ public class PopupModal extends GameObject {
     @Override
     public void draw(Graphics2D g2d) {
         if(position.y < 720) {
-            // TODO: Voir si ca fait lag le antialiasing
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g2d.setColor(new Color(0xF1F1F1));
             g2d.fillRoundRect((int) position.x, (int) position.y, size.width, size.height, 10, 10);
@@ -57,8 +59,9 @@ public class PopupModal extends GameObject {
     }
 
     public void close() {
-        System.out.println(inputLinked.getText());
         closing = true;
+
+        engine.getGameCanvas().removeKeyListener(inputLinked);
     }
 
 }

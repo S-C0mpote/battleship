@@ -10,8 +10,9 @@ import java.util.TreeMap;
 public class Scene {
 
     private final String name;
-    private final Map<Integer, GameObject> gameObjects = new TreeMap<>();
-    private final Map<Integer, InteractiveGameObject> interactiveGO = new TreeMap<>(Collections.reverseOrder());
+
+    private Map<Integer, GameObject> gameObjects = new TreeMap<>();
+    private Map<Integer, InteractiveGameObject> interactiveGO = new TreeMap<>(Collections.reverseOrder());
 
     public Scene(String name) {
         this.name = name;
@@ -28,14 +29,20 @@ public class Scene {
         gameObjects.put(zIndex, gameObject);
     }
 
-    public void removeGameObject(GameObject gameObject){
+    synchronized public void removeGameObject(GameObject gameObject) {
+        Map<Integer, GameObject> gameObjectsSorted = new TreeMap<>(gameObjects);
+        Map<Integer, InteractiveGameObject> interactiveGOSorted = new TreeMap<>(interactiveGO);
+
         gameObjects.forEach((i, go) -> {
             if(gameObject.equals(go)) {
-                gameObjects.remove(i);
+                gameObjectsSorted.remove(i);
 
-                if(go instanceof InteractiveGameObject) gameObjects.remove(i);
+                if(go instanceof InteractiveGameObject) interactiveGOSorted.remove(i);
             }
         });
+
+        gameObjects = gameObjectsSorted;
+        interactiveGO = interactiveGOSorted;
     }
 
     public Map<Integer, GameObject> getGameObjects(){ return gameObjects; }
