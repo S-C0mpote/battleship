@@ -6,6 +6,7 @@ import info1.game.utils.Vector2D;
 import info1.ships.IShip;
 import info1.ships.NavyFleet;
 
+import javax.swing.border.StrokeBorder;
 import java.awt.*;
 import java.util.List;
 
@@ -27,24 +28,29 @@ public class Grid extends GameObject {
         int posx = (int) position.x;
         int posy = (int) position.y;
 
+        g2d.setStroke(new BasicStroke(1));
         g2d.setFont(Fonts.MAIN.deriveFont(12f));
         g2d.setColor(new Color(0XF1F1F1));
         g2d.fillRect( (int) position.x , (int) position.y, size.width, size.height);
 
         //Placement vertical (Lignes)
-        for(int i = 1; i < 11; i++){
-            posy += cellSize;
-            g2d.setColor(Color.BLACK);
-            g2d.drawLine(posx ,posy, posx + size.width, posy);
+        for(int i = 0; i < 10; i++){
+            if(i > 0) {
+                g2d.setColor(Color.BLACK);
+                g2d.drawLine(posx, posy, posx + size.width, posy);
+            }
             g2d.setColor(new Color(0xF1F1F1));
-            g2d.drawString(i + "", posx - ((int) position.x / 10)  / 2, posy - cellSize / 2);
+            g2d.drawString((i + 1) + "", posx - ((int) position.x / 10)  / 2, posy + cellSize / 2);
+            posy += cellSize;
         }
         int valeur = 65;
 
         //Placement Horizontal (colonnes)
         for(int i = 0; i < 10; i++){
-            g2d.setColor(Color.BLACK);
-            g2d.drawLine(posx, (int) position.y, posx, (int) position.y + size.height);
+            if(i > 0) {
+                g2d.setColor(Color.BLACK);
+                g2d.drawLine(posx, (int) position.y, posx, (int) position.y + size.height);
+            }
             g2d.setColor(new Color(0xF1F1F1));
             g2d.drawString((char) valeur + "", posx + cellSize / 2, (int) position.y - ((int) position.y / 10) / 2);
             posx += cellSize;
