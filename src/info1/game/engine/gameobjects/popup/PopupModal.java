@@ -4,7 +4,7 @@ import info1.game.engine.GameEngine;
 import info1.game.engine.gameobjects.Button;
 import info1.game.engine.gameobjects.GameObject;
 import info1.game.engine.gameobjects.Input;
-import info1.game.engine.utils.Vector2D;
+import info1.game.utils.Vector2D;
 import info1.game.resources.Fonts;
 
 import java.awt.*;

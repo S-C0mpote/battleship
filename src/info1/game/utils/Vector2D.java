@@ -1,4 +1,4 @@
-package info1.game.engine.utils;
+package info1.game.utils;
 
 public class Vector2D {
 

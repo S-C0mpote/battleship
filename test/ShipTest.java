@@ -52,8 +52,9 @@ class ShipTest {
     }
 
     @Test void testSizeCuirasse() throws Exception {
-        IShip ship =  new Battleship("qsdfg","A1","D1");
+        Ship ship =  new Battleship("qsdfg","A1","D1");
         assertEquals(ShipCategory.BATTLESHIP.getSize(), ship.getSize());
+
     }
 
     @Test void testSizeCroiseur() throws Exception {

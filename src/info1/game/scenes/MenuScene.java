@@ -6,13 +6,10 @@ import info1.game.engine.Scene;
 import info1.game.engine.Scenes;
 import info1.game.engine.gameobjects.*;
 import info1.game.engine.gameobjects.Button;
-import info1.game.engine.gameobjects.popup.PopupModal;
-import info1.game.engine.utils.Vector2D;
+import info1.game.utils.Vector2D;
 import info1.game.resources.Images;
 
 import java.awt.*;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class MenuScene {
 

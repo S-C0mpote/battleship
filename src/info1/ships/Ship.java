@@ -1,5 +1,7 @@
 package info1.ships;
 
+import info1.game.utils.Direction;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -14,6 +16,7 @@ public abstract class Ship implements IShip {
     private List<ICoord> coords = new ArrayList<>();
     private ICoord front, back;
     private String name;
+    private Direction direction;
 
     /**
      * NB : LA SIGNATURE DU CONSTRUCTEUR DOIT ETRE RESPECTEE
@@ -37,20 +40,24 @@ public abstract class Ship implements IShip {
                 for(int y = front.getY(); y >= back.getY(); y--) {
                     coords.add(new Coord(intPosToStr(front.getX(), y)));
                 }
+                direction = Direction.HAUT;
             } else { // e.g. A5 A8 || A5 A5
                 for(int y = front.getY(); y <= back.getY(); y++) {
                     coords.add(new Coord(intPosToStr(front.getX(), y)));
                 }
+                direction = Direction.BAS;
             }
         } else if(front.getY() == back.getY()) {
             if(front.getX() > back.getX()) { // e.g. C5 A5
                 for(int x = front.getX(); x >= back.getX(); x--) {
                     coords.add(new Coord(intPosToStr(x, front.getY())));
                 }
+                direction = Direction.GAUCHE;
             } else { // e.g. A5 C5 || C5 C5
                 for(int x = front.getX(); x <= back.getX(); x++) {
                     coords.add(new Coord(intPosToStr(x, front.getY())));
                 }
+                direction = Direction.DROITE;
             }
         }
 
@@ -104,5 +111,9 @@ public abstract class Ship implements IShip {
     @Override
     public int hashCode() {
         return Objects.hash(front, back, name);
+    }
+
+    public Direction getOrientation() {
+        return direction;
     }
 }
