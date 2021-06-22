@@ -125,11 +125,11 @@ public abstract class Ship implements IShip {
         List<ICoord> coords = new ArrayList<>();
 
         switch (direction) {
-            case HAUT   -> {
+            case HAUT -> {
                 for (int i = getSize() - 1; i >= 0; i--)
                     coords.add(new Coord(intPosToStr(x, y + i)));
             }
-            case BAS    -> {
+            case BAS -> {
                 for (int i = 0; i < getSize(); i++)
                     coords.add(new Coord(intPosToStr(x, y + i)));
             }
@@ -141,10 +141,6 @@ public abstract class Ship implements IShip {
                 for (int i = 0; i < getSize(); i++)
                     coords.add(new Coord(intPosToStr(x + i, y)));
             }
-        }
-
-        for (int i = 0; i < getSize(); i++){
-
         }
 
         if(!fleet.canBePlaced(coords, this)) throw new BadCoordException();

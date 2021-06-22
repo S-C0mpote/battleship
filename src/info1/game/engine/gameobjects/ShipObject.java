@@ -87,11 +87,6 @@ public class ShipObject extends InteractiveGameObject {
         int x = (int) Math.round((position.x - grid.getBase().x) / grid.getCellSize());
         int y = (int) Math.round((position.y - grid.getBase().y) / grid.getCellSize());
 
-        System.out.println(position.x - grid.getBase().x);
-
-        System.out.println(x);
-        System.out.println(y);
-
         try {
             ship.move(x + 1, y + 1, ship.getOrientation(), grid.getFleet());
 
