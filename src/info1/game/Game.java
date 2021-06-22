@@ -6,6 +6,8 @@ import info1.game.network.GameNetwork;
 import info1.game.resources.Fonts;
 import info1.game.scenes.MenuScene;
 import info1.game.scenes.SetupScene;
+import info1.ships.BadCoordException;
+import info1.ships.CoordsBadShipException;
 
 import java.sql.Time;
 import java.util.Timer;
@@ -15,14 +17,14 @@ public class Game {
 
     private static GameNetwork gameNetwork;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws BadCoordException, CoordsBadShipException {
         GameEngine engine = new GameEngine();
         engine.getGameCanvas().setFont(Fonts.MAIN);
 
         MenuScene.load(engine);
         SetupScene.load(engine);
 
-        engine.start(Scenes.MENU.getScene());
+        engine.start(Scenes.SETUP.getScene());
     }
 
     public static void setGameNetwork(GameNetwork gameNetwork) {

@@ -5,6 +5,7 @@ import info1.game.engine.gameobjects.GameObject;
 public abstract class InteractiveGameObject extends GameObject {
 
     private boolean isOver = false;
+    private boolean isPressed = false;
 
     /**
      * Appelé quand la souris passe sur l'objet
@@ -31,4 +32,10 @@ public abstract class InteractiveGameObject extends GameObject {
      */
     public void setOver(boolean over) { isOver = over; }
     public boolean isOver() { return isOver; }
+
+    /**
+     * @param pressed true = clique en cours
+     */
+    public void setPressed(boolean pressed) { isPressed = pressed; }
+    public boolean isPressed() { return isPressed; }
 }

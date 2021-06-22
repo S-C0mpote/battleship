@@ -18,4 +18,11 @@ public class Vector2D {
     public void addX(double x) { this.x += x; }
     public void addY(double x) { this.x += x; }
 
+    @Override
+    public String toString() {
+        return "(" +
+                "x=" + x +
+                ", y=" + y +
+                ')';
+    }
 }
