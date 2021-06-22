@@ -31,17 +31,13 @@ public class NavyFleet implements INavyFleet {
         return MAX_SIZE == size;
     }
 
-
     @Override
     public int add(IShip iShip) {
         int size = iShip.getSize();
 
         if(ships.contains(iShip)) return -1;
         if(remainingSize() < size) return -2;
-
-        for(IShip ship : ships)
-            for(ICoord coord : ship.getCoords())
-                if (iShip.getCoords().contains(coord)) return -3;
+        if(!canBePlaced(iShip.getCoords())) return -3;
 
         this.size += size;
 
@@ -49,6 +45,31 @@ public class NavyFleet implements INavyFleet {
         ships.sort(Comparator.comparingInt(a -> a.getCategory().getSize()));
 
         return 0;
+    }
+
+    /**
+     * @return true = coords is available
+     */
+    public boolean canBePlaced(List<ICoord> coords){
+        for(IShip ship : ships)
+            for(ICoord coord : ship.getCoords())
+                if (coords.contains(coord)) return false;
+
+        return true;
+    }
+
+    /**
+     * @return true = coords is available
+     */
+    public boolean canBePlaced(List<ICoord> coords, IShip withoutShip){
+        List<IShip> copyShips = new ArrayList<>(ships);
+        copyShips.remove(withoutShip);
+
+        for(IShip ship : copyShips)
+            for(ICoord coord : ship.getCoords())
+                if (coords.contains(coord)) return false;
+
+        return true;
     }
 
     @Override

@@ -10,6 +10,10 @@ public class Vector2D {
         this.y = y;
     }
 
+    public Vector2D copy() {
+        return new Vector2D(x, y);
+    }
+
     public void addVector(Vector2D toAdd) {
         this.x += toAdd.x;
         this.y += toAdd.y;

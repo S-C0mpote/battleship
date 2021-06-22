@@ -4,10 +4,7 @@ import info1.game.engine.GameEngine;
 import info1.game.engine.listeners.InteractiveGameObject;
 import info1.game.utils.Direction;
 import info1.game.utils.Vector2D;
-import info1.ships.BadCoordException;
-import info1.ships.ICoord;
-import info1.ships.IShip;
-import info1.ships.Ship;
+import info1.ships.*;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -18,10 +15,10 @@ public class ShipObject extends InteractiveGameObject {
 
     private Grid grid;
     private Ship ship;
-    private Color color = Color.ORANGE;
-    private boolean drag = false;
-    private Vector2D marginPosition, initPosition;
     private GameEngine engine;
+    private boolean drag = false;
+    private Color color = Color.ORANGE;
+    private Vector2D marginPosition, initPosition;
 
     public ShipObject(Grid grid, Ship ship, GameEngine engine){
         this.engine = engine;
@@ -60,7 +57,7 @@ public class ShipObject extends InteractiveGameObject {
     public void mousePressed() {
         drag = true;
         engine.getGameCanvas().setCursor(new Cursor(Cursor.MOVE_CURSOR));
-        initPosition = position;
+        initPosition = position.copy();
         marginPosition = new Vector2D(engine.getMousePosition().x - position.x, engine.getMousePosition().y - position.y);
     }
 
@@ -72,35 +69,10 @@ public class ShipObject extends InteractiveGameObject {
         int x = (int) Math.round((position.x - grid.getBase().x) / grid.getCellSize());
         int y = (int) Math.round((position.y - grid.getBase().y) / grid.getCellSize());
 
-        List<IShip> filteredShips = grid.getShips().stream()
-                .filter(s -> !s.equals(ship))
-                .collect(Collectors.toList());
-
-        System.out.println("Vérif...");
-
-        System.out.println(Arrays.toString(filteredShips.toArray()));
-
-        System.out.println(filteredShips.size());
-
-        // Vérification
-        for(IShip iShip : filteredShips) {
-            for(ICoord coord : iShip.getCoords()) {
-                if (ship.getCoords().contains(coord)) {
-                    System.out.println("test");
-                    position = initPosition;
-                    return;
-                }
-            }
-        }
-
-        System.out.println("validé");
-
-        // TODO: Quand on change de direction
         try {
-            ship.move(x, y, ship.getOrientation());
+            ship.move(x, y, ship.getOrientation(), grid.getFleet());
         } catch (BadCoordException e) {
             position = initPosition;
-            System.out.println("opijfgopizjfgoziràj");
         }
     }
 

@@ -4,18 +4,19 @@ package info1.game.engine.gameobjects;
 import info1.game.resources.Fonts;
 import info1.game.utils.Vector2D;
 import info1.ships.IShip;
+import info1.ships.NavyFleet;
 
 import java.awt.*;
 import java.util.List;
 
 public class Grid extends GameObject {
-    private List<IShip> ships;
+    private NavyFleet fleet;
 
     private int cellSize;
     private Vector2D base;
 
-    public Grid(List<IShip> ships){
-        this.ships = ships;
+    public Grid(NavyFleet fleet){
+        this.fleet = fleet;
     }
 
     @Override
@@ -61,12 +62,8 @@ public class Grid extends GameObject {
     public Vector2D getBase() {
         return base;
     }
-
     public int getCellSize() {
         return cellSize;
     }
-
-    public List<IShip> getShips() {
-        return ships;
-    }
+    public NavyFleet getFleet() {return fleet;}
 }
