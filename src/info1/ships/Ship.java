@@ -1,6 +1,7 @@
 package info1.ships;
 
 import info1.game.utils.Direction;
+import info1.game.utils.Vector2D;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -113,7 +114,32 @@ public abstract class Ship implements IShip {
         return Objects.hash(front, back, name);
     }
 
-    public Direction getOrientation() {
-        return direction;
+    public Direction getOrientation() {return direction;}
+
+    public void move(int x, int y, Direction direction) throws BadCoordException {
+        this.direction = direction;
+        coords.clear();
+        coords.add(new Coord(intPosToStr(x,y)));
+
+        for (int i = 0; i < getSize(); i++){
+            switch (direction) {
+                case HAUT -> {
+                    coords.add(new Coord(intPosToStr(x,y - i)));
+                    break;
+                }
+                case BAS -> {
+                    coords.add(new Coord(intPosToStr(x,y + i)));
+                    break;
+                }
+                case GAUCHE -> {
+                    coords.add(new Coord(intPosToStr(x + i, y)));
+                    break;
+                }
+                case DROITE -> {
+                    coords.add(new Coord(intPosToStr(x - i, y)));
+                    break;
+                }
+            }
+        }
     }
 }
