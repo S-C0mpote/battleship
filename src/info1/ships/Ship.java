@@ -126,24 +126,20 @@ public abstract class Ship implements IShip {
 
         switch (direction) {
             case HAUT   -> {
-                for (int i = getSize() - 1; i >= 0; i--){
+                for (int i = getSize() - 1; i >= 0; i--)
                     coords.add(new Coord(intPosToStr(x, y + i)));
-                }
             }
             case BAS    -> {
-                for (int i = 0; i < getSize(); i++){
+                for (int i = 0; i < getSize(); i++)
                     coords.add(new Coord(intPosToStr(x, y + i)));
-                }
             }
             case GAUCHE -> {
-                for (int i = getSize() - 1; i >= 0; i--){
+                for (int i = getSize() - 1; i >= 0; i--)
                     coords.add(new Coord(intPosToStr(x + i, y)));
-                }
             }
             case DROITE -> {
-                for (int i = 0; i < getSize(); i++){
+                for (int i = 0; i < getSize(); i++)
                     coords.add(new Coord(intPosToStr(x + i, y)));
-                }
             }
         }
 

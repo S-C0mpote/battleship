@@ -94,6 +94,7 @@ public class ShipObject extends InteractiveGameObject {
 
         try {
             ship.move(x + 1, y + 1, ship.getOrientation(), grid.getFleet());
+
         } catch (BadCoordException e) {}
 
         refreshPosition();
