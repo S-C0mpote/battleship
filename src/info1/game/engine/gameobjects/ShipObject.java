@@ -7,12 +7,14 @@ import info1.game.utils.Vector2D;
 import info1.ships.*;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.geom.AffineTransform;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ShipObject extends InteractiveGameObject {
+public class ShipObject extends InteractiveGameObject implements KeyListener {
 
     private Grid grid;
     private Ship ship;
@@ -20,6 +22,7 @@ public class ShipObject extends InteractiveGameObject {
     private double zoom = 1;
     private boolean drag = false;
     private Vector2D marginPosition = new Vector2D(0,0);
+    private Direction direction;
 
     public ShipObject(Grid grid, Ship ship, GameEngine engine){
         this.engine = engine;
@@ -57,10 +60,10 @@ public class ShipObject extends InteractiveGameObject {
         AffineTransform af = new AffineTransform();
 
         double theta = 0;
-        if(ship.getOrientation() == Direction.GAUCHE) theta = -(Math.PI / 2);
-        else if(ship.getOrientation() == Direction.DROITE) theta = Math.PI / 2;
-        else if(ship.getOrientation() == Direction.BAS) theta = 0;
-        else if(ship.getOrientation() == Direction.HAUT) theta = Math.PI;
+        if(direction == Direction.GAUCHE) theta = -(Math.PI / 2);
+        else if(direction == Direction.DROITE) theta = Math.PI / 2;
+        else if(direction == Direction.BAS) theta = 0;
+        else if(direction == Direction.HAUT) theta = Math.PI;
 
         if(ship.getOrientation() == Direction.GAUCHE || ship.getOrientation() == Direction.BAS) {
             af.translate(
@@ -79,6 +82,7 @@ public class ShipObject extends InteractiveGameObject {
     }
 
     public void refreshPosition(){
+        direction = ship.getOrientation();
         if(ship.getOrientation() == Direction.GAUCHE || ship.getOrientation() == Direction.HAUT) {
             position.x = (ship.getBack().getX() - 1) * grid.getCellSize() + grid.getBase().x;
             position.y = (ship.getBack().getY() - 1 ) * grid.getCellSize() + grid.getBase().y;
@@ -114,7 +118,7 @@ public class ShipObject extends InteractiveGameObject {
         int y = (int) Math.round((position.y - grid.getBase().y) / grid.getCellSize());
 
         try {
-            ship.move(x + 1, y + 1, ship.getOrientation(), grid.getFleet());
+            ship.move(x + 1, y + 1, direction, grid.getFleet());
         } catch (BadCoordException ignored) {}
 
         refreshPosition();
@@ -130,4 +134,19 @@ public class ShipObject extends InteractiveGameObject {
         return drag;
     }
 
+    @Override
+    public void keyTyped(KeyEvent e) { }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if(drag && e.getKeyCode() == 82){
+            if(direction == Direction.GAUCHE) direction = Direction.HAUT;
+            else if(direction == Direction.DROITE) direction = Direction.BAS;
+            else if(direction == Direction.BAS) direction = Direction.GAUCHE;
+            else if(direction == Direction.HAUT) direction = Direction.DROITE;
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) { }
 }

@@ -1,8 +1,10 @@
 package info1.game.engine;
 
+import info1.game.Game;
 import info1.game.engine.gameobjects.GameObject;
 import info1.game.engine.listeners.InteractiveGameObject;
 
+import java.awt.event.KeyListener;
 import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
@@ -29,6 +31,20 @@ public class Scene {
         gameObjects.put(zIndex, gameObject);
     }
 
+    public void disableListeners(){
+        for(GameObject go : this.getGameObjects().values()){
+            if(go instanceof KeyListener){
+                Game.engine.getGameCanvas().removeKeyListener((KeyListener) go);
+            }
+        }
+    }
+    public void enableListeners(){
+        for(GameObject go : this.getGameObjects().values()){
+            if(go instanceof KeyListener){
+                Game.engine.getGameCanvas().addKeyListener((KeyListener) go);
+            }
+        }
+    }
     synchronized public void removeGameObject(GameObject gameObject) {
         Map<Integer, GameObject> gameObjectsSorted = new TreeMap<>(gameObjects);
         Map<Integer, InteractiveGameObject> interactiveGOSorted = new TreeMap<>(interactiveGO);

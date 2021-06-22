@@ -6,6 +6,7 @@ import info1.game.network.GameNetwork;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyListener;
 import java.util.Map;
 
 public class GameEngine {
@@ -91,9 +92,13 @@ public class GameEngine {
         gameCanvas.getBufferStrategy().show();
     }
 
-    public void setScene(Scene scene) { this.scene = scene; }
-    public void setNetwork(GameNetwork network) { this.network = network; }
+    public void setScene(Scene scene) {
+        this.scene.disableListeners();
+        this.scene = scene;
+        this.scene.enableListeners();
+    }
 
+    public void setNetwork(GameNetwork network) { this.network = network; }
     public GameNetwork getNetwork() { return network; }
     public GameCanvas getGameCanvas() { return gameCanvas; }
     public Scene getCurrentScene() { return scene; }

@@ -24,8 +24,6 @@ public class Input extends InteractiveGameObject implements KeyListener {
 
     public Input(GameEngine engine) {
         this.engine = engine;
-
-        engine.getGameCanvas().addKeyListener(this);
     }
 
     @Override

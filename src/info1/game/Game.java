@@ -15,12 +15,11 @@ import java.util.TimerTask;
 
 public class Game {
 
+    public static GameEngine engine = new GameEngine();
+
     public static void main(String[] args) {
-        GameEngine engine = new GameEngine();
         engine.getGameCanvas().setFont(Fonts.MAIN);
-
         MenuScene.load(engine);
-
         engine.start(Scenes.MENU.getScene());
     }
 }
