@@ -13,8 +13,7 @@ import java.awt.*;
 public class MenuScene {
 
     public static void load(GameEngine engine) {
-        Input input = new Input(300, 50);
-        input.setPosition(new Vector2D(200, 200));
+
 
         Button createParty = new Button(190, 49, "Créer une partie", new Color(0x6A5800));
         createParty.setClassicImg(Images.BUTTON_YELLOW);
@@ -25,14 +24,14 @@ public class MenuScene {
         MenuBackground menuBackground = new MenuBackground();
         TitleMenu title = new TitleMenu(engine);
 
-        LabelGame version = new LabelGame("Maxandre ROCHEFORT, Léo ROCHARD, Morgann LERAY, Elouan NAQUIN", Color.WHITE, 10f);
-        version.setPosition(new Vector2D(10, 710));
+        LabelCenter version = new LabelCenter("Maxandre ROCHEFORT, Léo ROCHARD, Morgann LERAY, Elouan NAQUIN", Color.WHITE, 10f);
+        version.setPosition(new Vector2D(0, 700));
+        version.setSize(new Dimension(1280,10));
 
         Scene menu = Scenes.MENU.getScene();
 
         menu.addGameObject(-1, menuBackground);
         menu.addGameObject(createParty);
-        menu.addGameObject(input);
         menu.addGameObject(title);
         menu.addGameObject(version);
     }
