@@ -139,7 +139,5 @@ public abstract class Ship implements IShip {
         this.coords = coords;
         front = coords.get(0);
         back = coords.get(coords.size() - 1);
-        System.out.println(front);
-        System.out.println(back);
     }
 }

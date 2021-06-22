@@ -16,9 +16,10 @@ public class ShipObject extends InteractiveGameObject {
     private Grid grid;
     private Ship ship;
     private GameEngine engine;
+    private double zoom = 0;
     private boolean drag = false;
     private Color color = Color.ORANGE;
-    private Vector2D marginPosition, initPosition;
+    private Vector2D marginPosition = new Vector2D(0,0);
 
     public ShipObject(Grid grid, Ship ship, GameEngine engine){
         this.engine = engine;
@@ -29,7 +30,15 @@ public class ShipObject extends InteractiveGameObject {
 
 
     @Override
-    public void update(double delta) { }
+    public void update(double delta) {
+        if(drag && zoom < 10){
+            zoom += delta * 0.08;
+            if(zoom > 10) zoom = 10;
+        } else if(zoom > 0 && !drag){
+            zoom -= delta * 0.08;
+            if(zoom < 0) zoom = 0;
+        }
+    }
 
     @Override
     public void draw(Graphics2D g2d) {
@@ -39,7 +48,7 @@ public class ShipObject extends InteractiveGameObject {
         }
 
         g2d.setColor(color);
-        g2d.fillRect((int) position.x, (int) position.y, size.width,size.height);
+        g2d.fillRect((int) (position.x - zoom), (int) (position.y - zoom), (int) (size.width + zoom * 2), (int) (size.height + zoom * 2));
     }
 
     public void refreshPosition(){
@@ -59,9 +68,10 @@ public class ShipObject extends InteractiveGameObject {
 
     @Override
     public void mousePressed() {
+        if(engine.getMousePosition() == null)return;
         drag = true;
+        refreshPosition();
         engine.getGameCanvas().setCursor(new Cursor(Cursor.MOVE_CURSOR));
-        initPosition = position.copy();
         marginPosition = new Vector2D(engine.getMousePosition().x - position.x, engine.getMousePosition().y - position.y);
     }
 
@@ -75,10 +85,9 @@ public class ShipObject extends InteractiveGameObject {
 
         try {
             ship.move(x + 1, y + 1, ship.getOrientation(), grid.getFleet());
-            refreshPosition();
-        } catch (BadCoordException e) {
-            position = initPosition;
-        }
+        } catch (BadCoordException e) {}
+
+        refreshPosition();
     }
 
     @Override
