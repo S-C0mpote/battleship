@@ -62,7 +62,16 @@ public class ShipObject extends InteractiveGameObject {
         else if(ship.getOrientation() == Direction.BAS) theta = 0;
         else if(ship.getOrientation() == Direction.HAUT) theta = Math.PI;
 
-        af.translate(position.x + 5 - zoom * 5, position.y + 5 - zoom * 5);
+        if(ship.getOrientation() == Direction.GAUCHE || ship.getOrientation() == Direction.BAS) {
+            af.translate(
+                    position.x + grid.getCellSize() - zoom * grid.getCellSize(),
+                    position.y + grid.getCellSize() - zoom * grid.getCellSize());
+        }else {
+            af.translate(
+                    position.x + (size.width - grid.getCellSize()) + grid.getCellSize() - zoom * grid.getCellSize(),
+                    position.y + (size.height - grid.getCellSize()) + grid.getCellSize() - zoom * grid.getCellSize());
+        }
+
         af.scale(zoom, zoom);
         af.rotate(theta, grid.getCellSize() / 2d, grid.getCellSize() / 2d);
 
