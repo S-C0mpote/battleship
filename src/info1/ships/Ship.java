@@ -124,19 +124,38 @@ public abstract class Ship implements IShip {
     public void move(int x, int y, Direction direction, NavyFleet fleet) throws BadCoordException {
         List<ICoord> coords = new ArrayList<>();
 
-        for (int i = 0; i < getSize(); i++){
-            switch (direction) {
-                case HAUT   -> coords.add(new Coord(intPosToStr(x,y - i)));
-                case BAS    -> coords.add(new Coord(intPosToStr(x,y + i)));
-                case GAUCHE -> coords.add(new Coord(intPosToStr(x - i, y)));
-                case DROITE -> coords.add(new Coord(intPosToStr(x + i, y)));
+        switch (direction) {
+            case HAUT   -> {
+                for (int i = getSize() - 1; i >= 0; i--){
+                    coords.add(new Coord(intPosToStr(x, y + i)));
+                }
             }
+            case BAS    -> {
+                for (int i = 0; i < getSize(); i++){
+                    coords.add(new Coord(intPosToStr(x, y + i)));
+                }
+            }
+            case GAUCHE -> {
+                for (int i = getSize() - 1; i >= 0; i--){
+                    coords.add(new Coord(intPosToStr(x + i, y)));
+                }
+            }
+            case DROITE -> {
+                for (int i = 0; i < getSize(); i++){
+                    coords.add(new Coord(intPosToStr(x + i, y)));
+                }
+            }
+        }
+
+        for (int i = 0; i < getSize(); i++){
+
         }
 
         if(!fleet.canBePlaced(coords, this)) throw new BadCoordException();
 
         this.direction = direction;
         this.coords = coords;
+
         front = coords.get(0);
         back = coords.get(coords.size() - 1);
     }
