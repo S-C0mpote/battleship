@@ -17,10 +17,6 @@ public final class NavyFleetConfiguration {
             e.printStackTrace();
         }
 
-        System.out.println(fleet.isComplete());
-        System.out.println(fleet.isBelgianConfiguration());
-        System.out.println(fleet.isFrenchConfiguration());
-
         return fleet;
     }
 

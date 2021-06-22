@@ -13,12 +13,19 @@ public final class Images {
 
     public static BufferedImage MENU_LOGO;
 
+    public static BufferedImage SHIP_SUBMARINE;
+    public static BufferedImage SHIP_DESTROYER;
+
     static {
         try {
             BUTTON_YELLOW = ImageIO.read(new File("assets/ui/buttons/yellow_button.png"));
             BUTTON_YELLOW_OVER = ImageIO.read(new File("assets/ui/buttons/yellow_button_over.png"));
             BUTTON_YELLOW_PRESS = ImageIO.read(new File("assets/ui/buttons/yellow_button_press.png"));
+
             MENU_LOGO = ImageIO.read(new File("assets/ui/logo.png"));
+
+            SHIP_SUBMARINE = ImageIO.read(new File("assets/ships/submarine.png"));
+            SHIP_DESTROYER = ImageIO.read(new File("assets/ships/destroyer.png"));
         } catch (IOException e) {e.printStackTrace();}
     }
 

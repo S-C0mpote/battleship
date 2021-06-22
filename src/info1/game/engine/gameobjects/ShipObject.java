@@ -7,6 +7,7 @@ import info1.game.utils.Vector2D;
 import info1.ships.*;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,9 +17,8 @@ public class ShipObject extends InteractiveGameObject {
     private Grid grid;
     private Ship ship;
     private GameEngine engine;
-    private double zoom = 0;
+    private double zoom = 1;
     private boolean drag = false;
-    private Color color = Color.ORANGE;
     private Vector2D marginPosition = new Vector2D(0,0);
 
     public ShipObject(Grid grid, Ship ship, GameEngine engine){
@@ -31,12 +31,12 @@ public class ShipObject extends InteractiveGameObject {
 
     @Override
     public void update(double delta) {
-        if(drag && zoom < 10){
-            zoom += delta * 0.08;
-            if(zoom > 10) zoom = 10;
-        } else if(zoom > 0 && !drag){
-            zoom -= delta * 0.08;
-            if(zoom < 0) zoom = 0;
+        if(drag && zoom < 1.2){
+            zoom += delta * 0.008;
+            if(zoom > 1.2) zoom = 1.2;
+        } else if(zoom > 1 && !drag){
+            zoom -= delta * 0.008;
+            if(zoom < 1) zoom = 1;
         }
     }
 
@@ -47,8 +47,20 @@ public class ShipObject extends InteractiveGameObject {
             position.y = Math.min(Math.max(engine.getMousePosition().y - marginPosition.y, grid.getBase().y), grid.getBase().y + grid.getSize().height - size.height);
         }
 
-        g2d.setColor(color);
-        g2d.fillRect((int) (position.x - zoom), (int) (position.y - zoom), (int) (size.width + zoom * 2), (int) (size.height + zoom * 2));
+        AffineTransform save = g2d.getTransform();
+        AffineTransform af = new AffineTransform();
+        af.translate(position.x + 5 - zoom * 5, position.y + 5 - zoom * 5);
+        af.scale(zoom, zoom);
+        double theta = -1;
+        if(ship.getOrientation() == Direction.GAUCHE) theta = -(Math.PI / 2);
+        else if(ship.getOrientation() == Direction.DROITE) theta = Math.PI / 2;
+        else if(ship.getOrientation() == Direction.BAS) theta = 0;
+        else if(ship.getOrientation() == Direction.HAUT) theta = Math.PI;
+        af.rotate(theta, grid.getCellSize() / 2d, grid.getCellSize() / 2d);
+
+        g2d.setTransform(af);
+        g2d.drawImage(ship.getImage(), 0, 0, null);
+        g2d.setTransform(save);
     }
 
     public void refreshPosition(){
@@ -59,7 +71,6 @@ public class ShipObject extends InteractiveGameObject {
             position.x = (ship.getFront().getX() - 1) * grid.getCellSize() + grid.getBase().x;
             position.y = (ship.getFront().getY() - 1 ) * grid.getCellSize() + grid.getBase().y;
         }
-
 
         if(ship.getOrientation() == Direction.DROITE || ship.getOrientation() == Direction.GAUCHE) {
             size.width = ship.getSize() * grid.getCellSize();
@@ -89,21 +100,16 @@ public class ShipObject extends InteractiveGameObject {
 
         try {
             ship.move(x + 1, y + 1, ship.getOrientation(), grid.getFleet());
-
-        } catch (BadCoordException e) {}
+        } catch (BadCoordException ignored) {}
 
         refreshPosition();
     }
 
     @Override
-    public void mouseOver() {
-        color = Color.RED;
-    }
+    public void mouseOver() {}
 
     @Override
-    public void mouseExit() {
-        color = Color.ORANGE;
-    }
+    public void mouseExit() {}
 
     public boolean isDrag() {
         return drag;

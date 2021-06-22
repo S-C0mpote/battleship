@@ -1,24 +1,22 @@
 package info1.ships;
 
 import info1.game.utils.Direction;
-import info1.game.utils.Vector2D;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 /**
  * une implémentation "abstraite" d'un bateau quelconque, de taille indéterminée
  */
-
-
 public abstract class Ship implements IShip {
 
     private List<ICoord> coords = new ArrayList<>();
     private ICoord front, back;
     private String name;
     private Direction direction;
+    private BufferedImage image;
 
     /**
      * NB : LA SIGNATURE DU CONSTRUCTEUR DOIT ETRE RESPECTEE
@@ -70,53 +68,6 @@ public abstract class Ship implements IShip {
         return String.valueOf((char) (x + 64)) + y;
     }
 
-    @Override
-    public List<ICoord> getCoords() {
-        return coords;
-    }
-
-    @Override
-    public ICoord getFront() {
-        return front;
-    }
-
-    @Override
-    public ICoord getBack() {
-        return back;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public int getSize() {
-        return coords.size();
-    }
-
-    @Override
-    public String toString() {
-        return name + " [" + front + " -> " + back + "]";
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Ship ship = (Ship) o;
-        return Objects.equals(front, ship.front) &&
-                Objects.equals(back, ship.back) &&
-                Objects.equals(name, ship.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(front, back, name);
-    }
-
-    public Direction getOrientation() { return direction; }
-
     /**
      * @param x doit respecter 1 <= x <= 10
      * @param y doit respecter 1 <= y <= 10
@@ -151,4 +102,44 @@ public abstract class Ship implements IShip {
         front = coords.get(0);
         back = coords.get(coords.size() - 1);
     }
+
+    @Override
+    public List<ICoord> getCoords() { return coords; }
+
+    @Override
+    public ICoord getFront() { return front; }
+
+    @Override
+    public ICoord getBack() { return back; }
+
+    @Override
+    public String getName() { return name; }
+
+    public BufferedImage getImage() { return image; }
+
+    protected void setImage(BufferedImage image) { this.image = image; }
+
+    @Override
+    public int getSize() { return coords.size(); }
+
+    public Direction getOrientation() { return direction; }
+
+    @Override
+    public String toString() {
+        return name + " [" + front + " -> " + back + "]";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ship ship = (Ship) o;
+        return Objects.equals(front, ship.front) &&
+                Objects.equals(back, ship.back) &&
+                Objects.equals(name, ship.name);
+    }
+
+    @Override
+    public int hashCode() {return Objects.hash(front, back, name);}
+
 }
