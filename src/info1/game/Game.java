@@ -4,6 +4,7 @@ import info1.game.engine.GameEngine;
 import info1.game.engine.Scenes;
 import info1.game.resources.Fonts;
 import info1.game.scenes.MenuScene;
+import info1.game.scenes.SetupScene;
 
 public class Game {
 
@@ -12,8 +13,9 @@ public class Game {
         engine.getGameCanvas().setFont(Fonts.MAIN);
 
         MenuScene.load(engine);
+        SetupScene.load(engine);
 
-        engine.start(Scenes.MENU.getScene());
+        engine.start(Scenes.SETUP.getScene());
     }
 
 }

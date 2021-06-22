@@ -1,7 +1,7 @@
 package info1.game.engine;
 
 public enum Scenes {
-    MENU(new Scene("Menu")), IN_GAME(new Scene("Jeu"));
+    MENU(new Scene("Menu")), IN_GAME(new Scene("Jeu")), SETUP(new Scene("Setup"));
 
     private final Scene scene;
 

@@ -1,5 +1,6 @@
 package info1.game.engine.gameobjects;
 
+import info1.game.engine.listeners.ButtonListener;
 import info1.game.engine.listeners.InteractiveGameObject;
 import info1.game.resources.Fonts;
 
@@ -11,6 +12,8 @@ public class Button extends InteractiveGameObject {
     private String name;
     private int yMargin = 0;
     private Color color;
+
+    private ButtonListener listener;
 
     private BufferedImage currentImg;
     private BufferedImage classicImg;
@@ -59,6 +62,7 @@ public class Button extends InteractiveGameObject {
     @Override
     public void mousePressed() {
         currentImg = pressImg;
+        if(listener != null) listener.onClick();
         yMargin = 4;
     }
 
@@ -66,6 +70,10 @@ public class Button extends InteractiveGameObject {
     public void mouseReleased() {
         currentImg = overImg;
         yMargin = 0;
+    }
+
+    public void setListener(ButtonListener listener) {
+        this.listener = listener;
     }
 
     public void setOverImg(BufferedImage overImg) {
