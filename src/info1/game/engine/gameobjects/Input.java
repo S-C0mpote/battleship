@@ -20,6 +20,7 @@ public class Input extends InteractiveGameObject implements KeyListener {
     private String text = "";
     private float fontSize = 20f;
     private boolean active = false;
+    private int limit = 100;
 
     public Input(GameEngine engine) {
         this.engine = engine;
@@ -63,12 +64,17 @@ public class Input extends InteractiveGameObject implements KeyListener {
 
         if(e.getKeyCode() == 8 && !text.isEmpty()) {
             text = text.substring(0, text.length() - 1);
+            limit++;
             return;
         }
 
         if(e.getKeyCode() < 20) return;
 
-        text += e.getKeyChar();
+        if (limit > text.length()){
+            text += e.getKeyChar();
+            limit--;
+        }
+
     }
 
     @Override
@@ -103,6 +109,9 @@ public class Input extends InteractiveGameObject implements KeyListener {
     public void setActive(boolean active) {
         this.active = active;
         this.bar = active;
+    }
+    public void setLimit(int limit){
+        this.limit = limit * 2;
     }
 }
 

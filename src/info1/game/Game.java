@@ -19,7 +19,7 @@ public class Game {
         MenuScene.load(engine);
         SetupScene.load(engine);
 
-        engine.start(Scenes.SETUP.getScene());
+        engine.start(Scenes.MENU.getScene());
     }
 
 }

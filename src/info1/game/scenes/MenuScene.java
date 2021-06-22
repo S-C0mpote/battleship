@@ -16,7 +16,7 @@ public class MenuScene {
     public static void load(GameEngine engine) {
         Scene menu = Scenes.MENU.getScene();
 
-        Button joinParty = new Button(190, 49, "Rejoidnre une partie", new Color(0x6A5800));
+        Button joinParty = new Button(190, 49, "Rejoindre une partie", new Color(0x6A5800));
         joinParty.setClassicImg(Images.BUTTON_YELLOW);
         joinParty.setOverImg(Images.BUTTON_YELLOW_OVER);
         joinParty.setPressImg(Images.BUTTON_YELLOW_PRESS);
@@ -35,6 +35,7 @@ public class MenuScene {
         codeInput.setPadding(10);
         codeInput.setSize(new Dimension(190, 49));
         codeInput.setPosition(new Vector2D(1280 / 2d - 190 / 2d, 720 / 2d - 60));
+        codeInput.setLimit(10);
         menu.addGameObject(codeInput);
 
         MenuBackground menuBackground = new MenuBackground();

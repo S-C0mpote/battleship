@@ -31,6 +31,7 @@ public class PopupSignIn {
 
         input.setSize(new Dimension(modal.getSize().width - 40, 50));
         input.setPosition(new Vector2D(modal.getPosition().x + 20, modal.getPosition().y + 80));
+        input.setLimit(20);
 
         button.setClassicImg(Images.BUTTON_YELLOW);
         button.setOverImg(Images.BUTTON_YELLOW_OVER);
