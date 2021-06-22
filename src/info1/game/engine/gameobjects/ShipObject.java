@@ -48,19 +48,25 @@ public class ShipObject extends InteractiveGameObject {
         }
 
         AffineTransform save = g2d.getTransform();
+        g2d.setTransform(this.getTransform());
+        g2d.drawImage(ship.getImage(), 0, 0, null);
+        g2d.setTransform(save);
+    }
+
+    public AffineTransform getTransform() {
         AffineTransform af = new AffineTransform();
-        af.translate(position.x + 5 - zoom * 5, position.y + 5 - zoom * 5);
-        af.scale(zoom, zoom);
-        double theta = -1;
+
+        double theta = 0;
         if(ship.getOrientation() == Direction.GAUCHE) theta = -(Math.PI / 2);
         else if(ship.getOrientation() == Direction.DROITE) theta = Math.PI / 2;
         else if(ship.getOrientation() == Direction.BAS) theta = 0;
         else if(ship.getOrientation() == Direction.HAUT) theta = Math.PI;
+
+        af.translate(position.x + 5 - zoom * 5, position.y + 5 - zoom * 5);
+        af.scale(zoom, zoom);
         af.rotate(theta, grid.getCellSize() / 2d, grid.getCellSize() / 2d);
 
-        g2d.setTransform(af);
-        g2d.drawImage(ship.getImage(), 0, 0, null);
-        g2d.setTransform(save);
+        return af;
     }
 
     public void refreshPosition(){

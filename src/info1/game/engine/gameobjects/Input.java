@@ -38,12 +38,10 @@ public class Input extends InteractiveGameObject implements KeyListener {
                 accumulator = 0;
             }
         }
-
     }
 
     @Override
     public void draw(Graphics2D g2d) {
-        // TODO: Voir si ca lag
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setColor(background);
         g2d.fillRoundRect((int) position.x, (int) position.y, size.width, size.height, 10, 10);
@@ -56,6 +54,18 @@ public class Input extends InteractiveGameObject implements KeyListener {
         g2d.setFont(smaller);
         g2d.setColor(foreground);
         g2d.drawString(text + (bar ? "|" : ""), (int) position.x + padding, yf);
+    }
+
+    @Override
+    public void mousePressed() {
+        engine.getCurrentScene().getInteractiveGO().forEach((i, igo) -> {
+            if(igo instanceof Input) {
+                Input other = (Input) igo;
+                other.setActive(false);
+            }
+        });
+
+        active = true;
     }
 
     @Override
@@ -73,33 +83,12 @@ public class Input extends InteractiveGameObject implements KeyListener {
         text += e.getKeyChar();
     }
 
-    @Override
-    public void mousePressed() {
-        engine.getCurrentScene().getInteractiveGO().forEach((i, igo) -> {
-            if(igo instanceof Input) {
-                Input other = (Input) igo;
-                other.setActive(false);
-            }
-        });
-
-        active = true;
-    }
-
-    @Override
     public void keyReleased(KeyEvent e) {}
-
-    @Override
     public void keyTyped(KeyEvent e) {}
 
-    public String getText() { return text; }
     public void setText(String text) { this.text = text; }
-
     public void setBackground(Color background) { this.background = background; }
-    public Color getBackground() { return background; }
-
     public void setForeground(Color foreground) { this.foreground = foreground; }
-    public Color getForeground() { return foreground; }
-
     public void setFontSize(float fontSize) { this.fontSize = fontSize; }
     public void setPadding(int padding) { this.padding = padding; }
     public void setLimit(int limit){ this.limit = limit; }
@@ -107,5 +96,10 @@ public class Input extends InteractiveGameObject implements KeyListener {
         this.active = active;
         this.bar = active;
     }
+
+    public Color getBackground() { return background; }
+    public Color getForeground() { return foreground; }
+    public String getText() { return text; }
+
 }
 
