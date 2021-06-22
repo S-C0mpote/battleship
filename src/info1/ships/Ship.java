@@ -4,6 +4,7 @@ import info1.game.utils.Direction;
 import info1.game.utils.Vector2D;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -123,15 +124,21 @@ public abstract class Ship implements IShip {
             switch (direction) {
                 case HAUT   -> coords.add(new Coord(intPosToStr(x,y - i)));
                 case BAS    -> coords.add(new Coord(intPosToStr(x,y + i)));
-                case GAUCHE -> coords.add(new Coord(intPosToStr(x + i, y)));
-                case DROITE -> coords.add(new Coord(intPosToStr(x - i, y)));
+                case GAUCHE -> coords.add(new Coord(intPosToStr(x - i, y)));
+                case DROITE -> coords.add(new Coord(intPosToStr(x + i, y)));
             }
         }
+        System.out.println(x);
+        System.out.println(y);
+
 
         if(!fleet.canBePlaced(coords, this)) throw new BadCoordException();
 
         this.direction = direction;
-        this.coords.clear();
-        this.coords.addAll(coords);
+        this.coords = coords;
+        front = coords.get(0);
+        back = coords.get(coords.size() - 1);
+        System.out.println(front);
+        System.out.println(back);
     }
 }

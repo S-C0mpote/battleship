@@ -24,18 +24,7 @@ public class ShipObject extends InteractiveGameObject {
         this.engine = engine;
         this.grid = grid;
         this.ship = ship;
-        position.x = (ship.getFront().getX() - 1) * grid.getCellSize() + grid.getBase().x;
-        position.y = (ship.getFront().getY()  - 1 )* grid.getCellSize() + grid.getBase().y;
-
-        if(ship.getOrientation() == Direction.DROITE || ship.getOrientation() == Direction.GAUCHE) {
-            size.width = ship.getSize() * grid.getCellSize();
-            size.height = grid.getCellSize();
-        }
-
-        else if(ship.getOrientation() == Direction.BAS || ship.getOrientation() == Direction.HAUT){
-            size.height = ship.getSize() * grid.getCellSize();
-            size.width = grid.getCellSize();
-        }
+        refreshPosition();
     }
 
 
@@ -51,6 +40,21 @@ public class ShipObject extends InteractiveGameObject {
 
         g2d.setColor(color);
         g2d.fillRect((int) position.x, (int) position.y, size.width,size.height);
+    }
+
+    public void refreshPosition(){
+        position.x = (ship.getFront().getX() - 1) * grid.getCellSize() + grid.getBase().x;
+        position.y = (ship.getFront().getY()  - 1 )* grid.getCellSize() + grid.getBase().y;
+
+        if(ship.getOrientation() == Direction.DROITE || ship.getOrientation() == Direction.GAUCHE) {
+            size.width = ship.getSize() * grid.getCellSize();
+            size.height = grid.getCellSize();
+        }
+
+        else if(ship.getOrientation() == Direction.BAS || ship.getOrientation() == Direction.HAUT){
+            size.height = ship.getSize() * grid.getCellSize();
+            size.width = grid.getCellSize();
+        }
     }
 
     @Override
@@ -71,6 +75,7 @@ public class ShipObject extends InteractiveGameObject {
 
         try {
             ship.move(x, y, ship.getOrientation(), grid.getFleet());
+            refreshPosition();
         } catch (BadCoordException e) {
             position = initPosition;
         }

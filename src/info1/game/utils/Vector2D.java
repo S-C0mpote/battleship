@@ -1,5 +1,6 @@
 package info1.game.utils;
 
+
 public class Vector2D {
 
     public double x;
@@ -10,8 +11,8 @@ public class Vector2D {
         this.y = y;
     }
 
-    public Vector2D copy() {
-        return new Vector2D(x, y);
+    public Vector2D copy(){
+        return new Vector2D(x,y);
     }
 
     public void addVector(Vector2D toAdd) {
