@@ -6,6 +6,10 @@ import info1.game.resources.Fonts;
 import info1.game.scenes.MenuScene;
 import info1.game.scenes.SetupScene;
 
+import java.sql.Time;
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class Game {
 
     public static void main(String[] args) {
@@ -15,7 +19,7 @@ public class Game {
         MenuScene.load(engine);
         SetupScene.load(engine);
 
-        engine.start(Scenes.SETUP.getScene());
+        engine.start(Scenes.MENU.getScene());
     }
 
 }

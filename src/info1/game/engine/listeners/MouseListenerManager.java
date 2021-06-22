@@ -1,6 +1,7 @@
 package info1.game.engine.listeners;
 
 import info1.game.engine.GameEngine;
+import info1.game.engine.gameobjects.popup.PopupModal;
 import info1.game.engine.utils.Vector2D;
 
 import java.awt.*;
@@ -47,6 +48,8 @@ public class MouseListenerManager implements MouseListener {
             if(e.getX() >= pos.x && e.getX() <= pos.x + size.width && e.getY() >= pos.y && e.getY() <= pos.y + size.height) {
                 igo.mousePressed();
                 return;
+            }else {
+                System.out.println(igo.getClass().getName());
             }
         }
     }

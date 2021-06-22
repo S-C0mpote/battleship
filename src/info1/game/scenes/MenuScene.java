@@ -1,5 +1,6 @@
 package info1.game.scenes;
 
+import info1.game.components.PopupSignIn;
 import info1.game.engine.GameEngine;
 import info1.game.engine.Scene;
 import info1.game.engine.Scenes;
@@ -9,12 +10,12 @@ import info1.game.engine.utils.Vector2D;
 import info1.game.resources.Images;
 
 import java.awt.*;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MenuScene {
 
     public static void load(GameEngine engine) {
-
-
         Button createParty = new Button(190, 49, "Créer une partie", new Color(0x6A5800));
         createParty.setClassicImg(Images.BUTTON_YELLOW);
         createParty.setOverImg(Images.BUTTON_YELLOW_OVER);
@@ -24,9 +25,11 @@ public class MenuScene {
         MenuBackground menuBackground = new MenuBackground();
         TitleMenu title = new TitleMenu(engine);
 
-        LabelCenter version = new LabelCenter("Maxandre ROCHEFORT, Léo ROCHARD, Morgann LERAY, Elouan NAQUIN", Color.WHITE, 10f);
-        version.setPosition(new Vector2D(0, 700));
-        version.setSize(new Dimension(1280,10));
+        LabelGame version = new LabelGame("Maxandre ROCHEFORT, Léo ROCHARD, Morgann LERAY, Elouan NAQUIN", Color.WHITE, 10f);
+        version.setPosition(new Vector2D(10, 710));
+
+        PopupSignIn signIn = new PopupSignIn(engine);
+        signIn.open();
 
         Scene menu = Scenes.MENU.getScene();
 
