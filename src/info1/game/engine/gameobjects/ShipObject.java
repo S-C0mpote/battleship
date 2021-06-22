@@ -52,15 +52,19 @@ public class ShipObject extends InteractiveGameObject {
     }
 
     public void refreshPosition(){
-        position.x = (ship.getFront().getX() - 1) * grid.getCellSize() + grid.getBase().x;
-        position.y = (ship.getFront().getY()  - 1 )* grid.getCellSize() + grid.getBase().y;
+        if(ship.getOrientation() == Direction.GAUCHE || ship.getOrientation() == Direction.HAUT) {
+            position.x = (ship.getBack().getX() - 1) * grid.getCellSize() + grid.getBase().x;
+            position.y = (ship.getBack().getY() - 1 ) * grid.getCellSize() + grid.getBase().y;
+        }else {
+            position.x = (ship.getFront().getX() - 1) * grid.getCellSize() + grid.getBase().x;
+            position.y = (ship.getFront().getY() - 1 ) * grid.getCellSize() + grid.getBase().y;
+        }
+
 
         if(ship.getOrientation() == Direction.DROITE || ship.getOrientation() == Direction.GAUCHE) {
             size.width = ship.getSize() * grid.getCellSize();
             size.height = grid.getCellSize();
-        }
-
-        else if(ship.getOrientation() == Direction.BAS || ship.getOrientation() == Direction.HAUT){
+        }else {
             size.height = ship.getSize() * grid.getCellSize();
             size.width = grid.getCellSize();
         }

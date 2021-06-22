@@ -118,8 +118,8 @@ public abstract class Ship implements IShip {
     public Direction getOrientation() {return direction;}
 
     /**
-     * @param x >= 1
-     * @param y >= 1
+     * @param x doit respecter 1 <= x <= 10
+     * @param y doit respecter 1 <= y <= 10
      */
     public void move(int x, int y, Direction direction, NavyFleet fleet) throws BadCoordException {
         List<ICoord> coords = new ArrayList<>();

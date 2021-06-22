@@ -3,26 +3,25 @@ package info1.game.network;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import info1.network.Game;
 import info1.network.Network;
-import info1.network.Player;
 import info1.ships.BadCoordException;
 import info1.ships.UncompleteFleetException;
 
 public class GameNetwork {
 
-    public static final String API = "http://37.187.38.219/api/v0";
+    private static final String API = "http://37.187.38.219/api/v0";
 
-    public final GamePlayer client;
-    public GamePlayer enemy;
-    public Game currentGame;
+    private final GamePlayer user;
+    private GamePlayer enemy;
+    private Game currentGame;
 
-    public GameNetwork(GamePlayer client) {
-        this.client = client;
+    public GameNetwork(GamePlayer user) {
+        this.user = user;
 
         Network.setProxy("srv-proxy-etu-2.iut-nantes.univ-nantes.prive", 3128);
-        Network.enableProxy(true);
+        Network.enableProxy(false);
 
         try {
-            Network.suscribeNewPlayer(API, client.getPlayer());
+            Network.suscribeNewPlayer(API, user.getPlayer());
         } catch (UnirestException e) { e.printStackTrace(); }
     }
 
@@ -31,11 +30,13 @@ public class GameNetwork {
      */
     public boolean createGame() {
         try {
-            currentGame = Network.initNewGame(API, client.getPlayer(), client.getNavyFleet());
+            currentGame = Network.initNewGame(API, user.getPlayer(), user.getNavyFleet());
             return true;
         } catch (UnirestException | UncompleteFleetException | BadCoordException e) { e.printStackTrace(); }
 
         return false;
     }
 
+    public Game getCurrentGame() { return currentGame; }
+    public GamePlayer getUser() { return user; }
 }

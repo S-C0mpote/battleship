@@ -15,23 +15,12 @@ import java.util.TimerTask;
 
 public class Game {
 
-    private static GameNetwork gameNetwork;
-
-    public static void main(String[] args) throws BadCoordException, CoordsBadShipException {
+    public static void main(String[] args) {
         GameEngine engine = new GameEngine();
         engine.getGameCanvas().setFont(Fonts.MAIN);
 
         MenuScene.load(engine);
-        SetupScene.load(engine);
 
-        engine.start(Scenes.SETUP.getScene());
-    }
-
-    public static void setGameNetwork(GameNetwork gameNetwork) {
-        Game.gameNetwork = gameNetwork;
-    }
-
-    public static GameNetwork getGameNetwork() {
-        return gameNetwork;
+        engine.start(Scenes.MENU.getScene());
     }
 }

@@ -29,11 +29,19 @@ public class MenuScene {
         createParty.setOverImg(Images.BUTTON_YELLOW_OVER);
         createParty.setPressImg(Images.BUTTON_YELLOW_PRESS);
         createParty.setPosition(new Vector2D(1280 / 2d - 190 / 2d, 720 / 2d + 60));
+        createParty.setListener(() -> {
+            engine.getNetwork().createGame();
+            System.out.println(engine.getNetwork().getCurrentGame());
+        });
         menu.addGameObject(createParty);
 
-        createParty.setListener(() -> {
-
-        });
+        Button editFleet = new Button(190, 49, "Gérer ma flotte", new Color(0x6A5800));
+        editFleet.setClassicImg(Images.BUTTON_YELLOW);
+        editFleet.setOverImg(Images.BUTTON_YELLOW_OVER);
+        editFleet.setPressImg(Images.BUTTON_YELLOW_PRESS);
+        editFleet.setPosition(new Vector2D(1080, 720 - 59));
+        editFleet.setListener(() -> engine.setScene(Scenes.SETUP.getScene()));
+        menu.addGameObject(editFleet);
 
         Input codeInput = new Input(engine);
         codeInput.setFontSize(12f);

@@ -1,8 +1,8 @@
 package info1.game.network;
 
-import info1.game.Game;
 import info1.network.Player;
 import info1.ships.INavyFleet;
+import info1.ships.NavyFleetConfiguration;
 
 public class GamePlayer {
 
@@ -11,6 +11,7 @@ public class GamePlayer {
 
     public GamePlayer(String name) {
         this.player = new Player(name);
+        this.navyFleet = NavyFleetConfiguration.getFrenchDefault();
     }
 
     public Player getPlayer() { return player; }

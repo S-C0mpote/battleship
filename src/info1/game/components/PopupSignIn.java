@@ -1,6 +1,5 @@
 package info1.game.components;
 
-import info1.game.Game;
 import info1.game.engine.GameEngine;
 import info1.game.engine.Scene;
 import info1.game.engine.Scenes;
@@ -11,6 +10,7 @@ import info1.game.engine.gameobjects.popup.PopupModal;
 import info1.game.network.GameNetwork;
 import info1.game.network.GamePlayer;
 import info1.game.resources.Images;
+import info1.game.scenes.SetupScene;
 import info1.game.utils.Vector2D;
 
 import java.awt.*;
@@ -23,11 +23,11 @@ public class PopupSignIn {
     private final Button button;
     private final Scene menu = Scenes.MENU.getScene();
 
-    public PopupSignIn(GameEngine gameEngine) {
-        background = new PopupBackground(gameEngine);
-        input = new Input(gameEngine);
+    public PopupSignIn(GameEngine engine) {
+        background = new PopupBackground(engine);
+        input = new Input(engine);
         button = new Button(190, 49, "Valider", new Color(0x6A5800));
-        modal = new PopupModal(gameEngine, button, input);
+        modal = new PopupModal(engine, button, input);
 
         modal.setSize(new Dimension(500, 220));
         modal.setPosition(new Vector2D(1280 / 2d - modal.getSize().width / 2d, 720 / 2d - modal.getSize().height / 2d));
@@ -45,7 +45,8 @@ public class PopupSignIn {
             background.close();
             modal.close();
 
-            Game.setGameNetwork(new GameNetwork(new GamePlayer(input.getText())));
+            engine.setNetwork(new GameNetwork(new GamePlayer(input.getText())));
+            SetupScene.load(engine);
         });
 
         menu.addGameObject(1000, background);

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SetupScene {
-    public static void load(GameEngine engine) throws BadCoordException, CoordsBadShipException {
+    public static void load(GameEngine engine) {
         Scene setup = Scenes.SETUP.getScene();
 
         Button fr_lang = new Button(190,49,"France", new Color(0x6A5800));
@@ -34,17 +34,18 @@ public class SetupScene {
         valider.setOverImg(Images.BUTTON_YELLOW_OVER);
         valider.setPressImg(Images.BUTTON_YELLOW_PRESS);
         valider.setPosition(new Vector2D(1280 - 200, 660));
+        valider.setListener(() -> engine.setScene(Scenes.MENU.getScene()));
 
         LabelCenter instruction = new LabelCenter("Placez vos bateaux", Color.WHITE, 35f);
         instruction.setSize(new Dimension(1280, 100));
 
-        NavyFleet currentFleet = new NavyFleet();
-        currentFleet.add(new AircraftCarrier("monPorteAvion", "E5", "E9"));
-        currentFleet.add(new Battleship("monCuirasse", "B2", "E2"));
+        NavyFleet currentFleet = (NavyFleet) engine.getNetwork().getUser().getNavyFleet();
 
         Grid grid = new Grid(currentFleet);
         grid.setSize(new Dimension(500, 500));
-        grid.setPosition(new Vector2D((1280 / 2d) - grid.getSize().width / 2d,720 / 2 - (grid.getSize().height / 2) ));
+        grid.setPosition(new Vector2D(
+                1280 / 2d - grid.getSize().width / 2d,
+                720 / 2d - grid.getSize().height / 2d));
         setup.addGameObject(grid);
 
         for(IShip ship : currentFleet.getShips()) {
