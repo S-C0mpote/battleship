@@ -62,7 +62,6 @@ public class Button extends InteractiveGameObject {
     @Override
     public void mousePressed() {
         currentImg = pressImg;
-        if(listener != null) listener.onClick();
         yMargin = 4;
     }
 
@@ -70,6 +69,7 @@ public class Button extends InteractiveGameObject {
     public void mouseReleased() {
         currentImg = overImg;
         yMargin = 0;
+        if(listener != null) listener.onClick();
     }
 
     public void setListener(ButtonListener listener) {

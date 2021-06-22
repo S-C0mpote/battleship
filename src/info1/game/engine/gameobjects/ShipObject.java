@@ -4,15 +4,13 @@ import info1.game.engine.GameEngine;
 import info1.game.engine.listeners.InteractiveGameObject;
 import info1.game.utils.Direction;
 import info1.game.utils.Vector2D;
-import info1.ships.*;
+import info1.ships.BadCoordException;
+import info1.ships.Ship;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.geom.AffineTransform;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class ShipObject extends InteractiveGameObject implements KeyListener {
 
@@ -30,7 +28,6 @@ public class ShipObject extends InteractiveGameObject implements KeyListener {
         this.ship = ship;
         refreshPosition();
     }
-
 
     @Override
     public void update(double delta) {
@@ -65,7 +62,7 @@ public class ShipObject extends InteractiveGameObject implements KeyListener {
         else if(direction == Direction.BAS) theta = 0;
         else if(direction == Direction.HAUT) theta = Math.PI;
 
-        if(ship.getOrientation() == Direction.GAUCHE || ship.getOrientation() == Direction.BAS) {
+        if(direction == Direction.GAUCHE || direction == Direction.BAS) {
             af.translate(
                     position.x + grid.getCellSize() - zoom * grid.getCellSize(),
                     position.y + grid.getCellSize() - zoom * grid.getCellSize());
@@ -76,6 +73,7 @@ public class ShipObject extends InteractiveGameObject implements KeyListener {
         }
 
         af.scale(zoom, zoom);
+
         af.rotate(theta, grid.getCellSize() / 2d, grid.getCellSize() / 2d);
 
         return af;
@@ -83,7 +81,8 @@ public class ShipObject extends InteractiveGameObject implements KeyListener {
 
     public void refreshPosition(){
         direction = ship.getOrientation();
-        if(ship.getOrientation() == Direction.GAUCHE || ship.getOrientation() == Direction.HAUT) {
+
+        if(direction == Direction.GAUCHE || direction == Direction.HAUT) {
             position.x = (ship.getBack().getX() - 1) * grid.getCellSize() + grid.getBase().x;
             position.y = (ship.getBack().getY() - 1 ) * grid.getCellSize() + grid.getBase().y;
         }else {
@@ -91,7 +90,7 @@ public class ShipObject extends InteractiveGameObject implements KeyListener {
             position.y = (ship.getFront().getY() - 1 ) * grid.getCellSize() + grid.getBase().y;
         }
 
-        if(ship.getOrientation() == Direction.DROITE || ship.getOrientation() == Direction.GAUCHE) {
+        if(direction == Direction.DROITE || direction == Direction.GAUCHE) {
             size.width = ship.getSize() * grid.getCellSize();
             size.height = grid.getCellSize();
         }else {

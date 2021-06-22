@@ -17,6 +17,7 @@ public final class Images {
     public static BufferedImage SHIP_DESTROYER;
     public static BufferedImage SHIP_CRUISER;
     public static BufferedImage SHIP_BATTLESHIP;
+    public static BufferedImage SHIP_AIRCRAFT_CARRIER;
 
     static {
         try {
@@ -30,6 +31,7 @@ public final class Images {
             SHIP_DESTROYER = ImageIO.read(new File("assets/ships/destroyer.png"));
             SHIP_CRUISER = ImageIO.read(new File("assets/ships/cruiser.png"));
             SHIP_BATTLESHIP = ImageIO.read(new File("assets/ships/battleship.png"));
+            SHIP_AIRCRAFT_CARRIER = ImageIO.read(new File("assets/ships/aircraft-carrier.png"));
         } catch (IOException e) {e.printStackTrace();}
     }
 

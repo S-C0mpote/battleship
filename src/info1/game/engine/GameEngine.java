@@ -37,8 +37,7 @@ public class GameEngine {
 
     public void start(Scene startScene) {
         gameCanvas.init();
-
-        this.scene = startScene;
+        setScene(startScene);
 
         double frameCount = 0;
         double firstTime, frameTime = 0;
@@ -93,7 +92,7 @@ public class GameEngine {
     }
 
     public void setScene(Scene scene) {
-        this.scene.disableListeners();
+        if(this.scene != null) this.scene.disableListeners();
         this.scene = scene;
         this.scene.enableListeners();
     }
