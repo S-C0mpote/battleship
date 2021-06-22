@@ -74,7 +74,7 @@ public class ShipObject extends InteractiveGameObject {
         int y = (int) Math.round((position.y - grid.getBase().y) / grid.getCellSize());
 
         try {
-            ship.move(x, y, ship.getOrientation(), grid.getFleet());
+            ship.move(x + 1, y + 1, ship.getOrientation(), grid.getFleet());
             refreshPosition();
         } catch (BadCoordException e) {
             position = initPosition;

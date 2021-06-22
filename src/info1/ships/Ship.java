@@ -117,6 +117,10 @@ public abstract class Ship implements IShip {
 
     public Direction getOrientation() {return direction;}
 
+    /**
+     * @param x >= 1
+     * @param y >= 1
+     */
     public void move(int x, int y, Direction direction, NavyFleet fleet) throws BadCoordException {
         List<ICoord> coords = new ArrayList<>();
 
@@ -128,9 +132,6 @@ public abstract class Ship implements IShip {
                 case DROITE -> coords.add(new Coord(intPosToStr(x + i, y)));
             }
         }
-        System.out.println(x);
-        System.out.println(y);
-
 
         if(!fleet.canBePlaced(coords, this)) throw new BadCoordException();
 
