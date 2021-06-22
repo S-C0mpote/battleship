@@ -1,5 +1,6 @@
 package info1.game.scenes;
 
+import info1.game.Game;
 import info1.game.components.PopupSignIn;
 import info1.game.engine.GameEngine;
 import info1.game.engine.Scene;
@@ -29,6 +30,10 @@ public class MenuScene {
         createParty.setPressImg(Images.BUTTON_YELLOW_PRESS);
         createParty.setPosition(new Vector2D(1280 / 2d - 190 / 2d, 720 / 2d + 60));
         menu.addGameObject(createParty);
+
+        createParty.setListener(() -> {
+
+        });
 
         Input codeInput = new Input(engine);
         codeInput.setFontSize(12f);

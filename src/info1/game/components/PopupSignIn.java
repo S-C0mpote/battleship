@@ -1,5 +1,6 @@
 package info1.game.components;
 
+import info1.game.Game;
 import info1.game.engine.GameEngine;
 import info1.game.engine.Scene;
 import info1.game.engine.Scenes;
@@ -7,8 +8,10 @@ import info1.game.engine.gameobjects.Button;
 import info1.game.engine.gameobjects.Input;
 import info1.game.engine.gameobjects.popup.PopupBackground;
 import info1.game.engine.gameobjects.popup.PopupModal;
-import info1.game.utils.Vector2D;
+import info1.game.network.GameNetwork;
+import info1.game.network.GamePlayer;
 import info1.game.resources.Images;
+import info1.game.utils.Vector2D;
 
 import java.awt.*;
 
@@ -41,8 +44,9 @@ public class PopupSignIn {
         button.setListener(() -> {
             background.close();
             modal.close();
-        });
 
+            Game.setGameNetwork(new GameNetwork(new GamePlayer(input.getText())));
+        });
 
         menu.addGameObject(1000, background);
         menu.addGameObject(1001, modal);

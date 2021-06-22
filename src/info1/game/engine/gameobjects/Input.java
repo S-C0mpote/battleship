@@ -64,17 +64,13 @@ public class Input extends InteractiveGameObject implements KeyListener {
 
         if(e.getKeyCode() == 8 && !text.isEmpty()) {
             text = text.substring(0, text.length() - 1);
-            limit++;
             return;
         }
 
         if(e.getKeyCode() < 20) return;
+        if(text.length() >= limit) return;
 
-        if (limit > text.length()){
-            text += e.getKeyChar();
-            limit--;
-        }
-
+        text += e.getKeyChar();
     }
 
     @Override
@@ -106,12 +102,10 @@ public class Input extends InteractiveGameObject implements KeyListener {
 
     public void setFontSize(float fontSize) { this.fontSize = fontSize; }
     public void setPadding(int padding) { this.padding = padding; }
+    public void setLimit(int limit){ this.limit = limit; }
     public void setActive(boolean active) {
         this.active = active;
         this.bar = active;
-    }
-    public void setLimit(int limit){
-        this.limit = limit * 2;
     }
 }
 
