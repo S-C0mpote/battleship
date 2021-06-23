@@ -10,6 +10,7 @@ import info1.game.engine.gameobjects.popup.ModalWelcome;
 import info1.game.network.GameNetwork;
 import info1.game.network.GamePlayer;
 import info1.game.resources.Images;
+import info1.game.scenes.GameScene;
 import info1.game.scenes.SetupScene;
 import info1.game.utils.Vector2D;
 
@@ -46,7 +47,11 @@ public class PopupSignIn {
             modal.close();
 
             engine.setNetwork(new GameNetwork(new GamePlayer(input.getText())));
+
             SetupScene.load(engine);
+            GameScene.load(engine);
+
+            engine.setScene(Scenes.IN_GAME.getScene());
         });
 
         menu.addGameObject(1000, background);
