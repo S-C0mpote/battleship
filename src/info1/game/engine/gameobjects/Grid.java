@@ -21,6 +21,7 @@ public class Grid extends GameObject {
     public Grid(NavyFleet fleet){
         this.fleet = fleet;
     }
+    public Grid(){this.fleet = null;}
 
     @Override
     public void update(double delta) {}
