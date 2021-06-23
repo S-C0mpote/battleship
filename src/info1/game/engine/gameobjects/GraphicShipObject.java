@@ -38,28 +38,27 @@ public class GraphicShipObject extends GameObject {
         double theta = 0;
         if(ship.getOrientation() == Direction.LEFT) theta = -(Math.PI / 2);
         else if(ship.getOrientation() == Direction.RIGHT) theta = (Math.PI / 2);
-        else if(ship.getOrientation() == Direction.BOTTOM) theta = 0;
-        else if(ship.getOrientation() == Direction.TOP) theta = Math.PI;
+        else if(ship.getOrientation() == Direction.TOP) theta = 0;
+        else if(ship.getOrientation() == Direction.BOTTOM) theta = Math.PI;
 
-        System.out.println(ship.getOrientation());
         if(ship.getOrientation() == Direction.LEFT) {
-            af.translate(position.x, position.y);
-        }
-        else if(ship.getOrientation() == Direction.BOTTOM){
+            af.translate(
+                    position.x,
+                    position.y + 13);
+        } else if(ship.getOrientation() == Direction.TOP){
             af.translate(
                     position.x + (size.width - grid.getCellSize()),
+                    position.y + (size.height - grid.getCellSize() * ship.getSize()));
+        } else if(ship.getOrientation() == Direction.BOTTOM){
+            af.translate(
+                    position.x + (size.width - grid.getCellSize()) + 13,
+                    position.y + (size.height - grid.getCellSize()) + 13);
+        } else if(ship.getOrientation() == Direction.RIGHT){
+            af.translate(
+                    position.x + (size.width - grid.getCellSize()) + 13,
                     position.y + (size.height - grid.getCellSize()));
         }
-        else if(ship.getOrientation() == Direction.TOP){
-            af.translate(
-                    position.x + (size.width - grid.getCellSize() / 2d) - 5,
-                    position.y + (size.height - grid.getCellSize() / 2d) - 5);
-        }
-        else if(ship.getOrientation() == Direction.RIGHT){
-            af.translate(
-                    position.x + (size.width - grid.getCellSize() + grid.getCellSize() / 2d),
-                    position.y + (size.height - grid.getCellSize()));
-        }
+
         af.scale(grid.getCellSize() / 50d, grid.getCellSize() / 50d);
         af.rotate(theta, (grid.getCellSize() / 2d), (grid.getCellSize() / 2d));
 
@@ -67,7 +66,7 @@ public class GraphicShipObject extends GameObject {
     }
 
     public void refreshPosition(){
-        if(ship.getOrientation() == Direction.LEFT || ship.getOrientation() == Direction.BOTTOM) {
+        if(ship.getOrientation() == Direction.LEFT || ship.getOrientation() == Direction.TOP) {
             position.x = (ship.getBack().getX() - 1) * grid.getCellSize() + grid.getPosition().x;
             position.y = (ship.getBack().getY() - 1 ) * grid.getCellSize() + grid.getPosition().y;
         }

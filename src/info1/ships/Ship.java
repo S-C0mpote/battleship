@@ -40,12 +40,12 @@ public abstract class Ship implements IShip {
                 for(int y = front.getY(); y >= back.getY(); y--) {
                     coords.add(new Coord(intPosToStr(front.getX(), y)));
                 }
-                direction = Direction.BOTTOM;
+                direction = Direction.TOP;
             } else { // e.g. A5 A8 || A5 A5
                 for(int y = front.getY(); y <= back.getY(); y++) {
                     coords.add(new Coord(intPosToStr(front.getX(), y)));
                 }
-                direction = Direction.TOP;
+                direction = Direction.BOTTOM;
             }
         } else if(front.getY() == back.getY()) {
             if(front.getX() > back.getX()) { // e.g. C5 A5
@@ -76,11 +76,11 @@ public abstract class Ship implements IShip {
         List<ICoord> coords = new ArrayList<>();
 
         switch (direction) {
-            case BOTTOM -> {
+            case TOP -> {
                 for (int i = getSize() - 1; i >= 0; i--)
                     coords.add(new Coord(intPosToStr(x, y + i)));
             }
-            case TOP -> {
+            case BOTTOM -> {
                 for (int i = 0; i < getSize(); i++)
                     coords.add(new Coord(intPosToStr(x, y + i)));
             }

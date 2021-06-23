@@ -1,17 +1,17 @@
 package info1.game.utils;
 
 public enum Direction {
-    TOP,
     BOTTOM,
+    TOP,
     LEFT,
     RIGHT;
 
     public Direction getNext() {
         switch (this) {
-            case TOP -> { return RIGHT; }
-            case RIGHT -> { return BOTTOM; }
-            case BOTTOM -> { return LEFT; }
-            case LEFT -> { return TOP; }
+            case BOTTOM -> { return RIGHT; }
+            case RIGHT -> { return TOP; }
+            case TOP -> { return LEFT; }
+            case LEFT -> { return BOTTOM; }
         }
         return null;
     }

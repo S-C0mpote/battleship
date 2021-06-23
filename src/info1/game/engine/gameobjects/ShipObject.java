@@ -8,8 +8,6 @@ import info1.ships.BadCoordException;
 import info1.ships.Ship;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
 
@@ -55,10 +53,10 @@ public class ShipObject extends InteractiveGameObject {
         double theta = 0;
         if(ship.getOrientation() == Direction.LEFT) theta = -(Math.PI / 2);
         else if(ship.getOrientation() == Direction.RIGHT) theta = (Math.PI / 2);
-        else if(ship.getOrientation() == Direction.BOTTOM) theta = 0;
-        else if(ship.getOrientation() == Direction.TOP) theta = Math.PI;
+        else if(ship.getOrientation() == Direction.TOP) theta = 0;
+        else if(ship.getOrientation() == Direction.BOTTOM) theta = Math.PI;
 
-        if(ship.getOrientation() == Direction.LEFT || ship.getOrientation() == Direction.BOTTOM) {
+        if(ship.getOrientation() == Direction.LEFT || ship.getOrientation() == Direction.TOP) {
             af.translate(position.x, position.y);
         }else {
             af.translate(
@@ -72,7 +70,7 @@ public class ShipObject extends InteractiveGameObject {
     }
 
     public void refreshPosition(){
-        if(ship.getOrientation() == Direction.LEFT || ship.getOrientation() == Direction.BOTTOM) {
+        if(ship.getOrientation() == Direction.LEFT || ship.getOrientation() == Direction.TOP) {
             position.x = (ship.getBack().getX() - 1) * grid.getCellSize() + grid.getPosition().x;
             position.y = (ship.getBack().getY() - 1 ) * grid.getCellSize() + grid.getPosition().y;
         }
