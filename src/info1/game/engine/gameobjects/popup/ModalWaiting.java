@@ -45,24 +45,20 @@ public class ModalWaiting extends GameObject {
                 engine.getCurrentScene().removeGameObject(buttonLinked);
                 engine.getCurrentScene().removeGameObject(this);
             }
-        }
-
-        if(opening) {
+        }else if(opening) {
             position.y -= delta * 3;
-
-            buttonLinked.setPosition(new Vector2D(position.x + size.width - 210, position.y + 150));
 
             if(position.y < 720 / 2d - size.height / 2d) {
                 position.y = 720 / 2d - size.height / 2d;
                 opening = false;
             }
+
+            buttonLinked.setPosition(new Vector2D(position.x + size.width - 210, position.y + 150));
         }
 
         acc += delta;
-
         if(acc >= 250) {
             acc = 0;
-
             dots = ".".repeat((dots.length() + 1) % 4);
         }
     }
