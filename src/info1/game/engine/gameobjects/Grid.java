@@ -45,7 +45,7 @@ public class Grid extends GameObject {
             }
 
             g2d.setColor(new Color(0xF1F1F1));
-            g2d.drawString((i + 1) + "", posx - ((int) position.x / 20), posy + cellSize / 2 + 5);
+            g2d.drawString((i + 1) + "", posx - ((int) position.x / 20) - cellSize / 2, posy + cellSize / 2 + 5);
             posy += cellSize;
         }
 
