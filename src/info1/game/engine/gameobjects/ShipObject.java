@@ -10,6 +10,7 @@ import info1.ships.Ship;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
 
 public class ShipObject extends InteractiveGameObject implements KeyListener {
@@ -51,6 +52,7 @@ public class ShipObject extends InteractiveGameObject implements KeyListener {
                     grid.getBase().y + grid.getSize().height - size.height);
         }
 
+
         AffineTransform save = g2d.getTransform();
         g2d.setTransform(this.getTransform());
         g2d.drawImage(ship.getImage(), 0, 0, null);
@@ -66,7 +68,7 @@ public class ShipObject extends InteractiveGameObject implements KeyListener {
         else if(direction == Direction.BOTTOM) theta = 0;
         else if(direction == Direction.TOP) theta = Math.PI;
 
-        if(direction == Direction.LEFT || direction == Direction.BOTTOM) {
+        if(ship.getOrientation() == Direction.LEFT || ship.getOrientation() == Direction.BOTTOM) {
             af.translate(
                     position.x + grid.getCellSize() - zoom * grid.getCellSize(),
                     position.y + grid.getCellSize() - zoom * grid.getCellSize());
@@ -77,7 +79,11 @@ public class ShipObject extends InteractiveGameObject implements KeyListener {
         }
 
         af.scale(zoom, zoom);
-        af.rotate(theta, grid.getCellSize() / 2d, grid.getCellSize() / 2d);
+
+        af.rotate(theta,
+                    (grid.getCellSize() / 2d),
+                    (grid.getCellSize() / 2d));
+
 
         return af;
     }
@@ -103,7 +109,7 @@ public class ShipObject extends InteractiveGameObject implements KeyListener {
     }
 
     @Override
-    public void mousePressed() {
+    public void mousePressed(MouseEvent e) {
         if(engine.getMousePosition() == null)return;
         drag = true;
         refreshPosition();
@@ -112,7 +118,7 @@ public class ShipObject extends InteractiveGameObject implements KeyListener {
     }
 
     @Override
-    public void mouseReleased() {
+    public void mouseReleased(MouseEvent e) {
         engine.getGameCanvas().setCursor(Cursor.getDefaultCursor());
         drag = false;
 

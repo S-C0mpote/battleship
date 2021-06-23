@@ -7,6 +7,7 @@ import info1.game.resources.Fonts;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
 
 public class Input extends InteractiveGameObject implements KeyListener {
 
@@ -55,7 +56,7 @@ public class Input extends InteractiveGameObject implements KeyListener {
     }
 
     @Override
-    public void mousePressed() {
+    public void mousePressed(MouseEvent e) {
         engine.getCurrentScene().getInteractiveGO().forEach((i, igo) -> {
             if(igo instanceof Input) {
                 Input other = (Input) igo;

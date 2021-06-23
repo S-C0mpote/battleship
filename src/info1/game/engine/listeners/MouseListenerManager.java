@@ -45,7 +45,7 @@ public class MouseListenerManager implements MouseListener {
             Dimension size = igo.getSize();
 
             if(e.getX() >= pos.x && e.getX() <= pos.x + size.width && e.getY() >= pos.y && e.getY() <= pos.y + size.height) {
-                igo.mousePressed();
+                igo.mousePressed(e);
                 igo.setPressed(true);
                 return;
             }
@@ -57,7 +57,7 @@ public class MouseListenerManager implements MouseListener {
         for(InteractiveGameObject igo : gameEngine.getCurrentScene().getInteractiveGO().values()) {
             if(igo.isPressed()) {
                 igo.setPressed(false);
-                igo.mouseReleased();
+                igo.mouseReleased(e);
             }
         }
     }

@@ -2,6 +2,8 @@ package info1.game.engine.listeners;
 
 import info1.game.engine.gameobjects.GameObject;
 
+import java.awt.event.MouseEvent;
+
 public abstract class InteractiveGameObject extends GameObject {
 
     private boolean isOver = false;
@@ -20,12 +22,12 @@ public abstract class InteractiveGameObject extends GameObject {
     /**
      * Appelé quand il y a un click (press) sur l'objet
      */
-    public void mousePressed() {};
+    public void mousePressed(MouseEvent event) {};
 
     /**
      * Appelé quand le click est relaché (release) de l'objet
      */
-    public void mouseReleased() {};
+    public void mouseReleased(MouseEvent event) {};
 
     /**
      * @param over true = curseur sur l'objet | false = curseur pas sur l'objet

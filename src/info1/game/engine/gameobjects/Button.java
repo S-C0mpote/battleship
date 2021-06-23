@@ -5,6 +5,7 @@ import info1.game.engine.listeners.InteractiveGameObject;
 import info1.game.resources.Fonts;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 public class Button extends InteractiveGameObject {
@@ -60,13 +61,13 @@ public class Button extends InteractiveGameObject {
     }
 
     @Override
-    public void mousePressed() {
+    public void mousePressed(MouseEvent e) {
         currentImg = pressImg;
         yMargin = 4;
     }
 
     @Override
-    public void mouseReleased() {
+    public void mouseReleased(MouseEvent e) {
         currentImg = overImg;
         yMargin = 0;
         if(listener != null) listener.onClick();
