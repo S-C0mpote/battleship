@@ -37,10 +37,11 @@ public class ModalWaiting extends GameObject {
             public void run() {
                 if(engine.getNetwork() != null && engine.getNetwork().getCurrentGame() != null) {
                     int status = engine.getNetwork().getStatus();
-                    if(status == 1 || status == -1) userJoined = true;
+                    System.out.println(status);
+                    if(status == 10 || status == -10) userJoined = true;
                 }
             }
-        }, 0L, 1L);
+        }, 0L, 1000L);
     }
 
     @Override
