@@ -13,7 +13,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
 
-public class ShipObject extends InteractiveGameObject implements KeyListener {
+public class ShipObject extends InteractiveGameObject {
 
     private Grid grid;
     private Ship ship;
@@ -21,12 +21,12 @@ public class ShipObject extends InteractiveGameObject implements KeyListener {
     private double zoom = 1;
     private boolean drag = false;
     private Vector2D marginPosition = new Vector2D(0,0);
-    private Direction direction;
 
     public ShipObject(Grid grid, Ship ship, GameEngine engine){
         this.engine = engine;
         this.grid = grid;
         this.ship = ship;
+
         refreshPosition();
     }
 
@@ -63,10 +63,10 @@ public class ShipObject extends InteractiveGameObject implements KeyListener {
         AffineTransform af = new AffineTransform();
 
         double theta = 0;
-        if(direction == Direction.LEFT) theta = -(Math.PI / 2);
-        else if(direction == Direction.RIGHT) theta = (Math.PI / 2);
-        else if(direction == Direction.BOTTOM) theta = 0;
-        else if(direction == Direction.TOP) theta = Math.PI;
+        if(ship.getOrientation() == Direction.LEFT) theta = -(Math.PI / 2);
+        else if(ship.getOrientation() == Direction.RIGHT) theta = (Math.PI / 2);
+        else if(ship.getOrientation() == Direction.BOTTOM) theta = 0;
+        else if(ship.getOrientation() == Direction.TOP) theta = Math.PI;
 
         if(ship.getOrientation() == Direction.LEFT || ship.getOrientation() == Direction.BOTTOM) {
             af.translate(
@@ -78,8 +78,6 @@ public class ShipObject extends InteractiveGameObject implements KeyListener {
                     position.y + (size.height - grid.getCellSize()) + grid.getCellSize() - zoom * grid.getCellSize());
         }
 
-        af.scale(zoom, zoom);
-
         af.rotate(theta,
                     (grid.getCellSize() / 2d),
                     (grid.getCellSize() / 2d));
@@ -89,17 +87,16 @@ public class ShipObject extends InteractiveGameObject implements KeyListener {
     }
 
     public void refreshPosition(){
-        direction = ship.getOrientation();
-
-        if(direction == Direction.LEFT || direction == Direction.TOP) {
+        if(ship.getOrientation() == Direction.LEFT || ship.getOrientation() == Direction.BOTTOM) {
             position.x = (ship.getBack().getX() - 1) * grid.getCellSize() + grid.getBase().x;
             position.y = (ship.getBack().getY() - 1 ) * grid.getCellSize() + grid.getBase().y;
-        }else {
+        }
+        else {
             position.x = (ship.getFront().getX() - 1) * grid.getCellSize() + grid.getBase().x;
             position.y = (ship.getFront().getY() - 1 ) * grid.getCellSize() + grid.getBase().y;
         }
 
-        if(direction == Direction.RIGHT || direction == Direction.LEFT) {
+        if(ship.getOrientation() == Direction.RIGHT || ship.getOrientation() == Direction.LEFT) {
             size.width = ship.getSize() * grid.getCellSize();
             size.height = grid.getCellSize();
         }else {
@@ -110,15 +107,40 @@ public class ShipObject extends InteractiveGameObject implements KeyListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if(engine.getMousePosition() == null)return;
-        drag = true;
-        refreshPosition();
-        engine.getGameCanvas().setCursor(new Cursor(Cursor.MOVE_CURSOR));
-        marginPosition = new Vector2D(engine.getMousePosition().x - position.x, engine.getMousePosition().y - position.y);
+        if(e.getButton() == 3 && !drag) {
+            int x = (int) Math.round((position.x - grid.getBase().x) / grid.getCellSize());
+            int y = (int) Math.round((position.y - grid.getBase().y) / grid.getCellSize());
+
+            System.out.println("test");
+
+            try {
+                Direction from = ship.getOrientation();
+                Direction to = from.getNext();
+
+                ship.move(x + 1, y + 1, to, grid.getFleet());
+            } catch (BadCoordException ignored) {}
+
+            refreshPosition();
+        }
+
+        if(engine.getMousePosition() == null) return;
+
+        if(e.getButton() == 1) {
+            drag = true;
+            refreshPosition();
+            engine.getGameCanvas().setCursor(new Cursor(Cursor.MOVE_CURSOR));
+            marginPosition = new Vector2D(engine.getMousePosition().x - position.x, engine.getMousePosition().y - position.y);
+        }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
+
+        if(e.getButton() == 3) {
+            this.setPressed(true);
+            return;
+        }
+
         engine.getGameCanvas().setCursor(Cursor.getDefaultCursor());
         drag = false;
 
@@ -126,7 +148,8 @@ public class ShipObject extends InteractiveGameObject implements KeyListener {
         int y = (int) Math.round((position.y - grid.getBase().y) / grid.getCellSize());
 
         try {
-            ship.move(x + 1, y + 1, direction, grid.getFleet());
+            ship.move(x + 1, y + 1, ship.getOrientation(), grid.getFleet());
+
         } catch (BadCoordException ignored) {}
 
         refreshPosition();
@@ -142,16 +165,5 @@ public class ShipObject extends InteractiveGameObject implements KeyListener {
         return drag;
     }
 
-    @Override
-    public void keyTyped(KeyEvent e) { }
 
-    @Override
-    public void keyPressed(KeyEvent e) {
-        if(drag && e.getKeyCode() == 82){
-            direction = direction.getNext();
-        }
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) { }
 }
