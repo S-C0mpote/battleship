@@ -21,7 +21,6 @@ public class NetworkManager {
     private NetworkListener listener;
     private boolean gameStarted = false;
     private boolean onPlayerJoin = false;
-    private double acc = 0;
 
     public NetworkManager(GamePlayer user) {
         this.user = user;
@@ -36,9 +35,15 @@ public class NetworkManager {
             } catch (UnirestException e) { e.printStackTrace(); }
 
             while (true) {
+                try { Thread.sleep(1000); }
+                catch (InterruptedException e) {e.printStackTrace();}
+
+                System.out.println("En attente de jeu...");
                 if(currentGame == null) continue;
 
-                switch (getStatus()) {
+                int status = getStatus();
+
+                switch (status) {
                     case 10, -10 -> {
                         if(!gameStarted) {
                             System.out.println("Party starting...");
@@ -48,12 +53,9 @@ public class NetworkManager {
                     }
 
                     default -> {
-                        System.out.println("Status inconnu");
+                        System.out.println("Status inconnu : " + status);
                     }
                 }
-
-                try { Thread.sleep(1000); }
-                catch (InterruptedException e) {e.printStackTrace();}
             }
         }).start();
     }
@@ -78,6 +80,7 @@ public class NetworkManager {
 
             if(game.isEmpty()) return false;
             currentGame = game.get();
+            gameStarted = true;
 
             return Network.joinGame(API, currentGame, user.getPlayer(), user.getNavyFleet());
         } catch (UnirestException | UncompleteFleetException | BadCoordException e) { e.printStackTrace(); }
