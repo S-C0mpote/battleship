@@ -7,7 +7,7 @@ import info1.game.engine.gameobjects.Button;
 import info1.game.engine.gameobjects.Input;
 import info1.game.engine.gameobjects.popup.PopupBackground;
 import info1.game.engine.gameobjects.popup.ModalWelcome;
-import info1.game.network.GameNetwork;
+import info1.game.network.NetworkManager;
 import info1.game.network.GamePlayer;
 import info1.game.resources.Images;
 import info1.game.scenes.GameScene;
@@ -43,7 +43,7 @@ public class PopupSignIn {
         button.setPosition(new Vector2D(modal.getPosition().x + modal.getSize().width - 210, modal.getPosition().y + 150));
 
         button.setListener(() -> {
-            GameNetwork network = new GameNetwork(new GamePlayer(input.getText()));
+            NetworkManager network = new NetworkManager(new GamePlayer(input.getText()));
             engine.setNetwork(network);
 
             background.close();
@@ -51,6 +51,11 @@ public class PopupSignIn {
 
             SetupScene.load(engine);
             GameScene.load(engine);
+
+            engine.getNetwork().setListener(() -> {
+                engine.setScene(Scenes.IN_GAME.getScene());
+                GameScene.start();
+            });
 
             //engine.setScene(Scenes.IN_GAME.getScene());
         });

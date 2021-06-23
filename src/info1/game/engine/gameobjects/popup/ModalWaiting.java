@@ -22,35 +22,17 @@ public class ModalWaiting extends GameObject {
     private String code;
     private Button buttonLinked;
     private String dots = "";
-    private NetworkListener listener;
     private boolean userJoined = false;
 
     private double acc = 0;
 
-    public ModalWaiting(GameEngine engine, Button buttonLinked, NetworkListener listener) {
+    public ModalWaiting(GameEngine engine, Button buttonLinked) {
         this.engine = engine;
         this.buttonLinked = buttonLinked;
-        this.listener = listener;
-
-        new Timer(true).scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                if(engine.getNetwork() != null && engine.getNetwork().getCurrentGame() != null) {
-                    int status = engine.getNetwork().getStatus();
-                    System.out.println(status);
-                    if(status == 10 || status == -10) userJoined = true;
-                }
-            }
-        }, 0L, 1000L);
     }
 
     @Override
     public void update(double delta) {
-        if(userJoined) {
-            listener.onJoin();
-            userJoined = false;
-        }
-
         if(closing) {
             position.y += delta * 3;
 
@@ -81,7 +63,7 @@ public class ModalWaiting extends GameObject {
         if(acc >= 250) {
             acc = 0;
 
-            dots = dots.repeat((dots.length() + 1) % 3);
+            dots = ".".repeat((dots.length() + 1) % 4);
         }
     }
 

@@ -1,15 +1,12 @@
 package info1.game.engine;
 
 import info1.game.engine.gameobjects.GameObject;
-import info1.game.engine.listeners.InteractiveGameObject;
 import info1.game.engine.listeners.MouseListenerManager;
-import info1.game.network.GameNetwork;
+import info1.game.network.NetworkManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyListener;
 import java.util.*;
-import java.util.List;
 
 public class GameEngine {
 
@@ -18,7 +15,7 @@ public class GameEngine {
     private final GameCanvas gameCanvas = new GameCanvas(WIDTH, HEIGHT);
     private final JFrame window = new JFrame("BattleShip");
     private final MouseListenerManager mouseListener;
-    private GameNetwork network;
+    private NetworkManager network;
 
     private boolean running = true;
     private Scene scene = null;
@@ -76,6 +73,8 @@ public class GameEngine {
     }
 
     synchronized public void update(double delta) {
+        if(network != null) network.update();
+
         for (GameObject gameObject : new ArrayList<>(scene.getGameObjects().values()))
             gameObject.update(delta);
     }
@@ -98,8 +97,8 @@ public class GameEngine {
         this.scene.enableListeners();
     }
 
-    public void setNetwork(GameNetwork network) { this.network = network; }
-    public GameNetwork getNetwork() { return network; }
+    public void setNetwork(NetworkManager network) { this.network = network; }
+    public NetworkManager getNetwork() { return network; }
     public GameCanvas getGameCanvas() { return gameCanvas; }
     public Scene getCurrentScene() { return scene; }
     public Point getMousePosition() { return mousePosition; }

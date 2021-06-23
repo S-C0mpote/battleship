@@ -6,10 +6,7 @@ import info1.game.engine.Scenes;
 import info1.game.engine.gameobjects.Button;
 import info1.game.engine.gameobjects.popup.ModalWaiting;
 import info1.game.engine.gameobjects.popup.PopupBackground;
-import info1.game.network.GameNetwork;
-import info1.game.network.GamePlayer;
 import info1.game.resources.Images;
-import info1.game.scenes.SetupScene;
 import info1.game.utils.Vector2D;
 
 import java.awt.*;
@@ -27,9 +24,7 @@ public class PopupWaiting {
 
         background = new PopupBackground(engine, 0);
         button = new Button(190, 49, "Annuler", new Color(0x6A5800));
-        modal = new ModalWaiting(engine, button, () -> {
-            engine.setScene(Scenes.IN_GAME.getScene());
-        });
+        modal = new ModalWaiting(engine, button);
 
         modal.setSize(new Dimension(500, 220));
         modal.setPosition(new Vector2D(1280 / 2d - modal.getSize().width / 2d, 720));
