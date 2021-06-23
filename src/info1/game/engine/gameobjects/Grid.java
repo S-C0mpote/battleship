@@ -16,22 +16,15 @@ public class Grid extends GameObject {
     private GamePlayer player;
 
     private int cellSize;
-    private Vector2D base;
 
     private final Color lineColor = new Color(0xF1F1F1);
-
     public Grid(GamePlayer player){
         this.player = player;
     }
-
-    public Grid() {
-        this.player = null;
-    }
+    public Grid() { this.player = null; }
 
     @Override
-    public void update(double delta) {
-
-    }
+    public void update(double delta) {}
 
     @Override
     public void draw(Graphics2D g2d) {
@@ -62,7 +55,6 @@ public class Grid extends GameObject {
                 g2d.setColor(lineColor);
                 g2d.drawLine(posx, (int) position.y, posx, (int) position.y + size.height - 1);
             }
-
             g2d.setColor(new Color(0xF1F1F1));
             g2d.drawString(valeur + "", posx + cellSize / 2 - 3, (int) position.y - ((int) position.y / 20));
             posx += cellSize;
@@ -74,12 +66,9 @@ public class Grid extends GameObject {
     public void setSize(Dimension size) {
         super.setSize(size);
         cellSize = size.width / 10;
-        base = new Vector2D((1280 / 2d - size.width / 2d), (720 / 2d - size.height / 2d));
     }
 
-    public Vector2D getBase() {
-        return base;
-    }
+
     public int getCellSize() {
         return cellSize;
     }
