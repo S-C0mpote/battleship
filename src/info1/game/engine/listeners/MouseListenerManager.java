@@ -6,6 +6,7 @@ import info1.game.utils.Vector2D;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 public class MouseListenerManager implements MouseListener {
 
@@ -45,8 +46,8 @@ public class MouseListenerManager implements MouseListener {
             Dimension size = igo.getSize();
 
             if(e.getX() >= pos.x && e.getX() <= pos.x + size.width && e.getY() >= pos.y && e.getY() <= pos.y + size.height) {
-                igo.mousePressed(e);
                 igo.setPressed(true);
+                igo.mousePressed(e);
                 return;
             }
         }

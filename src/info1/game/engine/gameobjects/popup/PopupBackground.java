@@ -13,13 +13,19 @@ import java.io.IOException;
 public class PopupBackground extends InteractiveGameObject {
 
     private final GameEngine engine;
-    private boolean closing = false;
-    private float opacity = 0.5f;
+    private boolean closing = false, opening;
+    private float opacity;
 
 
     public PopupBackground(GameEngine engine) {
+        this(engine, 0.5f);
+    }
+
+    public PopupBackground(GameEngine engine, float defaultOpacity) {
         this.size = new Dimension(1280, 720);
         this.engine = engine;
+
+        this.opacity = defaultOpacity;
     }
 
     @Override
@@ -30,6 +36,14 @@ public class PopupBackground extends InteractiveGameObject {
                 opacity = 0;
                 closing = false;
                 engine.getCurrentScene().removeGameObject(this);
+            }
+        }
+
+        if(opening) {
+            opacity += delta / 1e3;
+            if(opacity > 0.5f) {
+                opacity = 0.5f;
+                opening = false;
             }
         }
     }
@@ -44,5 +58,9 @@ public class PopupBackground extends InteractiveGameObject {
 
     public void close() {
         closing = true;
+    }
+
+    public void open() {
+        opening = true;
     }
 }

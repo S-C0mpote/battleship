@@ -2,6 +2,7 @@ package info1.game.scenes;
 
 import info1.game.Game;
 import info1.game.components.PopupSignIn;
+import info1.game.components.PopupWaiting;
 import info1.game.engine.GameEngine;
 import info1.game.engine.Scene;
 import info1.game.engine.Scenes;
@@ -31,10 +32,7 @@ public class MenuScene {
         createParty.setOverImg(Images.BUTTON_YELLOW_OVER);
         createParty.setPressImg(Images.BUTTON_YELLOW_PRESS);
         createParty.setPosition(new Vector2D(1280 / 2d - 190 / 2d, 720 / 2d + 60));
-        createParty.setListener(() -> {
-            engine.getNetwork().createGame();
-            System.out.println(engine.getNetwork().getCurrentGame());
-        });
+
         menu.addGameObject(createParty);
 
         Button editFleet = new Button(190, 49, "Gérer ma flotte", new Color(0x6A5800));
@@ -65,6 +63,13 @@ public class MenuScene {
         menu.addGameObject(version);
 
         new PopupSignIn(engine);
+        PopupWaiting popupWaiting = new PopupWaiting(engine);
+
+        createParty.setListener(() -> {
+            engine.getNetwork().createGame();
+            popupWaiting.open(engine.getNetwork().getCurrentGame().getId());
+        });
+
     }
 
 }

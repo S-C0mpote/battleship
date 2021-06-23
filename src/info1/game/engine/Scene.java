@@ -13,6 +13,10 @@ public class Scene {
 
     private final String name;
 
+    // TODO: Faire une liste d'attente, et remplir / enlever à chaque fin de update
+    private Map<Integer, GameObject> gameObjectAdds = new TreeMap<>();
+    private Map<Integer, GameObject> gameObjectsRemoves = new TreeMap<>();
+
     private Map<Integer, GameObject> gameObjects = new TreeMap<>();
     private Map<Integer, InteractiveGameObject> interactiveGO = new TreeMap<>(Collections.reverseOrder());
 
@@ -25,27 +29,26 @@ public class Scene {
     }
 
     public void addGameObject(int zIndex, GameObject gameObject) {
-        if(gameObject instanceof InteractiveGameObject)
+        if(gameObject instanceof InteractiveGameObject) {
             interactiveGO.put(zIndex, (InteractiveGameObject) gameObject);
+        }
 
         gameObjects.put(zIndex, gameObject);
     }
 
     public void disableListeners(){
-        for(GameObject go : this.getGameObjects().values()){
-            if(go instanceof KeyListener){
+        for(GameObject go : this.getGameObjects().values())
+            if(go instanceof KeyListener)
                 Game.engine.getGameCanvas().removeKeyListener((KeyListener) go);
-            }
-        }
     }
+
     public void enableListeners(){
-        for(GameObject go : this.getGameObjects().values()){
-            if(go instanceof KeyListener){
+        for(GameObject go : this.getGameObjects().values())
+            if(go instanceof KeyListener)
                 Game.engine.getGameCanvas().addKeyListener((KeyListener) go);
-            }
-        }
     }
-    synchronized public void removeGameObject(GameObject gameObject) {
+
+    public void removeGameObject(GameObject gameObject) {
         Map<Integer, GameObject> gameObjectsSorted = new TreeMap<>(gameObjects);
         Map<Integer, InteractiveGameObject> interactiveGOSorted = new TreeMap<>(interactiveGO);
 

@@ -7,7 +7,9 @@ import info1.game.network.GameNetwork;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class GameEngine {
 
@@ -79,7 +81,7 @@ public class GameEngine {
     }
 
     synchronized public void draw() {
-        Map<Integer, GameObject> gameObjects = this.scene.getGameObjects();
+        Map<Integer, GameObject> gameObjects = new TreeMap<>(this.scene.getGameObjects());
 
         Graphics2D g2d = gameCanvas.getGraphics2D();
 

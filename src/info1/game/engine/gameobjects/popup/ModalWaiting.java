@@ -4,23 +4,22 @@ import info1.game.engine.GameEngine;
 import info1.game.engine.gameobjects.Button;
 import info1.game.engine.gameobjects.GameObject;
 import info1.game.engine.gameobjects.Input;
-import info1.game.utils.Vector2D;
 import info1.game.resources.Fonts;
+import info1.game.utils.Vector2D;
 
 import java.awt.*;
 
-public class PopupModal extends GameObject {
+public class ModalWaiting extends GameObject {
 
     private final GameEngine engine;
-    private boolean closing = false;
+    private boolean closing = false, opening = false;
 
+    private String code;
     private Button buttonLinked;
-    private Input inputLinked;
 
-    public PopupModal(GameEngine engine, Button buttonLinked, Input inputLinked) {
+    public ModalWaiting(GameEngine engine, Button buttonLinked) {
         this.engine = engine;
         this.buttonLinked = buttonLinked;
-        this.inputLinked = inputLinked;
     }
 
     @Override
@@ -28,7 +27,6 @@ public class PopupModal extends GameObject {
         if(closing) {
             position.y += delta * 2;
 
-            inputLinked.setPosition(new Vector2D(position.x + 20, position.y + 80));
             buttonLinked.setPosition(new Vector2D(position.x + size.width - 210, position.y + 150));
 
             if(position.y >= 720) {
@@ -37,7 +35,17 @@ public class PopupModal extends GameObject {
 
                 engine.getCurrentScene().removeGameObject(this);
                 engine.getCurrentScene().removeGameObject(buttonLinked);
-                engine.getCurrentScene().removeGameObject(inputLinked);
+            }
+        }
+
+        if(opening) {
+            position.y -= delta * 2;
+
+            buttonLinked.setPosition(new Vector2D(position.x + size.width - 210, position.y + 150));
+
+            if(position.y < 720 / 2d - size.height / 2d) {
+                position.y = 720 / 2d - size.height / 2d;
+                opening = false;
             }
         }
     }
@@ -52,16 +60,19 @@ public class PopupModal extends GameObject {
 
             g2d.setColor(new Color(0x0A0A0A));
             g2d.setFont(Fonts.MAIN.deriveFont(20f));
-            g2d.drawString("Bienvenue !", (int) position.x + 20, (int) position.y + 35);
+            g2d.drawString("En attente d'un adversaire...", (int) position.x + 20, (int) position.y + 35);
             g2d.setFont(Fonts.MAIN.deriveFont(18f));
-            g2d.drawString("Veuillez saisir un pseudo.", (int) position.x + 20, (int) position.y + 60);
+            g2d.drawString("Voici votre code : " + code, (int) position.x + 20, (int) position.y + 60);
         }
     }
 
     public void close() {
-        closing = true;
+        this.closing = true;
+    }
 
-        engine.getGameCanvas().removeKeyListener(inputLinked);
+    public void open(int code) {
+        this.opening = true;
+        this.code = String.valueOf(code);
     }
 
 }
