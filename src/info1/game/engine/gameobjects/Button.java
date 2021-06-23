@@ -13,6 +13,7 @@ public class Button extends InteractiveGameObject {
     private String name;
     private int yMargin = 0;
     private Color color;
+    private boolean clicked = false;
 
     private ButtonListener listener;
 
@@ -28,7 +29,12 @@ public class Button extends InteractiveGameObject {
     }
 
     @Override
-    public void update(double delta) {}
+    public void update(double delta) {
+        if(listener != null && clicked) {
+            clicked = false;
+            listener.onClick();
+        }
+    }
 
     @Override
     public void draw(Graphics2D g2d) {
@@ -70,7 +76,7 @@ public class Button extends InteractiveGameObject {
     public void mouseReleased(MouseEvent e) {
         currentImg = overImg;
         yMargin = 0;
-        if(listener != null) listener.onClick();
+        clicked = true;
     }
 
     public void setListener(ButtonListener listener) {

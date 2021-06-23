@@ -18,7 +18,6 @@ public class ShipObject extends InteractiveGameObject {
     private Grid grid;
     private Ship ship;
     private GameEngine engine;
-    private double zoom = 1;
     private boolean drag = false;
     private Vector2D marginPosition = new Vector2D(0,0);
 
@@ -31,15 +30,7 @@ public class ShipObject extends InteractiveGameObject {
     }
 
     @Override
-    public void update(double delta) {
-        if(drag && zoom < 1.2){
-            zoom += delta * 0.008;
-            if(zoom > 1.2) zoom = 1.2;
-        } else if(zoom > 1 && !drag){
-            zoom -= delta * 0.008;
-            if(zoom < 1) zoom = 1;
-        }
-    }
+    public void update(double delta) { }
 
     @Override
     public void draw(Graphics2D g2d) {
@@ -51,7 +42,6 @@ public class ShipObject extends InteractiveGameObject {
                     Math.max(engine.getMousePosition().y - marginPosition.y, grid.getBase().y),
                     grid.getBase().y + grid.getSize().height - size.height);
         }
-
 
         AffineTransform save = g2d.getTransform();
         g2d.setTransform(this.getTransform());
@@ -69,19 +59,14 @@ public class ShipObject extends InteractiveGameObject {
         else if(ship.getOrientation() == Direction.TOP) theta = Math.PI;
 
         if(ship.getOrientation() == Direction.LEFT || ship.getOrientation() == Direction.BOTTOM) {
-            af.translate(
-                    position.x + grid.getCellSize() - zoom * grid.getCellSize(),
-                    position.y + grid.getCellSize() - zoom * grid.getCellSize());
+            af.translate(position.x, position.y);
         }else {
             af.translate(
-                    position.x + (size.width - grid.getCellSize()) + grid.getCellSize() - zoom * grid.getCellSize(),
-                    position.y + (size.height - grid.getCellSize()) + grid.getCellSize() - zoom * grid.getCellSize());
+                    position.x + (size.width - grid.getCellSize()),
+                    position.y + (size.height - grid.getCellSize()));
         }
 
-        af.rotate(theta,
-                    (grid.getCellSize() / 2d),
-                    (grid.getCellSize() / 2d));
-
+        af.rotate(theta, (grid.getCellSize() / 2d), (grid.getCellSize() / 2d));
 
         return af;
     }

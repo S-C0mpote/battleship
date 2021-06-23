@@ -20,8 +20,12 @@ import java.util.List;
 public class SetupScene {
 
     private static final List<ShipObject> shipObjects = new ArrayList<>();
+    private static GameEngine engine;
+    private static Grid grid;
 
     public static void load(GameEngine engine) {
+        SetupScene.engine = engine;
+
         Scene setup = Scenes.SETUP.getScene();
 
         Button fr_lang = new Button(190,49,"France", new Color(0x6A5800));
@@ -48,49 +52,26 @@ public class SetupScene {
 
         LabelIndicator indicator = new LabelIndicator("Choix de configuration :", Color.WHITE, 15f, 10, 630);
 
-        Grid grid = new Grid(engine.getNetwork().getUser());
+        grid = new Grid(engine.getNetwork().getUser());
         grid.setSize(new Dimension(500, 500));
         grid.setPosition(new Vector2D(
                 1280 / 2d - grid.getSize().width / 2d,
                 720 / 2d - grid.getSize().height / 2d));
         setup.addGameObject(grid);
 
-
         be_lang.setListener(() -> {
-            for(ShipObject ship : shipObjects) {
-                setup.removeGameObject(ship);
-            }
-
+            removeShips();
             engine.getNetwork().getUser().setNavyFleet(NavyFleetConfiguration.getBelgianDefault());
-
-            for(IShip ship : engine.getNetwork().getUser().getNavyFleet().getShips()) {
-                ShipObject shipObject = new ShipObject(grid, (Ship) ship, engine);
-                shipObjects.add(shipObject);
-                setup.addGameObject(shipObject);
-                System.out.println(ship.getName());
-            }
+            addShips();
         });
 
         fr_lang.setListener(() -> {
-            for(ShipObject ship : shipObjects) {
-                setup.removeGameObject(ship);
-            }
-
+            removeShips();
             engine.getNetwork().getUser().setNavyFleet(NavyFleetConfiguration.getFrenchDefault());
-
-            for(IShip ship : engine.getNetwork().getUser().getNavyFleet().getShips()) {
-                ShipObject shipObject = new ShipObject(grid, (Ship) ship, engine);
-                shipObjects.add(shipObject);
-                setup.addGameObject(shipObject);
-                System.out.println(ship.getName());
-            }
+            addShips();
         });
 
-        for(IShip ship : engine.getNetwork().getUser().getNavyFleet().getShips()) {
-            ShipObject shipObject = new ShipObject(grid, (Ship) ship, engine);
-            shipObjects.add(shipObject);
-            setup.addGameObject(shipObject);
-        }
+        addShips();
 
         LabelIndicator commands = new LabelIndicator("Commandes :" + "\n\n" + "gauche : bouger" + "\n" + "droite : tourner",
                 Color.WHITE, 20f, 10, (int) (720 / 2d - grid.getSize().height / 2d));
@@ -102,5 +83,17 @@ public class SetupScene {
         setup.addGameObject(instruction);
         setup.addGameObject(indicator);
         setup.addGameObject(commands);
+    }
+
+    private static void removeShips() {
+        for(ShipObject ship : shipObjects) Scenes.SETUP.getScene().removeGameObject(ship);
+    }
+
+    private static void addShips() {
+        for(IShip ship : engine.getNetwork().getUser().getNavyFleet().getShips()) {
+            ShipObject shipObject = new ShipObject(grid, (Ship) ship, engine);
+            shipObjects.add(shipObject);
+            Scenes.SETUP.getScene().addGameObject(shipObject);
+        }
     }
 }

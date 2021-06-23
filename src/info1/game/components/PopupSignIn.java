@@ -43,15 +43,16 @@ public class PopupSignIn {
         button.setPosition(new Vector2D(modal.getPosition().x + modal.getSize().width - 210, modal.getPosition().y + 150));
 
         button.setListener(() -> {
+            GameNetwork network = new GameNetwork(new GamePlayer(input.getText()));
+            engine.setNetwork(network);
+
             background.close();
             modal.close();
-
-            engine.setNetwork(new GameNetwork(new GamePlayer(input.getText())));
 
             SetupScene.load(engine);
             GameScene.load(engine);
 
-            engine.setScene(Scenes.IN_GAME.getScene());
+            //engine.setScene(Scenes.IN_GAME.getScene());
         });
 
         menu.addGameObject(1000, background);

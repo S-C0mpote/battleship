@@ -8,10 +8,8 @@ import info1.game.network.GameNetwork;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
+import java.util.List;
 
 public class GameEngine {
 
@@ -78,8 +76,6 @@ public class GameEngine {
     }
 
     synchronized public void update(double delta) {
-        // TODO: Voir pour eviter de faire ce truc là wuesh
-        //      Genre on fait tout en monothread
         for (GameObject gameObject : new ArrayList<>(scene.getGameObjects().values()))
             gameObject.update(delta);
     }
@@ -90,7 +86,7 @@ public class GameEngine {
         g2d.setColor(Color.BLACK);
         g2d.fillRect(0, 0, WIDTH, HEIGHT);
 
-        for (GameObject gameObject : new TreeMap<>(scene.getGameObjects()).values())
+        for (GameObject gameObject : new ArrayList<>(scene.getGameObjects().values()))
             gameObject.draw(g2d);
 
         gameCanvas.getBufferStrategy().show();
