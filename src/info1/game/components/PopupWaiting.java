@@ -27,7 +27,9 @@ public class PopupWaiting {
 
         background = new PopupBackground(engine, 0);
         button = new Button(190, 49, "Annuler", new Color(0x6A5800));
-        modal = new ModalWaiting(engine, button);
+        modal = new ModalWaiting(engine, button, () -> {
+            engine.setScene(Scenes.IN_GAME.getScene());
+        });
 
         modal.setSize(new Dimension(500, 220));
         modal.setPosition(new Vector2D(1280 / 2d - modal.getSize().width / 2d, 720));

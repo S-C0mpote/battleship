@@ -13,7 +13,13 @@ import info1.ships.NavyFleet;
 import java.awt.*;
 
 public class GameScene {
+
+    private static GameEngine engine;
+    private static LabelIndicator gameId;
+
     public static void load(GameEngine engine){
+        GameScene.engine = engine;
+
         Scene ingame = Scenes.IN_GAME.getScene();
 
         Grid emptyGrid = new Grid();
@@ -31,23 +37,28 @@ public class GameScene {
                 userGrid.getPosition().y));
 
 
-        LabelIndicator turn =  new LabelIndicator("Turn :",
-                Color.WHITE, 20f, (int) (emptyGrid.getBase().x * 2.25), 10);
+        LabelCenter turn =  new LabelCenter("VOTRE Tour !",
+                Color.WHITE, 20f);
+
+        turn.setPosition(new Vector2D(1280 / 2d - 75, 20));
+        turn.setSize(new Dimension(1280 / 2, 50));
 
 
-        LabelIndicator gameId = new LabelIndicator("#9999",
-                Color.WHITE, 20f, 10, 10);
+        gameId = new LabelIndicator("#0", Color.WHITE, 15f, 10, 10);
 
         // Cases restantes -1
         LabelIndicator cellRemaining =  new LabelIndicator("Cells remaining : 10 / 100",
                 Color.WHITE, 20f, (int) emptyGrid.getPosition().x, (int) emptyGrid.getPosition().y + emptyGrid.getSize().height);
-
-
+        
         ingame.addGameObject(-1,MenuScene.background);
         ingame.addGameObject(userGrid);
         ingame.addGameObject(emptyGrid);
         ingame.addGameObject(turn);
         ingame.addGameObject(gameId);
         ingame.addGameObject(cellRemaining);
+    }
+
+    public static void start() {
+        gameId.setText("GameID: " + engine.getNetwork().getCurrentGame().getId());
     }
 }

@@ -73,6 +73,7 @@ public class MenuScene {
         joinParty.setListener(() -> {
             int code = Integer.parseInt(codeInput.getText());
             if(engine.getNetwork().joinGame(code)) {
+                GameScene.start();
                 engine.setScene(Scenes.IN_GAME.getScene());
             }
         });

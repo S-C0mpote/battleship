@@ -1,6 +1,7 @@
 package info1.game.network;
 
 import com.mashape.unirest.http.exceptions.UnirestException;
+import info1.network.BadIdException;
 import info1.network.Game;
 import info1.network.Network;
 import info1.network.Player;
@@ -50,6 +51,14 @@ public class GameNetwork {
             return Network.joinGame(API, currentGame, user.getPlayer(), user.getNavyFleet());
         } catch (UnirestException | UncompleteFleetException | BadCoordException e) { e.printStackTrace(); }
         return false;
+    }
+
+    public int getStatus() {
+        try {
+            return Network.getInfo(API, currentGame, user.getPlayer());
+        } catch (UnirestException | BadIdException e) { e.printStackTrace(); }
+
+        return -999;
     }
 
     public Game getCurrentGame() { return currentGame; }

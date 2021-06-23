@@ -3,11 +3,14 @@ package info1.game.engine.gameobjects.popup;
 import info1.game.engine.GameEngine;
 import info1.game.engine.gameobjects.Button;
 import info1.game.engine.gameobjects.GameObject;
-import info1.game.engine.gameobjects.Input;
+import info1.game.engine.listeners.NetworkListener;
 import info1.game.resources.Fonts;
 import info1.game.utils.Vector2D;
 
 import java.awt.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class ModalWaiting extends GameObject {
 
@@ -17,16 +20,30 @@ public class ModalWaiting extends GameObject {
     private String code;
     private Button buttonLinked;
     private String dots = "";
+    private NetworkListener listener;
+    private boolean userJoined = false;
 
     private double acc = 0;
 
-    public ModalWaiting(GameEngine engine, Button buttonLinked) {
+    public ModalWaiting(GameEngine engine, Button buttonLinked, NetworkListener listener) {
         this.engine = engine;
         this.buttonLinked = buttonLinked;
+        this.listener = listener;
+
+        ScheduledExecutorService execService = Executors.newScheduledThreadPool(1);
+        execService.scheduleAtFixedRate(() -> {
+            int status = engine.getNetwork().getStatus();
+            if(status == 1 || status == -1) userJoined = true;
+        }, 0L, 1L, TimeUnit.SECONDS);
     }
 
     @Override
     public void update(double delta) {
+        if(userJoined) {
+            listener.onJoin();
+            userJoined = false;
+        }
+
         if(closing) {
             position.y += delta * 3;
 
