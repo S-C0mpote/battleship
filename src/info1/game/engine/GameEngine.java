@@ -78,19 +78,20 @@ public class GameEngine {
     }
 
     synchronized public void update(double delta) {
-        Map<Integer, GameObject> gameObjects = this.scene.getGameObjects();
-        gameObjects.forEach((i, go) -> go.update(delta));
+        // TODO: Voir pour eviter de faire ce truc là wuesh
+        //      Genre on fait tout en monothread
+        for (GameObject gameObject : new ArrayList<>(scene.getGameObjects().values()))
+            gameObject.update(delta);
     }
 
     synchronized public void draw() {
-        Iterator<GameObject> gameObjects = this.scene.getGameObjects().values().iterator();
-
         Graphics2D g2d = gameCanvas.getGraphics2D();
 
         g2d.setColor(Color.BLACK);
         g2d.fillRect(0, 0, WIDTH, HEIGHT);
 
-        while (gameObjects.hasNext()) gameObjects.next().draw(g2d);
+        for (GameObject gameObject : new TreeMap<>(scene.getGameObjects()).values())
+            gameObject.draw(g2d);
 
         gameCanvas.getBufferStrategy().show();
     }

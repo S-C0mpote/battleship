@@ -12,10 +12,9 @@ import java.awt.*;
 public class GameScene {
     public static void load(GameEngine engine){
         Scene ingame = Scenes.IN_GAME.getScene();
-        NavyFleet currentFleet = (NavyFleet) engine.getNetwork().getUser().getNavyFleet();
 
         Grid emptyGrid = new Grid();
-        Grid userGrid = new Grid(currentFleet);
+        Grid userGrid = new Grid(engine.getNetwork().getUser());
 
         userGrid.setSize(new Dimension(200, 200));
         userGrid.setPosition(new Vector2D(

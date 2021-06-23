@@ -1,8 +1,10 @@
 package info1.game.engine.gameobjects;
 
 
+import info1.game.network.GamePlayer;
 import info1.game.resources.Fonts;
 import info1.game.utils.Vector2D;
+import info1.ships.INavyFleet;
 import info1.ships.IShip;
 import info1.ships.NavyFleet;
 
@@ -11,20 +13,25 @@ import java.awt.*;
 import java.util.List;
 
 public class Grid extends GameObject {
-    private NavyFleet fleet;
+    private GamePlayer player;
 
     private int cellSize;
     private Vector2D base;
 
     private final Color lineColor = new Color(0xF1F1F1);
 
-    public Grid(NavyFleet fleet){
-        this.fleet = fleet;
+    public Grid(GamePlayer player){
+        this.player = player;
     }
-    public Grid(){this.fleet = null;}
+
+    public Grid() {
+        this.player = null;
+    }
 
     @Override
-    public void update(double delta) {}
+    public void update(double delta) {
+
+    }
 
     @Override
     public void draw(Graphics2D g2d) {
@@ -76,5 +83,8 @@ public class Grid extends GameObject {
     public int getCellSize() {
         return cellSize;
     }
-    public NavyFleet getFleet() {return fleet;}
+
+    public NavyFleet getFleet() {
+        return (NavyFleet) player.getNavyFleet();
+    }
 }

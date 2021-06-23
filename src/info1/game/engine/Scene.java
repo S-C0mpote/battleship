@@ -6,6 +6,7 @@ import info1.game.engine.listeners.InteractiveGameObject;
 
 import java.awt.event.KeyListener;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -13,6 +14,7 @@ public class Scene {
 
     private final String name;
 
+    private int i = 0;
     private Map<Integer, GameObject> gameObjects = new TreeMap<>();
     private Map<Integer, InteractiveGameObject> interactiveGO = new TreeMap<>(Collections.reverseOrder());
 
@@ -21,10 +23,12 @@ public class Scene {
     }
 
     public void addGameObject(GameObject gameObject){
-        addGameObject(gameObjects.size(), gameObject);
+        addGameObject(i, gameObject);
     }
 
     public void addGameObject(int zIndex, GameObject gameObject) {
+        i++;
+
         if(gameObject instanceof InteractiveGameObject) {
             interactiveGO.put(zIndex, (InteractiveGameObject) gameObject);
         }
