@@ -39,6 +39,8 @@ public class SetupScene {
         LabelCenter instruction = new LabelCenter("Placez vos bateaux", Color.WHITE, 35f);
         instruction.setSize(new Dimension(1280, 100));
 
+        LabelIndicator indicator = new LabelIndicator("Choix de configuration :", Color.WHITE, 15f, 10, 630);
+
         NavyFleet currentFleet = (NavyFleet) engine.getNetwork().getUser().getNavyFleet();
 
         Grid grid = new Grid(currentFleet);
@@ -53,10 +55,15 @@ public class SetupScene {
             setup.addGameObject(shipObject);
         }
 
+        LabelIndicator commands = new LabelIndicator("Commandes :" + "\n\n" + "gauche : bouger" + "\n" + "droite : tourner",
+                Color.WHITE, 20f, 10, (int) (720 / 2d - grid.getSize().height / 2d));
+
         setup.addGameObject(-1, MenuScene.background);
         setup.addGameObject(fr_lang);
         setup.addGameObject(be_lang);
         setup.addGameObject(valider);
         setup.addGameObject(instruction);
+        setup.addGameObject(indicator);
+        setup.addGameObject(commands);
     }
 }
