@@ -8,6 +8,8 @@ import info1.game.resources.Fonts;
 import info1.game.utils.Vector2D;
 
 import java.awt.*;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -30,11 +32,13 @@ public class ModalWaiting extends GameObject {
         this.buttonLinked = buttonLinked;
         this.listener = listener;
 
-        ScheduledExecutorService execService = Executors.newScheduledThreadPool(1);
-        execService.scheduleAtFixedRate(() -> {
-            int status = engine.getNetwork().getStatus();
-            if(status == 1 || status == -1) userJoined = true;
-        }, 0L, 1L, TimeUnit.SECONDS);
+        new Timer(true).scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                int status = engine.getNetwork().getStatus();
+                if(status == 1 || status == -1) userJoined = true;
+            }
+        }, 0L, 1L);
     }
 
     @Override
