@@ -70,6 +70,13 @@ public class MenuScene {
             popupWaiting.open(engine.getNetwork().getCurrentGame().getId());
         });
 
+        joinParty.setListener(() -> {
+            int code = Integer.parseInt(codeInput.getText());
+            if(engine.getNetwork().joinGame(code)) {
+                engine.setScene(Scenes.IN_GAME.getScene());
+            }
+        });
+
     }
 
 }

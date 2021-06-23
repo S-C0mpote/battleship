@@ -3,8 +3,11 @@ package info1.game.network;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import info1.network.Game;
 import info1.network.Network;
+import info1.network.Player;
 import info1.ships.BadCoordException;
 import info1.ships.UncompleteFleetException;
+
+import java.util.Optional;
 
 public class GameNetwork {
 
@@ -26,15 +29,26 @@ public class GameNetwork {
         } catch (UnirestException e) { e.printStackTrace(); }
     }
 
-    /**
-     * @return Le code de la partie créée
-     */
     public boolean createGame() {
         try {
             currentGame = Network.initNewGame(API, user.getPlayer(), user.getNavyFleet());
             return true;
         } catch (UnirestException | UncompleteFleetException | BadCoordException e) { e.printStackTrace(); }
 
+        return false;
+    }
+
+    public boolean joinGame(int code) {
+        try {
+            Optional<Game> game = Network.listInitializedGames(API).stream()
+                    .filter(g -> g.getId() == code)
+                    .findFirst();
+
+            if(game.isEmpty()) return false;
+            currentGame = game.get();
+
+            return Network.joinGame(API, currentGame, user.getPlayer(), user.getNavyFleet());
+        } catch (UnirestException | UncompleteFleetException | BadCoordException e) { e.printStackTrace(); }
         return false;
     }
 
