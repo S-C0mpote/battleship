@@ -18,7 +18,8 @@ public class GameScene {
 
     private static GameEngine engine;
     private static LabelIndicator gameId;
-    private static Grid userGrid, ennemyGrid;
+    private static Grid userGrid;
+    private static InteractiveGrid ennemyGrid;
     private static final List<GraphicShipObject> shipObjects = new ArrayList<>();
 
 
@@ -27,7 +28,7 @@ public class GameScene {
 
         Scene ingame = Scenes.IN_GAME.getScene();
 
-        ennemyGrid = new Grid();
+        ennemyGrid = new InteractiveGrid();
         userGrid = new Grid(engine.getNetwork().getUser());
 
         userGrid.setSize(new Dimension(300, 300));

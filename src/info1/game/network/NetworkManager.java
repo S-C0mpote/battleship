@@ -6,6 +6,8 @@ import info1.network.BadIdException;
 import info1.network.Game;
 import info1.network.Network;
 import info1.ships.BadCoordException;
+import info1.ships.Coord;
+import info1.ships.ICoord;
 import info1.ships.UncompleteFleetException;
 
 import java.util.Optional;
@@ -92,6 +94,7 @@ public class NetworkManager {
             return Network.joinGame(API, currentGame, user.getPlayer(), user.getNavyFleet());
         } catch (UnirestException | UncompleteFleetException | BadCoordException e) { e.printStackTrace(); }
         return false;
+
     }
 
     public int getStatus() {
@@ -100,6 +103,12 @@ public class NetworkManager {
         } catch (UnirestException | BadIdException e) { e.printStackTrace(); }
 
         return -999;
+    }
+    public void playOnGrid(ICoord coord) throws BadCoordException, UnirestException {
+        if(Network.playOneTurn(API, currentGame, user.getPlayer(), new Coord(coord.toString())) == 1){
+            System.out.println("touché");
+        }
+        System.out.println("raté");
     }
 
     public Game getCurrentGame() { return currentGame; }
