@@ -55,7 +55,7 @@ public class SetupScene {
             setup.addGameObject(shipObject);
         }
 
-        LabelIndicator commands = new LabelIndicator("Commandes :" + "\n\n" + "gauche : bouger" + "\n" + "droite : touner",
+        LabelIndicator commands = new LabelIndicator("Commandes :" + "\n\n" + "gauche : bouger" + "\n" + "droite : tourner",
                 Color.WHITE, 20f, 10, (int) (720 / 2d - grid.getSize().height / 2d));
 
         setup.addGameObject(-1, MenuScene.background);
