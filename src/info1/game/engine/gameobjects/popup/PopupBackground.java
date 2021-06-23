@@ -31,16 +31,14 @@ public class PopupBackground extends InteractiveGameObject {
     @Override
     public void update(double delta) {
         if(closing) {
-            opacity -= delta / 1e3;
+            opacity -= delta / 5e2;
             if(opacity <= 0) {
                 opacity = 0;
                 closing = false;
                 engine.getCurrentScene().removeGameObject(this);
             }
-        }
-
-        if(opening) {
-            opacity += delta / 1e3;
+        } else if(opening) {
+            opacity += delta / 5e2;
             if(opacity > 0.5f) {
                 opacity = 0.5f;
                 opening = false;

@@ -13,10 +13,6 @@ public class Scene {
 
     private final String name;
 
-    // TODO: Faire une liste d'attente, et remplir / enlever à chaque fin de update
-    private Map<Integer, GameObject> gameObjectAdds = new TreeMap<>();
-    private Map<Integer, GameObject> gameObjectsRemoves = new TreeMap<>();
-
     private Map<Integer, GameObject> gameObjects = new TreeMap<>();
     private Map<Integer, InteractiveGameObject> interactiveGO = new TreeMap<>(Collections.reverseOrder());
 
@@ -50,7 +46,9 @@ public class Scene {
 
     public void removeGameObject(GameObject gameObject) {
         Map<Integer, GameObject> gameObjectsSorted = new TreeMap<>(gameObjects);
-        Map<Integer, InteractiveGameObject> interactiveGOSorted = new TreeMap<>(interactiveGO);
+        Map<Integer, InteractiveGameObject> interactiveGOSorted = new TreeMap<>(Collections.reverseOrder());
+
+        interactiveGOSorted.putAll(interactiveGO);
 
         gameObjects.forEach((i, go) -> {
             if(gameObject.equals(go)) {

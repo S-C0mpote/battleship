@@ -1,6 +1,7 @@
 package info1.game.engine;
 
 import info1.game.engine.gameobjects.GameObject;
+import info1.game.engine.listeners.InteractiveGameObject;
 import info1.game.engine.listeners.MouseListenerManager;
 import info1.game.network.GameNetwork;
 
@@ -8,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -81,14 +83,14 @@ public class GameEngine {
     }
 
     synchronized public void draw() {
-        Map<Integer, GameObject> gameObjects = new TreeMap<>(this.scene.getGameObjects());
+        Iterator<GameObject> gameObjects = this.scene.getGameObjects().values().iterator();
 
         Graphics2D g2d = gameCanvas.getGraphics2D();
 
         g2d.setColor(Color.BLACK);
         g2d.fillRect(0, 0, WIDTH, HEIGHT);
 
-        gameObjects.forEach((i, go) -> go.draw(g2d));
+        while (gameObjects.hasNext()) gameObjects.next().draw(g2d);
 
         gameCanvas.getBufferStrategy().show();
     }

@@ -6,7 +6,8 @@ import info1.game.utils.Vector2D;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
+import java.util.*;
+import java.util.List;
 
 public class MouseListenerManager implements MouseListener {
 
@@ -41,7 +42,9 @@ public class MouseListenerManager implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        for(InteractiveGameObject igo : gameEngine.getCurrentScene().getInteractiveGO().values()) {
+        List<InteractiveGameObject> igos = new ArrayList<>(gameEngine.getCurrentScene().getInteractiveGO().values());
+
+        for(InteractiveGameObject igo : igos) {
             Vector2D pos = igo.getPosition();
             Dimension size = igo.getSize();
 
@@ -55,7 +58,9 @@ public class MouseListenerManager implements MouseListener {
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        for(InteractiveGameObject igo : gameEngine.getCurrentScene().getInteractiveGO().values()) {
+        List<InteractiveGameObject> igos = new ArrayList<>(gameEngine.getCurrentScene().getInteractiveGO().values());
+
+        for(InteractiveGameObject igo : igos) {
             if(igo.isPressed()) {
                 igo.setPressed(false);
                 igo.mouseReleased(e);

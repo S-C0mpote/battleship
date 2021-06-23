@@ -26,7 +26,7 @@ public class ModalWelcome extends GameObject {
     @Override
     public void update(double delta) {
         if(closing) {
-            position.y += delta * 2;
+            position.y += delta * 3;
 
             inputLinked.setPosition(new Vector2D(position.x + 20, position.y + 80));
             buttonLinked.setPosition(new Vector2D(position.x + size.width - 210, position.y + 150));

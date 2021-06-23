@@ -16,6 +16,9 @@ public class ModalWaiting extends GameObject {
 
     private String code;
     private Button buttonLinked;
+    private String dots = "";
+
+    private double acc = 0;
 
     public ModalWaiting(GameEngine engine, Button buttonLinked) {
         this.engine = engine;
@@ -25,7 +28,7 @@ public class ModalWaiting extends GameObject {
     @Override
     public void update(double delta) {
         if(closing) {
-            position.y += delta * 2;
+            position.y += delta * 3;
 
             buttonLinked.setPosition(new Vector2D(position.x + size.width - 210, position.y + 150));
 
@@ -33,13 +36,13 @@ public class ModalWaiting extends GameObject {
                 position.y = 720;
                 closing = false;
 
-                engine.getCurrentScene().removeGameObject(this);
                 engine.getCurrentScene().removeGameObject(buttonLinked);
+                engine.getCurrentScene().removeGameObject(this);
             }
         }
 
         if(opening) {
-            position.y -= delta * 2;
+            position.y -= delta * 3;
 
             buttonLinked.setPosition(new Vector2D(position.x + size.width - 210, position.y + 150));
 
@@ -47,6 +50,14 @@ public class ModalWaiting extends GameObject {
                 position.y = 720 / 2d - size.height / 2d;
                 opening = false;
             }
+        }
+
+        acc += delta;
+
+        if(acc >= 250) {
+            acc = 0;
+
+            dots = dots.repeat((dots.length() + 1) % 3);
         }
     }
 
@@ -60,7 +71,7 @@ public class ModalWaiting extends GameObject {
 
             g2d.setColor(new Color(0x0A0A0A));
             g2d.setFont(Fonts.MAIN.deriveFont(20f));
-            g2d.drawString("En attente d'un adversaire...", (int) position.x + 20, (int) position.y + 35);
+            g2d.drawString("En attente d'un adversaire" + dots, (int) position.x + 20, (int) position.y + 35);
             g2d.setFont(Fonts.MAIN.deriveFont(18f));
             g2d.drawString("Voici votre code : " + code, (int) position.x + 20, (int) position.y + 60);
         }
