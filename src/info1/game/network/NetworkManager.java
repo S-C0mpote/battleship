@@ -61,7 +61,10 @@ public class NetworkManager {
     }
 
     public void update() {
-        if(onPlayerJoin) listener.onPlayerJoin();
+        if(onPlayerJoin) {
+            listener.onPlayerJoin();
+            onPlayerJoin = false;
+        }
     }
 
     public void createGame() {

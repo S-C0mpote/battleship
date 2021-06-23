@@ -35,12 +35,10 @@ public class GameScene {
                 1280 / 4d - userGrid.getSize().width / 2d - 120,
                 720 / 3d - userGrid.getSize().height / 2d));
 
-
         ennemyGrid.setSize(new Dimension(500, 500));
         ennemyGrid.setPosition(new Vector2D(
                 1280 / 2d,
                 userGrid.getPosition().y));
-
 
         LabelCenter turn =  new LabelCenter("VOTRE Tour !",
                 Color.WHITE, 20f);
@@ -48,8 +46,7 @@ public class GameScene {
         turn.setPosition(new Vector2D(1280 / 2d - 75, 20));
         turn.setSize(new Dimension(1280 / 2, 50));
 
-
-        gameId = new LabelIndicator("#0", Color.WHITE, 15f, 10, 10);
+        gameId = new LabelIndicator("", Color.WHITE, 15f, 10, 10);
 
         // Cases restantes -1
         LabelIndicator cellRemaining =  new LabelIndicator("Cells remaining : 10 / 100",
@@ -64,11 +61,11 @@ public class GameScene {
     }
 
     public static void start() {
+        System.out.println("Start");
         gameId.setText("GameID: " + engine.getNetwork().getCurrentGame().getId());
-        System.out.println("1");
         setShips();
-        System.out.println("2");
     }
+
     private static void setShips() {
         for(IShip ship : engine.getNetwork().getUser().getNavyFleet().getShips()) {
             GraphicShipObject shipObject = new GraphicShipObject(userGrid, (Ship) ship, engine);

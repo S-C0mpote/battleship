@@ -82,8 +82,6 @@ public class GraphicShipObject extends GameObject {
             size.height = ship.getSize() * grid.getCellSize();
             size.width = grid.getCellSize();
         }
-        System.out.println("grid : " + grid.getCellSize());
-        System.out.println(grid.getPosition());
     }
 
 
