@@ -35,7 +35,7 @@ public class ModalWaiting extends GameObject {
         new Timer(true).scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                if(engine.getNetwork() != null) {
+                if(engine.getNetwork() != null && engine.getNetwork().getCurrentGame() != null) {
                     int status = engine.getNetwork().getStatus();
                     if(status == 1 || status == -1) userJoined = true;
                 }
