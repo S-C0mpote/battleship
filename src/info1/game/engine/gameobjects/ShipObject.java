@@ -43,8 +43,12 @@ public class ShipObject extends InteractiveGameObject implements KeyListener {
     @Override
     public void draw(Graphics2D g2d) {
         if(drag && engine.getMousePosition() != null){
-            position.x = Math.min(Math.max(engine.getMousePosition().x - marginPosition.x, grid.getBase().x), grid.getBase().x + grid.getSize().width - size.width);
-            position.y = Math.min(Math.max(engine.getMousePosition().y - marginPosition.y, grid.getBase().y), grid.getBase().y + grid.getSize().height - size.height);
+            position.x = Math.min(
+                    Math.max(engine.getMousePosition().x - marginPosition.x, grid.getBase().x),
+                    grid.getBase().x + grid.getSize().width - size.width);
+            position.y = Math.min(
+                    Math.max(engine.getMousePosition().y - marginPosition.y, grid.getBase().y),
+                    grid.getBase().y + grid.getSize().height - size.height);
         }
 
         AffineTransform save = g2d.getTransform();
@@ -57,12 +61,12 @@ public class ShipObject extends InteractiveGameObject implements KeyListener {
         AffineTransform af = new AffineTransform();
 
         double theta = 0;
-        if(direction == Direction.GAUCHE) theta = -(Math.PI / 2);
-        else if(direction == Direction.DROITE) theta = Math.PI / 2;
-        else if(direction == Direction.BAS) theta = 0;
-        else if(direction == Direction.HAUT) theta = Math.PI;
+        if(direction == Direction.LEFT) theta = -(Math.PI / 2);
+        else if(direction == Direction.RIGHT) theta = (Math.PI / 2);
+        else if(direction == Direction.BOTTOM) theta = 0;
+        else if(direction == Direction.TOP) theta = Math.PI;
 
-        if(direction == Direction.GAUCHE || direction == Direction.BAS) {
+        if(direction == Direction.LEFT || direction == Direction.BOTTOM) {
             af.translate(
                     position.x + grid.getCellSize() - zoom * grid.getCellSize(),
                     position.y + grid.getCellSize() - zoom * grid.getCellSize());
@@ -73,7 +77,6 @@ public class ShipObject extends InteractiveGameObject implements KeyListener {
         }
 
         af.scale(zoom, zoom);
-
         af.rotate(theta, grid.getCellSize() / 2d, grid.getCellSize() / 2d);
 
         return af;
@@ -82,7 +85,7 @@ public class ShipObject extends InteractiveGameObject implements KeyListener {
     public void refreshPosition(){
         direction = ship.getOrientation();
 
-        if(direction == Direction.GAUCHE || direction == Direction.HAUT) {
+        if(direction == Direction.LEFT || direction == Direction.TOP) {
             position.x = (ship.getBack().getX() - 1) * grid.getCellSize() + grid.getBase().x;
             position.y = (ship.getBack().getY() - 1 ) * grid.getCellSize() + grid.getBase().y;
         }else {
@@ -90,7 +93,7 @@ public class ShipObject extends InteractiveGameObject implements KeyListener {
             position.y = (ship.getFront().getY() - 1 ) * grid.getCellSize() + grid.getBase().y;
         }
 
-        if(direction == Direction.DROITE || direction == Direction.GAUCHE) {
+        if(direction == Direction.RIGHT || direction == Direction.LEFT) {
             size.width = ship.getSize() * grid.getCellSize();
             size.height = grid.getCellSize();
         }else {
@@ -139,10 +142,7 @@ public class ShipObject extends InteractiveGameObject implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if(drag && e.getKeyCode() == 82){
-            if(direction == Direction.GAUCHE) direction = Direction.HAUT;
-            else if(direction == Direction.DROITE) direction = Direction.BAS;
-            else if(direction == Direction.BAS) direction = Direction.GAUCHE;
-            else if(direction == Direction.HAUT) direction = Direction.DROITE;
+            direction = direction.getNext();
         }
     }
 

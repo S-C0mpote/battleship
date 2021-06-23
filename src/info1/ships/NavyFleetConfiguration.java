@@ -6,13 +6,13 @@ public final class NavyFleetConfiguration {
         NavyFleet fleet = new NavyFleet();
 
         try {
-            fleet.add(new AircraftCarrier("un porteavion", "E5", "E9"));
-            fleet.add(new Battleship("un cuirassé", "B2", "E2"));
-            fleet.add(new Submarine("un sous-marin", "G10"));
-            fleet.add(new Cruiser("un croiseur", "B8", "B6")); // reverse
-            fleet.add(new Cruiser("un autre croiseur", "J8", "H8")); // reverse
-            fleet.add(new Destroyer("un torpilleur", "H3", "H4"));
-            fleet.add(new Destroyer("un autre torpilleur", "D9", "C9")); // reverse
+            fleet.add(new AircraftCarrier("un porteavion", "A1", "A5"));
+            fleet.add(new Battleship("un cuirassé", "B1", "B4"));
+            fleet.add(new Cruiser("un croiseur", "C1", "C3"));
+            fleet.add(new Cruiser("un autre croiseur", "D1", "D3"));
+            fleet.add(new Destroyer("un torpilleur", "E1", "E2"));
+            fleet.add(new Destroyer("un autre torpilleur", "F1", "F2"));
+            fleet.add(new Submarine("un sous-marin", "G1"));
         } catch (BadCoordException | CoordsBadShipException e) {
             e.printStackTrace();
         }

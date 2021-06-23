@@ -40,24 +40,24 @@ public abstract class Ship implements IShip {
                 for(int y = front.getY(); y >= back.getY(); y--) {
                     coords.add(new Coord(intPosToStr(front.getX(), y)));
                 }
-                direction = Direction.HAUT;
+                direction = Direction.TOP;
             } else { // e.g. A5 A8 || A5 A5
                 for(int y = front.getY(); y <= back.getY(); y++) {
                     coords.add(new Coord(intPosToStr(front.getX(), y)));
                 }
-                direction = Direction.BAS;
+                direction = Direction.BOTTOM;
             }
         } else if(front.getY() == back.getY()) {
             if(front.getX() > back.getX()) { // e.g. C5 A5
                 for(int x = front.getX(); x >= back.getX(); x--) {
                     coords.add(new Coord(intPosToStr(x, front.getY())));
                 }
-                direction = Direction.GAUCHE;
+                direction = Direction.LEFT;
             } else { // e.g. A5 C5 || C5 C5
                 for(int x = front.getX(); x <= back.getX(); x++) {
                     coords.add(new Coord(intPosToStr(x, front.getY())));
                 }
-                direction = Direction.DROITE;
+                direction = Direction.RIGHT;
             }
         }
 
@@ -76,19 +76,19 @@ public abstract class Ship implements IShip {
         List<ICoord> coords = new ArrayList<>();
 
         switch (direction) {
-            case HAUT -> {
+            case TOP -> {
                 for (int i = getSize() - 1; i >= 0; i--)
                     coords.add(new Coord(intPosToStr(x, y + i)));
             }
-            case BAS -> {
+            case BOTTOM -> {
                 for (int i = 0; i < getSize(); i++)
                     coords.add(new Coord(intPosToStr(x, y + i)));
             }
-            case GAUCHE -> {
+            case LEFT -> {
                 for (int i = getSize() - 1; i >= 0; i--)
                     coords.add(new Coord(intPosToStr(x + i, y)));
             }
-            case DROITE -> {
+            case RIGHT -> {
                 for (int i = 0; i < getSize(); i++)
                     coords.add(new Coord(intPosToStr(x + i, y)));
             }

@@ -18,10 +18,11 @@ public class GameNetwork {
         this.user = user;
 
         Network.setProxy("srv-proxy-etu-2.iut-nantes.univ-nantes.prive", 3128);
-        Network.enableProxy(false);
+        Network.enableProxy(true);
 
         try {
             Network.suscribeNewPlayer(API, user.getPlayer());
+            System.out.println("Connected to " + user.getPlayer().getName() + "!");
         } catch (UnirestException e) { e.printStackTrace(); }
     }
 
