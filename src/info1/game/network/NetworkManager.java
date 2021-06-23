@@ -72,6 +72,10 @@ public class NetworkManager {
         }
     }
 
+    public void leaveGame() {
+        currentGame = null;
+    }
+
     public boolean joinGame(int code) {
         try {
             Optional<Game> game = Network.listInitializedGames(API).stream()

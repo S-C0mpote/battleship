@@ -15,7 +15,7 @@ public class PopupWaiting {
 
     private final ModalWaiting modal;
     private final PopupBackground background;
-    private final Button button;
+    private final Button cancelButton;
     private final Scene menu = Scenes.MENU.getScene();
     private final GameEngine engine;
 
@@ -23,27 +23,28 @@ public class PopupWaiting {
         this.engine = engine;
 
         background = new PopupBackground(engine, 0);
-        button = new Button(190, 49, "Annuler", new Color(0x6A5800));
-        modal = new ModalWaiting(engine, button);
+        cancelButton = new Button(190, 49, "Annuler", new Color(0x6A5800));
+        modal = new ModalWaiting(engine, cancelButton);
 
         modal.setSize(new Dimension(500, 220));
         modal.setPosition(new Vector2D(1280 / 2d - modal.getSize().width / 2d, 720));
 
-        button.setClassicImg(Images.BUTTON_YELLOW);
-        button.setOverImg(Images.BUTTON_YELLOW_OVER);
-        button.setPressImg(Images.BUTTON_YELLOW_PRESS);
-        button.setPosition(new Vector2D(modal.getPosition().x + modal.getSize().width - 210, modal.getPosition().y + 150));
+        cancelButton.setClassicImg(Images.BUTTON_YELLOW);
+        cancelButton.setOverImg(Images.BUTTON_YELLOW_OVER);
+        cancelButton.setPressImg(Images.BUTTON_YELLOW_PRESS);
+        cancelButton.setPosition(new Vector2D(modal.getPosition().x + modal.getSize().width - 210, modal.getPosition().y + 150));
 
-        button.setListener(() -> {
+        cancelButton.setListener(() -> {
             background.close();
             modal.close();
+            engine.getNetwork().leaveGame();
         });
     }
 
     public void open(int code) {
         menu.addGameObject(2000, background);
         menu.addGameObject(2001, modal);
-        menu.addGameObject(2002, button);
+        menu.addGameObject(2002, cancelButton);
 
         background.open();
         modal.open(code);
