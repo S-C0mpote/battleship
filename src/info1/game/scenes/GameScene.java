@@ -67,7 +67,7 @@ public class GameScene extends Scene {
         gameId = new Label("", Color.WHITE, 15f);
         gameId.setLocation(10, 10);
 
-        opponentLabel = new Label("", Color.WHITE, 15f, Direction.CENTER);
+        opponentLabel = new Label("", Color.WHITE, 15f, Direction.RIGHT);
         opponentLabel.setPosition(new Vector2D(enemyGrid.getPosition().x, enemyGrid.getPosition().y + enemyGrid.getSize().height + 10));
         opponentLabel.setSize(new Dimension(enemyGrid.getSize().width, 15));
 
