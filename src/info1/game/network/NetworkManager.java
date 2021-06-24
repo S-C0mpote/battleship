@@ -1,6 +1,8 @@
 package info1.game.network;
 
 import com.mashape.unirest.http.exceptions.UnirestException;
+import info1.game.components.PopupMessage;
+import info1.game.engine.Scenes;
 import info1.game.engine.listeners.NetworkListener;
 import info1.network.BadIdException;
 import info1.network.Game;
@@ -51,7 +53,9 @@ public class NetworkManager {
             try {
                 Network.suscribeNewPlayer(API, user.getPlayer());
                 System.out.println("Connected to " + user.getPlayer().getName() + "!");
-            } catch (UnirestException e) { e.printStackTrace(); }
+            } catch (UnirestException e) {
+                new PopupMessage(info1.game.Game.engine, "Vérifiez le proxy.");
+            }
 
             while (true) {
                 try { Thread.sleep(1000); }

@@ -3,7 +3,7 @@ package info1.game.components;
 import info1.game.engine.GameEngine;
 import info1.game.engine.Scene;
 import info1.game.engine.Scenes;
-import info1.game.engine.gameobjects.Button;
+import info1.game.engine.gameobjects.ui.Button;
 import info1.game.engine.gameobjects.popup.ModalWaiting;
 import info1.game.engine.gameobjects.popup.PopupBackground;
 import info1.game.resources.Images;

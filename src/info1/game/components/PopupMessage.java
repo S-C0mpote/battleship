@@ -3,9 +3,9 @@ package info1.game.components;
 import info1.game.engine.GameEngine;
 import info1.game.engine.Scene;
 import info1.game.engine.Scenes;
-import info1.game.engine.gameobjects.Button;
 import info1.game.engine.gameobjects.popup.ModalAlert;
 import info1.game.engine.gameobjects.popup.PopupBackground;
+import info1.game.engine.gameobjects.ui.Button;
 import info1.game.resources.Images;
 import info1.game.utils.Vector2D;
 
@@ -47,15 +47,4 @@ public class PopupMessage {
         modal.open();
     }
 
-    public Button getButton() {
-        return validateButton;
-    }
-
-    public ModalAlert getModal() {
-        return modal;
-    }
-
-    public PopupBackground getBackground() {
-        return background;
-    }
 }

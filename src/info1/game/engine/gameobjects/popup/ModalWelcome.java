@@ -1,9 +1,9 @@
 package info1.game.engine.gameobjects.popup;
 
 import info1.game.engine.GameEngine;
-import info1.game.engine.gameobjects.Button;
+import info1.game.engine.gameobjects.ui.Button;
 import info1.game.engine.gameobjects.GameObject;
-import info1.game.engine.gameobjects.Input;
+import info1.game.engine.gameobjects.ui.Input;
 import info1.game.utils.Vector2D;
 import info1.game.resources.Fonts;
 
@@ -12,8 +12,10 @@ import java.awt.*;
 public class ModalWelcome extends GameObject {
 
     private final GameEngine engine;
-    private boolean closing = false;
+    private final Font bigFont = Fonts.MAIN.deriveFont(20f);
+    private final Font mediumFont = Fonts.MAIN;
 
+    private boolean closing = false;
     private Button buttonLinked;
     private Input inputLinked;
 
@@ -51,9 +53,9 @@ public class ModalWelcome extends GameObject {
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
 
             g2d.setColor(new Color(0x0A0A0A));
-            g2d.setFont(Fonts.MAIN.deriveFont(20f));
+            g2d.setFont(bigFont);
             g2d.drawString("Bienvenue !", (int) position.x + 20, (int) position.y + 35);
-            g2d.setFont(Fonts.MAIN.deriveFont(18f));
+            g2d.setFont(mediumFont);
             g2d.drawString("Veuillez saisir un pseudo.", (int) position.x + 20, (int) position.y + 60);
         }
     }

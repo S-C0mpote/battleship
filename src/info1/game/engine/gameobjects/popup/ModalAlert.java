@@ -1,7 +1,7 @@
 package info1.game.engine.gameobjects.popup;
 
 import info1.game.engine.GameEngine;
-import info1.game.engine.gameobjects.Button;
+import info1.game.engine.gameobjects.ui.Button;
 import info1.game.engine.gameobjects.GameObject;
 import info1.game.resources.Fonts;
 import info1.game.utils.Vector2D;
@@ -11,10 +11,13 @@ import java.awt.*;
 public class ModalAlert extends GameObject {
 
     private final GameEngine engine;
-    private boolean closing = false, opening = false;
-
     private final String message;
     private final Button buttonLinked;
+    private final Font font = Fonts.MAIN.deriveFont(15f);
+
+    private boolean closing = false, opening = false;
+    private boolean build = false;
+    private int xf, yf;
 
     public ModalAlert(GameEngine engine, Button buttonLinked, String message) {
         this.engine = engine;
@@ -51,21 +54,22 @@ public class ModalAlert extends GameObject {
     @Override
     public void draw(Graphics2D g2d) {
         if(position.y < 720) {
+            if(!build) {
+                FontMetrics metrics = g2d.getFontMetrics(font);
+                xf = (size.width - metrics.stringWidth(message)) / 2;
+                yf = (((size.height - 29) - metrics.getHeight()) / 2);
+                build = true;
+            }
+
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g2d.setColor(new Color(0xF1F1F1));
             g2d.fillRoundRect((int) position.x, (int) position.y, size.width, size.height, 10, 10);
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
+
+            g2d.setFont(font);
+            g2d.setColor(Color.BLACK);
+            g2d.drawString(message, (int) position.x + xf, (int) position.y + yf);
         }
-
-        Font fontSize = g2d.getFont().deriveFont(15f);
-        FontMetrics metrics = g2d.getFontMetrics(fontSize);
-        int xf = (int) position.x + (size.width - metrics.stringWidth(message)) / 2;
-        int yf = (int) position.y + (((size.height - 29) - metrics.getHeight()) / 2);
-
-        g2d.setFont(fontSize);
-        g2d.setColor(Color.BLACK);
-        g2d.drawString(message, xf, yf);
-
     }
 
     public void close() {

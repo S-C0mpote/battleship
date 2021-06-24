@@ -1,8 +1,7 @@
-package info1.game.engine.gameobjects;
+package info1.game.engine.gameobjects.ui;
 
 import info1.game.engine.GameEngine;
 import info1.game.engine.listeners.InteractiveGameObject;
-import info1.game.resources.Fonts;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -12,12 +11,12 @@ import java.awt.event.MouseEvent;
 public class Input extends InteractiveGameObject implements KeyListener {
 
     private final GameEngine engine;
+    private final Color background = new Color(0xCDCDCD);
+    private final Color foreground = new Color(0x2A2A2A);
 
     private int padding = 20;
     private double accumulator = 0;
     private boolean bar = false;
-    private Color background = new Color(0xCDCDCD);
-    private Color foreground = new Color(0x2A2A2A);
     private String text = "";
     private float fontSize = 20f;
     private boolean active = false;
@@ -58,10 +57,8 @@ public class Input extends InteractiveGameObject implements KeyListener {
     @Override
     public void mousePressed(MouseEvent e) {
         engine.getCurrentScene().getInteractiveGO().forEach((i, igo) -> {
-            if(igo instanceof Input) {
-                Input other = (Input) igo;
-                other.setActive(false);
-            }
+            if(igo instanceof Input)
+                ((Input) igo).setActive(false);
         });
 
         active = true;
@@ -86,18 +83,14 @@ public class Input extends InteractiveGameObject implements KeyListener {
     public void keyTyped(KeyEvent e) {}
 
     public void setText(String text) { this.text = text; }
-    public void setBackground(Color background) { this.background = background; }
-    public void setForeground(Color foreground) { this.foreground = foreground; }
     public void setFontSize(float fontSize) { this.fontSize = fontSize; }
     public void setPadding(int padding) { this.padding = padding; }
     public void setLimit(int limit){ this.limit = limit; }
     public void setActive(boolean active) {
         this.active = active;
-        this.bar = active;
+        this.accumulator = 1000;
     }
 
-    public Color getBackground() { return background; }
-    public Color getForeground() { return foreground; }
     public String getText() { return text; }
 
 }

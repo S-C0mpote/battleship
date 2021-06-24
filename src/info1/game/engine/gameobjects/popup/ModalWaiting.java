@@ -1,29 +1,24 @@
 package info1.game.engine.gameobjects.popup;
 
 import info1.game.engine.GameEngine;
-import info1.game.engine.gameobjects.Button;
+import info1.game.engine.gameobjects.ui.Button;
 import info1.game.engine.gameobjects.GameObject;
-import info1.game.engine.listeners.NetworkListener;
 import info1.game.resources.Fonts;
 import info1.game.utils.Vector2D;
 
 import java.awt.*;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 public class ModalWaiting extends GameObject {
 
     private final GameEngine engine;
     private boolean closing = false, opening = false;
 
+    private final Font bigFont = Fonts.MAIN.deriveFont(20f);
+    private final Font mediumFont = Fonts.MAIN;
+    
     private String code;
     private Button buttonLinked;
     private String dots = "";
-    private boolean userJoined = false;
-
     private double acc = 0;
 
     public ModalWaiting(GameEngine engine, Button buttonLinked) {
@@ -72,9 +67,9 @@ public class ModalWaiting extends GameObject {
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
 
             g2d.setColor(new Color(0x0A0A0A));
-            g2d.setFont(Fonts.MAIN.deriveFont(20f));
+            g2d.setFont(bigFont);
             g2d.drawString("En attente d'un adversaire" + dots, (int) position.x + 20, (int) position.y + 35);
-            g2d.setFont(Fonts.MAIN.deriveFont(18f));
+            g2d.setFont(mediumFont);
             g2d.drawString("Voici votre code : " + code, (int) position.x + 20, (int) position.y + 60);
         }
     }

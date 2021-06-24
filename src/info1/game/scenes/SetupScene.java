@@ -4,20 +4,18 @@ import info1.game.Game;
 import info1.game.engine.GameEngine;
 import info1.game.engine.Scene;
 import info1.game.engine.Scenes;
-import info1.game.engine.gameobjects.Button;
+import info1.game.engine.gameobjects.ui.Button;
 import info1.game.engine.gameobjects.*;
-import info1.game.engine.gameobjects.Label;
+import info1.game.engine.gameobjects.ui.Label;
 import info1.game.resources.Images;
 import info1.game.utils.Direction;
 import info1.game.utils.Vector2D;
 import info1.ships.IShip;
-import info1.ships.NavyFleet;
 import info1.ships.NavyFleetConfiguration;
 import info1.ships.Ship;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class SetupScene extends Scene {

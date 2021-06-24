@@ -1,4 +1,4 @@
-package info1.game.engine.gameobjects;
+package info1.game.engine.gameobjects.ui;
 
 import info1.game.engine.listeners.ButtonListener;
 import info1.game.engine.listeners.InteractiveGameObject;
@@ -10,10 +10,14 @@ import java.awt.image.BufferedImage;
 
 public class Button extends InteractiveGameObject {
 
+    private final Font font = Fonts.MAIN.deriveFont(12f);
+
     private String name;
     private int yMargin = 0;
     private Color color;
     private boolean clicked = false;
+    private boolean build = false;
+    private int xf, yf;
 
     private ButtonListener listener;
 
@@ -38,16 +42,17 @@ public class Button extends InteractiveGameObject {
 
     @Override
     public void draw(Graphics2D g2d) {
+        if(!build) {
+            FontMetrics metrics = g2d.getFontMetrics(font);
+            xf = (size.width - metrics.stringWidth(name)) / 2;
+            yf = ((size.height - metrics.getHeight()) / 2) + metrics.getAscent();
+            build = true;
+        }
+
         g2d.drawImage(currentImg, (int) position.x, (int) position.y + yMargin, null);
-
-        Font smaller = g2d.getFont().deriveFont(12f);
-        FontMetrics metrics = g2d.getFontMetrics(smaller);
-        int xf = (int) position.x + (size.width - metrics.stringWidth(name)) / 2;
-        int yf = (int) position.y + ((size.height - metrics.getHeight()) / 2) + metrics.getAscent();
-
-        g2d.setFont(smaller);
+        g2d.setFont(font);
         g2d.setColor(color);
-        g2d.drawString(name, xf, yf + yMargin);
+        g2d.drawString(name, (int) position.x + xf, (int) position.y + yf + yMargin);
     }
 
     public String getName(){

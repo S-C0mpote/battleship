@@ -7,14 +7,16 @@ import info1.game.components.PopupWaiting;
 import info1.game.engine.GameEngine;
 import info1.game.engine.Scene;
 import info1.game.engine.Scenes;
-import info1.game.engine.gameobjects.Button;
 import info1.game.engine.gameobjects.*;
-import info1.game.engine.gameobjects.Label;
+import info1.game.engine.gameobjects.ui.Button;
+import info1.game.engine.gameobjects.ui.Input;
+import info1.game.engine.gameobjects.ui.Label;
 import info1.game.resources.Images;
 import info1.game.utils.Direction;
 import info1.game.utils.Vector2D;
 
 import java.awt.*;
+
 
 public class MenuScene extends Scene {
 

@@ -1,21 +1,15 @@
 package info1.game.engine.gameobjects.popup;
 
 import info1.game.engine.GameEngine;
-import info1.game.engine.gameobjects.GameObject;
 import info1.game.engine.listeners.InteractiveGameObject;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 public class PopupBackground extends InteractiveGameObject {
 
     private final GameEngine engine;
     private boolean closing = false, opening;
     private float opacity;
-
 
     public PopupBackground(GameEngine engine) {
         this(engine, 0.5f);
@@ -24,7 +18,6 @@ public class PopupBackground extends InteractiveGameObject {
     public PopupBackground(GameEngine engine, float defaultOpacity) {
         this.size = new Dimension(1280, 720);
         this.engine = engine;
-
         this.opacity = defaultOpacity;
     }
 

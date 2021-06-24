@@ -2,8 +2,8 @@ package info1.game.components;
 
 import info1.game.engine.GameEngine;
 import info1.game.engine.Scenes;
-import info1.game.engine.gameobjects.Button;
-import info1.game.engine.gameobjects.Input;
+import info1.game.engine.gameobjects.ui.Button;
+import info1.game.engine.gameobjects.ui.Input;
 import info1.game.engine.gameobjects.popup.PopupBackground;
 import info1.game.engine.gameobjects.popup.ModalWelcome;
 import info1.game.network.NetworkEvents;
