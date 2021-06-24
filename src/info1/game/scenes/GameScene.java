@@ -18,6 +18,7 @@ public class GameScene {
 
     private static GameEngine engine;
     private static LabelIndicator gameId;
+    private static LabelCenter turn;
     private static Grid userGrid;
     private static InteractiveGrid ennemyGrid;
     private static final List<GraphicShipObject> shipObjects = new ArrayList<>();
@@ -41,8 +42,7 @@ public class GameScene {
                 1280 / 2d,
                 userGrid.getPosition().y));
 
-        LabelCenter turn =  new LabelCenter("VOTRE Tour !",
-                Color.WHITE, 20f);
+        turn =  new LabelCenter("", new Color(0xF0F0F0), 20f);
 
         turn.setPosition(new Vector2D(1280 / 2d - 75, 20));
         turn.setSize(new Dimension(1280 / 2, 50));
@@ -65,6 +65,14 @@ public class GameScene {
         System.out.println("Start");
         gameId.setText("GameID: " + engine.getNetwork().getCurrentGame().getId());
         setShips();
+    }
+
+    public static void playerTurn() {
+        turn.setText("à vous de jouer !");
+    }
+
+    public static void enemyTurn() {
+        turn.setText("à l'adversaire de jouer !");
     }
 
     private static void setShips() {

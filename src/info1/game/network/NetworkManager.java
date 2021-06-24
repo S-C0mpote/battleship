@@ -135,7 +135,6 @@ public class NetworkManager {
             return ret;
         } catch (UnirestException | UncompleteFleetException | BadCoordException e) { e.printStackTrace(); }
         return false;
-
     }
 
     public int getStatus() {
@@ -145,11 +144,11 @@ public class NetworkManager {
 
         return -999;
     }
-    public void playOnGrid(ICoord coord) throws BadCoordException, UnirestException {
-        if(Network.playOneTurn(API, currentGame, user.getPlayer(), new Coord(coord.toString())) == 1){
-            System.out.println("touché");
-        }
-        System.out.println("raté");
+
+    public int play(ICoord coord) throws BadCoordException, UnirestException {
+        if(currentGame == null) return -999;
+
+        return Network.playOneTurn(API, currentGame, user.getPlayer(), coord);
     }
 
     public Game getCurrentGame() { return currentGame; }
