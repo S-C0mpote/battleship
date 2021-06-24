@@ -23,7 +23,7 @@ public class NetworkEvents implements NetworkListener {
 
     @Override
     public void onEnemyTurn() {
-        //gameScene.enemyTurn();
+        gameScene.enemyTurn();
     }
 
     @Override

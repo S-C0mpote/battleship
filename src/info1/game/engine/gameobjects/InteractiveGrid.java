@@ -125,7 +125,7 @@ public class InteractiveGrid extends InteractiveGameObject {
                 if(play == 100) System.out.println("gagné");
             }
 
-            Scenes.GAME.enemyTurn();
+            //Scenes.GAME.enemyTurn();
         } catch (BadCoordException | UnirestException e) {
             e.printStackTrace();
         }
