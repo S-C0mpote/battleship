@@ -8,5 +8,5 @@ public interface NetworkListener {
      */
     void onPlayerJoin();
     void onPlayerTurn();
-    void onEnnemyTurn();
+    void onEnemyTurn();
 }

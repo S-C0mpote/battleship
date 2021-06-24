@@ -34,7 +34,7 @@ public class NetworkManager {
     /**
      * Connecte le joueur, pour les évènement nous utilisons des boulean car
      * en Multi Threading cela pourrait générer des erreurs de ConcurrentModification
-     * (édition d'une liste pendant qu'un autre thread la lit)
+     * (édition d'une liste pendant qu'un autre thread l'a lit)
      */
     public NetworkManager(GamePlayer user) {
         this.user = user;
@@ -98,7 +98,7 @@ public class NetworkManager {
         }
 
         if(onEnemyTurn) {
-            listener.onEnnemyTurn();
+            listener.onEnemyTurn();
             onEnemyTurn = false;
         }
 

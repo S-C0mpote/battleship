@@ -66,7 +66,7 @@ public class PopupSignIn {
                 }
 
                 @Override
-                public void onEnnemyTurn() {
+                public void onEnemyTurn() {
                     System.out.println("C a lui");
                 }
             });
