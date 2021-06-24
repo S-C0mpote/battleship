@@ -71,11 +71,13 @@ public class NetworkManager {
                             onEnemyTurnSent = false;
                             onPlayerTurnSent = true;
                             onPlayerTurn = true;
+
                             playerTurn = user;
-                        } else if(!onEnemyTurnSent) {
+                        } else if(status == -10 && !onEnemyTurnSent) {
                             onEnemyTurnSent = true;
                             onPlayerTurnSent = false;
                             onEnemyTurn = true;
+
                             playerTurn = enemy;
                         }
                     }
@@ -91,16 +93,17 @@ public class NetworkManager {
     public void update() {
         if(onPlayerJoin) {
             listener.onPlayerJoin();
+            System.out.println("test");
             onPlayerJoin = false;
         }
 
         if(onEnemyTurn) {
-            listener.onPlayerJoin();
+            listener.onEnnemyTurn();
             onEnemyTurn = false;
         }
 
         if(onPlayerTurn) {
-            listener.onPlayerJoin();
+            listener.onPlayerTurn();
             onPlayerTurn = false;
         }
     }
