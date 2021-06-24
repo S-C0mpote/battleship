@@ -99,7 +99,7 @@ public class GameScene extends Scene {
 
         startAnimation.setUsername1(userName);
         startAnimation.setUsername2(enemyName);
-
+        startAnimation.start();
 
         // Affichage des bateaux
         for(GraphicShipObject ship : shipObjects) Scenes.SETUP.removeGameObject(ship);

@@ -1,21 +1,16 @@
 package info1.game.engine.gameobjects;
 
-import info1.game.utils.Direction;
-import info1.game.utils.Vector2D;
 
-import javax.imageio.ImageIO;
+import info1.game.utils.Vector2D;
 import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+
 
 public class StartAnimation extends GameObject {
 
     private boolean animated = true;
     private Vector2D leftPart = new Vector2D(0, 0);
     private String username1, username2;
-
+    private double vitesse = 100;
 
     public StartAnimation() {
         leftPart.y = 720 / 2d - 200;
@@ -24,10 +19,18 @@ public class StartAnimation extends GameObject {
 
     @Override
     public void update(double delta) {
-        if(animated) {
+       if(animated) {
             if(leftPart.y > 720 / 2d - 100) {
-                leftPart.x -= delta * 2;
-                leftPart.y += delta / 10d;
+
+                if(leftPart.y > 720 / 2d - 200 && leftPart.y < 720 / 2d - 90){
+                    leftPart.y += delta / vitesse;
+                    vitesse *= 1.0004;
+
+                }else{
+                    leftPart.x -= delta * 2;
+                    leftPart.y += delta / 10d;
+                }
+
 
                 if(leftPart.x <= -1280) {
                     leftPart.x = -1280;
@@ -36,6 +39,8 @@ public class StartAnimation extends GameObject {
             } else {
                 leftPart.x += delta * 2;
                 leftPart.y += delta / 20d;
+
+
 
                 if(leftPart.x > -1280 / 2d) {
                     leftPart.x = -1280 / 2d;
