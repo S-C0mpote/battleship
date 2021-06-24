@@ -8,19 +8,13 @@ import java.awt.image.BufferedImage;
 public class Image extends GameObject {
 
     private BufferedImage image;
-    private int width, height;
-
-    public Image(int width, int height) {
-        this.width = width;
-        this.height = height;
-    }
 
     @Override
     public void update(double delta) {}
 
     @Override
     public void draw(Graphics2D g2d) {
-        g2d.drawImage(image, 0, 0, width, height, null);
+        g2d.drawImage(image, (int) position.x, (int) position.y, size.width, size.height, null);
     }
 
     public void setImage(BufferedImage image) {

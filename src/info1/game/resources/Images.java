@@ -16,6 +16,9 @@ public final class Images {
 
     public static BufferedImage MENU_LOGO;
 
+    public static BufferedImage RIGHT_CLICK;
+    public static BufferedImage LEFT_CLICK;
+
     public static BufferedImage SHIP_SUBMARINE;
     public static BufferedImage SHIP_DESTROYER;
     public static BufferedImage SHIP_CRUISER;
@@ -35,6 +38,9 @@ public final class Images {
             BUTTON_RED_PRESS = ImageIO.read(new File("assets/ui/buttons/red_button_press.png"));
 
             MENU_LOGO = ImageIO.read(new File("assets/ui/logo.png"));
+
+            RIGHT_CLICK = ImageIO.read(new File("assets/ui/right_click.png"));
+            LEFT_CLICK = ImageIO.read(new File("assets/ui/left_click.png"));
 
             SHIP_SUBMARINE = ImageIO.read(new File("assets/ships/submarine.png"));
             SHIP_DESTROYER = ImageIO.read(new File("assets/ships/destroyer.png"));

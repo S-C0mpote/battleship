@@ -6,6 +6,7 @@ import info1.game.network.NetworkManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.*;
 
 public class GameEngine {
@@ -72,7 +73,7 @@ public class GameEngine {
         }
     }
 
-    synchronized public void update(double delta) {
+    synchronized public void update(double delta)  {
         if(network != null) network.update();
 
         for (GameObject gameObject : new ArrayList<>(scene.getGameObjects().values()))
