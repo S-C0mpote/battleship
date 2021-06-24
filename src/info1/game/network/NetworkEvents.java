@@ -29,7 +29,7 @@ public class NetworkEvents implements NetworkListener {
 
     @Override
     public void onPlayerWin() {
-        PopupMessage popupMessage = new PopupMessage(Game.engine, "You WIN", Scenes.GAME);
+        PopupMessage popupMessage = new PopupMessage(Game.engine, "Tu as gagné !", Scenes.GAME);
         popupMessage.getButton().setListener(() -> {
             popupMessage.getBackground().close();
             popupMessage.getModal().close();
@@ -40,7 +40,7 @@ public class NetworkEvents implements NetworkListener {
 
     @Override
     public void onPlayerLoose() {
-        PopupMessage popupMessage = new PopupMessage(Game.engine, "You LOOSE", Scenes.GAME);
+        PopupMessage popupMessage = new PopupMessage(Game.engine, "Tu as perdu !", Scenes.GAME);
         popupMessage.getButton().setListener(() -> {
             popupMessage.getBackground().close();
             popupMessage.getModal().close();

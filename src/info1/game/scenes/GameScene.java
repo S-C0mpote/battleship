@@ -33,7 +33,7 @@ public class GameScene extends Scene {
     public void load(){
         Scene inGameScene = Scenes.GAME;
 
-        Button quit = new Button(190,49,"Quitter", new Color(0x6A5800));
+        Button quit = new Button(190,49,"Quitter", new Color(0x973E00));
         quit.setClassicImg(Images.BUTTON_RED);
         quit.setOverImg(Images.BUTTON_RED_OVER);
         quit.setPressImg(Images.BUTTON_RED_PRESS);
