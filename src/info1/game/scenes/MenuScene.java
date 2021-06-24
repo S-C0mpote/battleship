@@ -68,7 +68,8 @@ public class MenuScene extends Scene {
         TitleMenu title = new TitleMenu(engine);
         menu.addGameObject(title);
 
-        Label version = new Label("Maxandre GROCHEFORT, Léo ROCHARD, Morgann LERAY, Elouan NAQUIN", Color.WHITE, 10f, Direction.CENTER);
+
+        Label version = new Label("Maxandre ROCHEFORT, Léo ROCHARD, Morgann LERAY, Elouan NAQUIN", Color.WHITE, 10f, Direction.CENTER);
         version.setPosition(new Vector2D(10, 700));
         version.setSize(new Dimension(1280, 20));
         menu.addGameObject(version);

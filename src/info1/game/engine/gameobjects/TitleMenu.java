@@ -7,13 +7,11 @@ import java.awt.*;
 
 public class TitleMenu extends GameObject{
 
-    private final int WIDTH = 405;
-
     private int direction = 1;
     private float speed = 100;
 
     public TitleMenu(GameEngine gameEngine) {
-        this.position.x = (gameEngine.getGameCanvas().getWidth() / 2d) - WIDTH / 2d;
+        this.position.x = (gameEngine.getGameCanvas().getWidth() / 2d) - 405 / 2d;
     }
 
     @Override

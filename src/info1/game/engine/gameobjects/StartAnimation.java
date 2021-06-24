@@ -10,7 +10,7 @@ public class StartAnimation extends GameObject {
     private boolean animated = true;
     private Vector2D leftPart = new Vector2D(0, 0);
     private String username1, username2;
-    private double vitesse = 100;
+    private double vitesse = 0.5;
 
     public StartAnimation() {
         leftPart.y = 720 / 2d - 200;
@@ -22,10 +22,9 @@ public class StartAnimation extends GameObject {
        if(animated) {
             if(leftPart.y > 720 / 2d - 100) {
 
-                if(leftPart.y > 720 / 2d - 200 && leftPart.y < 720 / 2d - 90){
-                    leftPart.y += delta / vitesse;
-                    vitesse *= 1.0004;
-
+                if(leftPart.y < 720 / 2d - 90){
+                    leftPart.y += delta * vitesse;
+                    vitesse -= 0.0004 * delta;
                 }else{
                     leftPart.x -= delta * 2;
                     leftPart.y += delta / 10d;
@@ -39,8 +38,6 @@ public class StartAnimation extends GameObject {
             } else {
                 leftPart.x += delta * 2;
                 leftPart.y += delta / 20d;
-
-
 
                 if(leftPart.x > -1280 / 2d) {
                     leftPart.x = -1280 / 2d;

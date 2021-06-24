@@ -67,7 +67,7 @@ public class GameScene extends Scene {
         gameId = new Label("", Color.WHITE, 15f);
         gameId.setLocation(10, 10);
 
-        opponentLabel = new Label("", Color.WHITE, 15f, Direction.RIGHT);
+        opponentLabel = new Label("", Color.WHITE, 15f, Direction.CENTER);
         opponentLabel.setPosition(new Vector2D(enemyGrid.getPosition().x, enemyGrid.getPosition().y + enemyGrid.getSize().height + 10));
         opponentLabel.setSize(new Dimension(enemyGrid.getSize().width, 15));
 
@@ -105,7 +105,7 @@ public class GameScene extends Scene {
         for(GraphicShipObject ship : shipObjects) Scenes.SETUP.removeGameObject(ship);
 
         for(IShip ship : engine.getNetwork().getUser().getNavyFleet().getShips()) {
-            GraphicShipObject shipObject = new GraphicShipObject(userGrid, (Ship) ship, engine);
+            GraphicShipObject shipObject = new GraphicShipObject(userGrid, (Ship) ship);
             shipObjects.add(shipObject);
             Scenes.GAME.addGameObject(shipObject);
         }

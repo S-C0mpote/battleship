@@ -9,12 +9,11 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 
 public class GraphicShipObject extends GameObject {
+
     private Grid grid;
     private Ship ship;
-    private GameEngine engine;
 
-    public GraphicShipObject(Grid grid, Ship ship, GameEngine engine){
-        this.engine = engine;
+    public GraphicShipObject(Grid grid, Ship ship){
         this.grid = grid;
         this.ship = ship;
 
@@ -36,6 +35,29 @@ public class GraphicShipObject extends GameObject {
         AffineTransform af = new AffineTransform();
 
         double theta = 0;
+
+        switch (ship.getOrientation()) {
+            case LEFT -> {
+                theta = -(Math.PI / 2);
+                af.translate(position.x, position.y + 13);
+            }
+            case RIGHT -> {
+                theta = (Math.PI / 2);
+                af.translate(position.x + (size.width - grid.getCellSize()) + 13,
+                        position.y + (size.height - grid.getCellSize()));
+            }
+            case TOP -> {
+                theta = 0;
+                af.translate(position.x + (size.width - grid.getCellSize()),
+                        position.y + (size.height - grid.getCellSize() * ship.getSize()));
+            }
+            case BOTTOM -> {
+                theta = Math.PI;
+                af.translate(position.x + (size.width - grid.getCellSize()),
+                        position.y + (size.height - grid.getCellSize() * ship.getSize()));
+            }
+        }
+
         if(ship.getOrientation() == Direction.LEFT) theta = -(Math.PI / 2);
         else if(ship.getOrientation() == Direction.RIGHT) theta = (Math.PI / 2);
         else if(ship.getOrientation() == Direction.TOP) theta = 0;

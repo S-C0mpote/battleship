@@ -66,8 +66,11 @@ public class Label extends GameObject {
 
     }
 
-    public void setText(String text) {this.text = text;}
-    public String getText(){return this.text;}
+    public void setText(String text) {
+        this.text = text;
+        build = false;
+    }
+    public String getText(){ return this.text; }
     public void setLocation(int x, int y){
         this.position.x = x;
         this.position.y = y;
