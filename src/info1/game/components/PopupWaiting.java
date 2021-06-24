@@ -16,7 +16,7 @@ public class PopupWaiting {
     private final ModalWaiting modal;
     private final PopupBackground background;
     private final Button cancelButton;
-    private final Scene menu = Scenes.MENU.getScene();
+    private final Scene menu = Scenes.MENU;
     private final GameEngine engine;
 
     public PopupWaiting(GameEngine engine) {

@@ -1,15 +1,13 @@
 package info1.game.engine;
 
-public enum Scenes {
-    MENU(new Scene("Menu")), IN_GAME(new Scene("Jeu")), SETUP(new Scene("Setup"));
+import info1.game.scenes.GameScene;
+import info1.game.scenes.MenuScene;
+import info1.game.scenes.SetupScene;
 
-    private final Scene scene;
+public final class Scenes {
 
-    Scenes(Scene scene) {
-        this.scene = scene;
-    }
+    public static final MenuScene MENU = new MenuScene();
+    public static final GameScene GAME = new GameScene();
+    public static final SetupScene SETUP = new SetupScene();
 
-    public Scene getScene() {
-        return scene;
-    }
 }

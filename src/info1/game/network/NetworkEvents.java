@@ -8,21 +8,22 @@ import info1.game.scenes.GameScene;
 public class NetworkEvents implements NetworkListener {
 
     private static NetworkEvents instance;
+    private final GameScene gameScene = Scenes.GAME;
 
     @Override
     public void onEnemyJoin() {
-        Game.engine.setScene(Scenes.IN_GAME.getScene());
-        GameScene.start();
+        Game.engine.setScene(gameScene);
+        gameScene.start();
     }
 
     @Override
     public void onPlayerTurn() {
-        GameScene.playerTurn();
+        gameScene.playerTurn();
     }
 
     @Override
     public void onEnemyTurn() {
-        GameScene.enemyTurn();
+        gameScene.enemyTurn();
     }
 
     @Override

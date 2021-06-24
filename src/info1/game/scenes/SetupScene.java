@@ -1,5 +1,6 @@
 package info1.game.scenes;
 
+import info1.game.Game;
 import info1.game.engine.GameEngine;
 import info1.game.engine.Scene;
 import info1.game.engine.Scenes;
@@ -17,16 +18,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class SetupScene {
+public class SetupScene extends Scene {
 
-    private static final List<ShipObject> shipObjects = new ArrayList<>();
-    private static GameEngine engine;
-    private static Grid grid;
+    private final List<ShipObject> shipObjects = new ArrayList<>();
+    private GameEngine engine;
+    private Grid grid;
 
-    public static void load(GameEngine engine) {
-        SetupScene.engine = engine;
+    public SetupScene() {
+        super("Setup");
+        this.engine = Game.engine;
+    }
 
-        Scene setup = Scenes.SETUP.getScene();
+    public void load() {
+        SetupScene setup = Scenes.SETUP;
 
         Button fr_lang = new Button(190,49,"France", new Color(0x6A5800));
         fr_lang.setClassicImg(Images.BUTTON_YELLOW);
@@ -45,7 +49,7 @@ public class SetupScene {
         valider.setOverImg(Images.BUTTON_YELLOW_OVER);
         valider.setPressImg(Images.BUTTON_YELLOW_PRESS);
         valider.setPosition(new Vector2D(1280 - 200, 660));
-        valider.setListener(() -> engine.setScene(Scenes.MENU.getScene()));
+        valider.setListener(() -> engine.setScene(Scenes.MENU));
 
         LabelCenter instruction = new LabelCenter("Placez vos bateaux", Color.WHITE, 35f);
         instruction.setSize(new Dimension(1280, 100));
@@ -76,7 +80,7 @@ public class SetupScene {
         LabelIndicator commands = new LabelIndicator("Commandes :" + "\n\n" + "gauche : bouger" + "\n" + "droite : tourner",
                 Color.WHITE, 20f, 10, (int) (720 / 2d - grid.getSize().height / 2d));
 
-        setup.addGameObject(-1, MenuScene.background);
+        setup.addGameObject(-1, Scenes.MENU.getBackground());
         setup.addGameObject(fr_lang);
         setup.addGameObject(be_lang);
         setup.addGameObject(valider);
@@ -85,15 +89,15 @@ public class SetupScene {
         setup.addGameObject(commands);
     }
 
-    private static void removeShips() {
-        for(ShipObject ship : shipObjects) Scenes.SETUP.getScene().removeGameObject(ship);
+    private void removeShips() {
+        for(ShipObject ship : shipObjects) Scenes.SETUP.removeGameObject(ship);
     }
 
-    private static void addShips() {
+    private void addShips() {
         for(IShip ship : engine.getNetwork().getUser().getNavyFleet().getShips()) {
             ShipObject shipObject = new ShipObject(grid, (Ship) ship, engine);
             shipObjects.add(shipObject);
-            Scenes.SETUP.getScene().addGameObject(shipObject);
+            Scenes.SETUP.addGameObject(shipObject);
         }
     }
 }

@@ -13,6 +13,7 @@ import info1.game.network.NetworkManager;
 import info1.game.network.GamePlayer;
 import info1.game.resources.Images;
 import info1.game.scenes.GameScene;
+import info1.game.scenes.MenuScene;
 import info1.game.scenes.SetupScene;
 import info1.game.utils.Vector2D;
 
@@ -24,7 +25,7 @@ public class PopupSignIn {
     private final ModalWelcome modal;
     private final Input input;
     private final Button button;
-    private final Scene menu = Scenes.MENU.getScene();
+    private final MenuScene menu = Scenes.MENU;
 
     public PopupSignIn(GameEngine engine) {
         background = new PopupBackground(engine);
@@ -53,12 +54,10 @@ public class PopupSignIn {
             background.close();
             modal.close();
 
-            SetupScene.load(engine);
-            GameScene.load(engine);
+            Scenes.SETUP.load();
+            Scenes.GAME.load();
 
             engine.getNetwork().setListener(NetworkEvents.getInstance());
-
-            //engine.setScene(Scenes.IN_GAME.getScene());
         });
 
         menu.addGameObject(1000, background);

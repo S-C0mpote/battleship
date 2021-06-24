@@ -7,19 +7,25 @@ import info1.game.components.PopupWaiting;
 import info1.game.engine.GameEngine;
 import info1.game.engine.Scene;
 import info1.game.engine.Scenes;
-import info1.game.engine.gameobjects.*;
 import info1.game.engine.gameobjects.Button;
-import info1.game.utils.Vector2D;
+import info1.game.engine.gameobjects.*;
 import info1.game.resources.Images;
+import info1.game.utils.Vector2D;
 
 import java.awt.*;
 
-public class MenuScene {
+public class MenuScene extends Scene {
 
-    public static MenuBackground background;
+    private GameEngine engine;
+    private MenuBackground background;
 
-    public static void load(GameEngine engine) {
-        Scene menu = Scenes.MENU.getScene();
+    public MenuScene() {
+        super("Menu");
+        this.engine = Game.engine;
+    }
+
+    public void load() {
+        MenuScene menu = Scenes.MENU;
 
         Button joinParty = new Button(190, 49, "Rejoindre une partie", new Color(0x6A5800));
         joinParty.setClassicImg(Images.BUTTON_YELLOW);
@@ -41,7 +47,7 @@ public class MenuScene {
         editFleet.setOverImg(Images.BUTTON_YELLOW_OVER);
         editFleet.setPressImg(Images.BUTTON_YELLOW_PRESS);
         editFleet.setPosition(new Vector2D(1080, 720 - 59));
-        editFleet.setListener(() -> engine.setScene(Scenes.SETUP.getScene()));
+        editFleet.setListener(() -> engine.setScene(Scenes.SETUP));
         menu.addGameObject(editFleet);
 
         Input codeInput = new Input(engine);
@@ -76,13 +82,17 @@ public class MenuScene {
                !codeInput.getText().matches("[0-9]*")) {
                 return;
             }
+
             int code = Integer.parseInt(codeInput.getText());
+
             if(engine.getNetwork().joinGame(code)) {
-                GameScene.start();
-                engine.setScene(Scenes.IN_GAME.getScene());
+                Scenes.GAME.start();
+                engine.setScene(Scenes.GAME);
             }
         });
-
     }
 
+    public MenuBackground getBackground() {
+        return background;
+    }
 }

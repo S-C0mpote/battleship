@@ -1,5 +1,6 @@
 package info1.game.scenes;
 
+import info1.game.Game;
 import info1.game.engine.GameEngine;
 import info1.game.engine.Scene;
 import info1.game.engine.Scenes;
@@ -14,20 +15,22 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameScene {
+public class GameScene extends Scene {
 
-    private static GameEngine engine;
-    private static LabelIndicator gameId;
-    private static LabelCenter turn;
-    private static Grid userGrid;
-    private static InteractiveGrid ennemyGrid;
-    private static final List<GraphicShipObject> shipObjects = new ArrayList<>();
+    private GameEngine engine;
+    private LabelIndicator gameId;
+    private LabelCenter turn;
+    private Grid userGrid;
+    private InteractiveGrid ennemyGrid;
+    private final List<GraphicShipObject> shipObjects = new ArrayList<>();
 
+    public GameScene() {
+        super("Game");
+        this.engine = Game.engine;
+    }
 
-    public static void load(GameEngine engine){
-        GameScene.engine = engine;
-
-        Scene ingame = Scenes.IN_GAME.getScene();
+    public void load(){
+        Scene inGameScene = Scenes.GAME;
 
         Button quit = new Button(190,49,"Quitter", new Color(0x6A5800));
         quit.setClassicImg(Images.BUTTON_YELLOW);
@@ -36,7 +39,7 @@ public class GameScene {
         quit.setPosition(new Vector2D(10, 660));
         quit.setListener(() -> {
                     engine.getNetwork().leaveGame();
-                    engine.setScene(Scenes.MENU.getScene());
+                    engine.setScene(Scenes.MENU);
         });
 
         ennemyGrid = new InteractiveGrid(engine);
@@ -59,41 +62,36 @@ public class GameScene {
 
         gameId = new LabelIndicator("", Color.WHITE, 15f, 10, 10);
 
-        // Cases restantes -1
-        LabelIndicator cellRemaining =  new LabelIndicator("Cells remaining : 10 / 100",
-                Color.WHITE, 20f, (int) ennemyGrid.getPosition().x, (int) ennemyGrid.getPosition().y + ennemyGrid.getSize().height);
-        
-        ingame.addGameObject(-1,MenuScene.background);
-        ingame.addGameObject(userGrid);
-        ingame.addGameObject(ennemyGrid);
-        ingame.addGameObject(turn);
-        ingame.addGameObject(gameId);
-        ingame.addGameObject(cellRemaining);
-        ingame.addGameObject(quit);
+        inGameScene.addGameObject(-1, Scenes.MENU.getBackground());
+        inGameScene.addGameObject(userGrid);
+        inGameScene.addGameObject(ennemyGrid);
+        inGameScene.addGameObject(turn);
+        inGameScene.addGameObject(gameId);
+        inGameScene.addGameObject(quit);
     }
 
-    public static void start() {
+    public void start() {
         System.out.println("Start");
         gameId.setText("GameID: " + engine.getNetwork().getCurrentGame().getId());
 
         // Affichage des bateaux
-        for(GraphicShipObject ship : shipObjects) Scenes.SETUP.getScene().removeGameObject(ship);
+        for(GraphicShipObject ship : shipObjects) Scenes.SETUP.removeGameObject(ship);
 
         for(IShip ship : engine.getNetwork().getUser().getNavyFleet().getShips()) {
             GraphicShipObject shipObject = new GraphicShipObject(userGrid, (Ship) ship, engine);
             shipObjects.add(shipObject);
-            Scenes.IN_GAME.getScene().addGameObject(shipObject);
+            Scenes.GAME.addGameObject(shipObject);
         }
 
         // Clear de la grille
         ennemyGrid.clear();
     }
 
-    public static void playerTurn() {
+    public void playerTurn() {
         turn.setText("à vous de jouer !");
     }
 
-    public static void enemyTurn() {
+    public void enemyTurn() {
         turn.setText("à l'adversaire de jouer !");
     }
 }

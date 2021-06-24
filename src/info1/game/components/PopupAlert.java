@@ -17,7 +17,7 @@ public class PopupAlert{
     private final PopupBackground background;
     private final ModalAlert modal;
     private final Button validateButton;
-    private final Scene menu = Scenes.MENU.getScene();
+    private final Scene menu = Scenes.MENU;
 
     public PopupAlert(GameEngine engine, String message) {
 

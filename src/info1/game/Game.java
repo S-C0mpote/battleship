@@ -12,8 +12,8 @@ public class Game {
     public static void main(String[] args) {
         engine.getGameCanvas().setFont(Fonts.MAIN);
 
-        MenuScene.load(engine);
+        Scenes.MENU.load();
 
-        engine.start(Scenes.MENU.getScene());
+        engine.start(Scenes.MENU);
     }
 }
