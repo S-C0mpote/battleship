@@ -110,21 +110,22 @@ public class InteractiveGrid extends InteractiveGameObject {
         try {
             coord = new Coord(intPosToStr(coordXclicked, coordYclicked));
 
+            if(hit.contains(cellClicked) || miss.contains(cellClicked)) return;
+
             int play = engine.getNetwork().play(coord);
 
             if(play == 0){
                 miss.add(cellClicked);
                 System.out.println("raté");
-                Scenes.GAME.enemyTurn();
             } else if(play == 1 || play == 10 || play == 100){
                 hit.add(cellClicked);
                 System.out.println("touché");
-                Scenes.GAME.enemyTurn();
+
 
                 if(play == 10) System.out.println("coulé");
                 if(play == 100) System.out.println("gagné");
             }
-
+            Scenes.GAME.enemyTurn();
         } catch (BadCoordException | UnirestException e) {
             e.printStackTrace();
         }
