@@ -10,7 +10,7 @@ public class NetworkEvents implements NetworkListener {
     private static NetworkEvents instance;
 
     @Override
-    public void onPlayerJoin() {
+    public void onEnemyJoin() {
         Game.engine.setScene(Scenes.IN_GAME.getScene());
         GameScene.start();
     }
@@ -23,6 +23,16 @@ public class NetworkEvents implements NetworkListener {
     @Override
     public void onEnemyTurn() {
         GameScene.enemyTurn();
+    }
+
+    @Override
+    public void onPlayerWin() {
+        System.out.println("You WIN !");
+    }
+
+    @Override
+    public void onPlayerLoose() {
+        System.out.println("You LOOSE !");
     }
 
     public static NetworkEvents getInstance() {

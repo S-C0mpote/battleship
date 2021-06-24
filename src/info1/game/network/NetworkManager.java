@@ -6,7 +6,6 @@ import info1.network.BadIdException;
 import info1.network.Game;
 import info1.network.Network;
 import info1.ships.BadCoordException;
-import info1.ships.Coord;
 import info1.ships.ICoord;
 import info1.ships.UncompleteFleetException;
 
@@ -30,6 +29,12 @@ public class NetworkManager {
 
     private boolean onPlayerTurn = false;
     private boolean onPlayerTurnSent = false;
+
+    private boolean onPlayerWin = false;
+    private boolean onPlayerWinSent = false;
+
+    private boolean onPlayerLoose = false;
+    private boolean onPlayerLooseSent = false;
 
     /**
      * Connecte le joueur, pour les évènement nous utilisons des boulean car
@@ -82,6 +87,18 @@ public class NetworkManager {
                         }
                     }
 
+                    case 100 -> {
+                        if(!onPlayerWinSent) {
+                            onPlayerWin = true;
+                        }
+                    }
+
+                    case -100 -> {
+                        if(!onPlayerLooseSent) {
+                            onPlayerLoose = true;
+                        }
+                    }
+
                     default -> {
                         System.out.println("Status inconnu : " + status);
                     }
@@ -92,8 +109,7 @@ public class NetworkManager {
 
     public void update() {
         if(onPlayerJoin) {
-            listener.onPlayerJoin();
-            System.out.println("test");
+            listener.onEnemyJoin();
             onPlayerJoin = false;
         }
 
@@ -105,6 +121,16 @@ public class NetworkManager {
         if(onPlayerTurn) {
             listener.onPlayerTurn();
             onPlayerTurn = false;
+        }
+
+        if(onPlayerWin) {
+            listener.onPlayerWin();
+            onPlayerWin = false;
+        }
+
+        if(onPlayerLoose) {
+            listener.onPlayerLoose();
+            onPlayerLoose = false;
         }
     }
 
