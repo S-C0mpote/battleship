@@ -20,6 +20,7 @@ public class GameScene extends Scene {
     private GameEngine engine;
     private LabelIndicator gameId;
     private LabelCenter turn;
+    private LabelRight userLabel, opponentLabel;
     private Grid userGrid;
     private InteractiveGrid enemyGrid;
     private final List<GraphicShipObject> shipObjects = new ArrayList<>();
@@ -62,17 +63,31 @@ public class GameScene extends Scene {
 
         gameId = new LabelIndicator("", Color.WHITE, 15f, 10, 10);
 
+        opponentLabel = new LabelRight("", Color.WHITE, 15f);
+        opponentLabel.setPosition(new Vector2D(enemyGrid.getPosition().x, enemyGrid.getPosition().y + enemyGrid.getSize().height + 10));
+        opponentLabel.setSize(new Dimension(enemyGrid.getSize().width, 15));
+
+
+        userLabel = new LabelRight("", Color.WHITE, 15f);
+        userLabel.setPosition(new Vector2D(userGrid.getPosition().x, userGrid.getPosition().y + userGrid.getSize().height + 10));
+        userLabel.setSize(new Dimension(userGrid.getSize().width, 15));
+
         inGameScene.addGameObject(-1, Scenes.MENU.getBackground());
         inGameScene.addGameObject(userGrid);
         inGameScene.addGameObject(enemyGrid);
         inGameScene.addGameObject(turn);
         inGameScene.addGameObject(gameId);
+        inGameScene.addGameObject(userLabel);
+        inGameScene.addGameObject(opponentLabel);
         inGameScene.addGameObject(quit);
     }
 
     public void start() {
         System.out.println("Start");
         gameId.setText("GameID: " + engine.getNetwork().getCurrentGame().getId());
+
+        userLabel.setText(engine.getNetwork().getUser().getPlayer().getName());
+        opponentLabel.setText(engine.getNetwork().getEnemy().getName());
 
         // Affichage des bateaux
         for(GraphicShipObject ship : shipObjects) Scenes.SETUP.removeGameObject(ship);

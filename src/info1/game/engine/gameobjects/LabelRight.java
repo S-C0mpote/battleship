@@ -2,19 +2,17 @@ package info1.game.engine.gameobjects;
 
 import java.awt.*;
 
-public class LabelIndicator extends GameObject {
+public class LabelRight extends GameObject {
 
     private String text;
     private final Color color;
     private final float fontsize;
 
 
-    public LabelIndicator(String text, Color color, float size, int x, int y) {
+    public LabelRight(String text, Color color, float size) {
         this.text = text;
         this.color = color;
         this.fontsize = size;
-        this.position.x = x;
-        this.position.y = y;
     }
 
     @Override
@@ -23,11 +21,13 @@ public class LabelIndicator extends GameObject {
     @Override
     public void draw(Graphics2D g2d) {
         Font smaller = g2d.getFont().deriveFont(fontsize);
+        FontMetrics metrics = g2d.getFontMetrics(smaller);
+        int xf = (int) position.x + (size.width - metrics.stringWidth(text));
+        int yf = (int) position.y + size.height;
+
         g2d.setFont(smaller);
         g2d.setColor(color);
-        int yTemp = (int) position.y;
-        for (String line : text.split("\n"))
-            g2d.drawString(line, (int) position.x, yTemp += g2d.getFontMetrics().getHeight());
+        g2d.drawString(text, xf, yf);
     }
 
     public void setText(String text) {
