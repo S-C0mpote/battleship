@@ -18,17 +18,29 @@ public class NetworkManager {
 
     private final GamePlayer user;
     private GamePlayer enemy;
+    private GamePlayer playerTurn;
 
     private Game currentGame;
     private NetworkListener listener;
-    private boolean gameStarted = false;
     private boolean onPlayerJoin = false;
+    private boolean onPlayerJoinSent = false;
 
+    private boolean onEnemyTurn = false;
+    private boolean onEnemyTurnSent = false;
+
+    private boolean onPlayerTurn = false;
+    private boolean onPlayerTurnSent = false;
+
+    /**
+     * Connecte le joueur, pour les évènement nous utilisons des boulean car
+     * en Multi Threading cela pourrait générer des erreurs de ConcurrentModification
+     * (édition d'une liste pendant qu'un autre thread la lit)
+     */
     public NetworkManager(GamePlayer user) {
         this.user = user;
 
         Network.setProxy("srv-proxy-etu-2.iut-nantes.univ-nantes.prive", 3128);
-        Network.enableProxy(false);
+        Network.enableProxy(true);
 
         new Thread(() -> {
             try {
@@ -40,17 +52,31 @@ public class NetworkManager {
                 try { Thread.sleep(1000); }
                 catch (InterruptedException e) {e.printStackTrace();}
 
-                System.out.println("En attente de jeu...");
-                if(currentGame == null) continue;
+                if(currentGame == null) {
+                    System.out.println("En attente de jeu...");
+                    continue;
+                }
 
                 int status = getStatus();
 
                 switch (status) {
                     case 10, -10 -> {
-                        if(!gameStarted) {
+                        if(!onPlayerJoinSent) {
                             System.out.println("Party starting...");
                             onPlayerJoin = true;
-                            gameStarted = true;
+                            onPlayerJoinSent = true;
+                        }
+
+                        if(status == 10 && !onPlayerTurnSent) {
+                            onEnemyTurnSent = false;
+                            onPlayerTurnSent = true;
+                            onPlayerTurn = true;
+                            playerTurn = user;
+                        } else if(!onEnemyTurnSent) {
+                            onEnemyTurnSent = true;
+                            onPlayerTurnSent = false;
+                            onEnemyTurn = true;
+                            playerTurn = enemy;
                         }
                     }
 
@@ -66,6 +92,16 @@ public class NetworkManager {
         if(onPlayerJoin) {
             listener.onPlayerJoin();
             onPlayerJoin = false;
+        }
+
+        if(onEnemyTurn) {
+            listener.onPlayerJoin();
+            onEnemyTurn = false;
+        }
+
+        if(onPlayerTurn) {
+            listener.onPlayerJoin();
+            onPlayerTurn = false;
         }
     }
 
@@ -89,9 +125,11 @@ public class NetworkManager {
 
             if(game.isEmpty()) return false;
             currentGame = game.get();
-            gameStarted = true;
+            onPlayerJoinSent = true;
 
-            return Network.joinGame(API, currentGame, user.getPlayer(), user.getNavyFleet());
+            boolean ret = Network.joinGame(API, currentGame, user.getPlayer(), user.getNavyFleet());
+            System.out.println(currentGame);
+            return ret;
         } catch (UnirestException | UncompleteFleetException | BadCoordException e) { e.printStackTrace(); }
         return false;
 

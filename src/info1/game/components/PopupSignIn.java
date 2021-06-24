@@ -7,6 +7,7 @@ import info1.game.engine.gameobjects.Button;
 import info1.game.engine.gameobjects.Input;
 import info1.game.engine.gameobjects.popup.PopupBackground;
 import info1.game.engine.gameobjects.popup.ModalWelcome;
+import info1.game.engine.listeners.NetworkListener;
 import info1.game.network.NetworkManager;
 import info1.game.network.GamePlayer;
 import info1.game.resources.Images;
@@ -52,9 +53,22 @@ public class PopupSignIn {
             SetupScene.load(engine);
             GameScene.load(engine);
 
-            engine.getNetwork().setListener(() -> {
-                engine.setScene(Scenes.IN_GAME.getScene());
-                GameScene.start();
+            engine.getNetwork().setListener(new NetworkListener() {
+                @Override
+                public void onPlayerJoin() {
+                    engine.setScene(Scenes.IN_GAME.getScene());
+                    GameScene.start();
+                }
+
+                @Override
+                public void onPlayerTurn() {
+                    System.out.println("C a toi");
+                }
+
+                @Override
+                public void onEnnemyTurn() {
+                    System.out.println("C a lui");
+                }
             });
 
             //engine.setScene(Scenes.IN_GAME.getScene());
