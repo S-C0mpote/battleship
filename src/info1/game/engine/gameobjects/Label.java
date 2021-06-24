@@ -1,6 +1,7 @@
 package info1.game.engine.gameobjects;
 
 import info1.game.utils.Direction;
+import info1.game.utils.Vector2D;
 
 import java.awt.*;
 
@@ -27,6 +28,7 @@ public class Label extends GameObject{
 
     @Override
     public void draw(Graphics2D g2d) {
+        //Déplacer / Opti, cc Maxandre
         Font smaller = g2d.getFont().deriveFont(fontsize);
         FontMetrics metrics = g2d.getFontMetrics(smaller);
         g2d.setFont(smaller);
@@ -64,12 +66,11 @@ public class Label extends GameObject{
         }
     }
 
-    public void setText(String text) {
-        this.text = text;
-    }
+    public void setText(String text) {this.text = text;}
     public String getText(){return this.text;}
     public void setLocation(int x, int y){
         this.position.x = x;
         this.position.y = y;
     }
+    public Vector2D getLocation(){return new Vector2D(this.position.x, this.position.y);}
 }
