@@ -18,14 +18,24 @@ public class StartAnimation extends GameObject {
         leftPart.x = -1280;
     }
 
+
     @Override
     public void update(double delta) {
+        /*
+         * TODO: NE PAS MULTIPLIER PAR DELTA LES SPEED.X +=
+         * TODO: NE PAS MULTIPLIER PAR DELTA LES SPEED.X +=
+         * TODO: NE PAS MULTIPLIER PAR DELTA LES SPEED.X +=
+         * TODO: NE PAS MULTIPLIER PAR DELTA LES SPEED.X +=
+         * TODO: NE PAS MULTIPLIER PAR DELTA LES SPEED.X +=
+         * TODO: NE PAS MULTIPLIER PAR DELTA LES SPEED.X +=
+         * TODO: NE PAS MULTIPLIER PAR DELTA LES SPEED.X +=
+         */
+
         if(animated) {
             if(leftPart.y == 720 / 2d - 300) {
                 if (leftPart.x > -1280 / 2d - 40) {
                     leftPart.x += delta / speed.x;
                     speed.x += 0.07 * delta;
-
                 } else {
                     leftPart.x += speed.x / delta; // TODO: A VOIR
                 }
