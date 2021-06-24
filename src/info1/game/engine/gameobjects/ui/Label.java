@@ -76,5 +76,4 @@ public class Label extends GameObject {
         this.position.y = y;
     }
     public Vector2D getLocation(){return new Vector2D(this.position.x, this.position.y);}
-    public int getFontHeight(){return yf;}
 }

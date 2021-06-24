@@ -85,7 +85,6 @@ public class SetupScene extends Scene {
         commands.setLocation(10, (int) (720 / 2d - grid.getSize().height / 2d));
         commands.setSize(new Dimension(100, 100));
 
-
         Image leftClick = new Image();
         leftClick.setSize(new Dimension(32, 32));
         leftClick.setPosition(new Vector2D(10, commands.getSize().height * 2 + 15));
@@ -95,9 +94,6 @@ public class SetupScene extends Scene {
         rightClick.setSize(new Dimension(32, 32));
         rightClick.setPosition(new Vector2D(10, commands.getSize().height * 2 + 60));
         rightClick.setImage(Images.RIGHT_CLICK);
-
-
-
 
         setup.addGameObject(-1, Scenes.MENU.getBackground());
         setup.addGameObject(fr_lang);
