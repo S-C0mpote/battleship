@@ -1,6 +1,7 @@
 package info1.game.scenes;
 
 import info1.game.Game;
+import info1.game.components.PopupAlert;
 import info1.game.components.PopupSignIn;
 import info1.game.components.PopupWaiting;
 import info1.game.engine.GameEngine;
