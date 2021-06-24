@@ -25,6 +25,7 @@ public class PopupMessage {
         background = new PopupBackground(engine, 0);
 
         validateButton = new Button(190, 49, "Ok", new Color(0x6A5800));
+        validateButton.setPosition(new Vector2D(-100, -100));
         modal = new ModalAlert(engine, validateButton, message);
 
         modal.setSize(new Dimension(400, 180));
