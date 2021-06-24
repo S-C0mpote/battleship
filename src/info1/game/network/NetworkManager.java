@@ -71,13 +71,9 @@ public class NetworkManager {
                             onPlayerJoinSent = true;
                         }
 
-                        if(status == 10 && !onPlayerTurnSent) {
-                            onEnemyTurnSent = false;
-                            onPlayerTurnSent = true;
+                        if(status == 10) {
                             onPlayerTurn = true;
-                        } else if(status == -10 && !onEnemyTurnSent) {
-                            onEnemyTurnSent = true;
-                            onPlayerTurnSent = false;
+                        } else {
                             onEnemyTurn = true;
                         }
                     }
