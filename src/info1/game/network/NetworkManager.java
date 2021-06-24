@@ -104,7 +104,8 @@ public class NetworkManager {
 
     public void update() {
         if(onPlayerJoin) {
-            enemy = currentGame.getGuest();
+            // TODO: ON PEUT PAS RECUPERER LE PSEUDO DE L'ADVERSAIRE
+            enemy = new Player("Enemy");
             listener.onEnemyJoin();
             onPlayerJoin = false;
         }

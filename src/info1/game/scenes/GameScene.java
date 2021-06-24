@@ -103,11 +103,13 @@ public class GameScene extends Scene {
     }
 
     public void playerTurn() {
+        System.out.println("PLAYER");
         turn.setText("à vous de jouer !");
         enemyGrid.setTurn(true);
     }
 
     public void enemyTurn() {
+        System.out.println("ENEMY");
         turn.setText("à l'adversaire de jouer !");
         enemyGrid.setTurn(false);
     }

@@ -121,10 +121,10 @@ public class InteractiveGrid extends InteractiveGameObject {
                 hit.add(cellClicked);
                 System.out.println("touché");
 
-
                 if(play == 10) System.out.println("coulé");
                 if(play == 100) System.out.println("gagné");
             }
+
             Scenes.GAME.enemyTurn();
         } catch (BadCoordException | UnirestException e) {
             e.printStackTrace();
