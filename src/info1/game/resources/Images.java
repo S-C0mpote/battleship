@@ -19,6 +19,9 @@ public final class Images {
     public static BufferedImage SHIP_BATTLESHIP;
     public static BufferedImage SHIP_AIRCRAFT_CARRIER;
 
+    public static BufferedImage HIT;
+    public static BufferedImage MISS;
+
     static {
         try {
             BUTTON_YELLOW = ImageIO.read(new File("assets/ui/buttons/yellow_button.png"));
@@ -32,6 +35,9 @@ public final class Images {
             SHIP_CRUISER = ImageIO.read(new File("assets/ships/cruiser.png"));
             SHIP_BATTLESHIP = ImageIO.read(new File("assets/ships/battleship.png"));
             SHIP_AIRCRAFT_CARRIER = ImageIO.read(new File("assets/ships/aircraft-carrier.png"));
+
+            HIT = ImageIO.read(new File("assets/ui/hit.png"));
+            MISS = ImageIO.read(new File("assets/ui/miss.png"));
         } catch (IOException e) {e.printStackTrace();}
     }
 

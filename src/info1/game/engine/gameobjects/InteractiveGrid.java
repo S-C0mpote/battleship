@@ -5,6 +5,7 @@ import info1.game.engine.GameEngine;
 import info1.game.engine.listeners.InteractiveGameObject;
 import info1.game.network.GamePlayer;
 import info1.game.resources.Fonts;
+import info1.game.resources.Images;
 import info1.game.utils.Vector2D;
 import info1.ships.BadCoordException;
 import info1.ships.Coord;
@@ -65,14 +66,11 @@ public class InteractiveGrid extends InteractiveGameObject {
             valeur++;
         }
 
-        g2d.setColor(Color.GREEN);
-        for(Vector2D vector : hit){
-            g2d.fillRect((int) vector.x, (int) vector.y, cellSize, cellSize);
-        }
-        g2d.setColor(Color.RED);
-        for(Vector2D vector : miss){
-            g2d.fillRect((int) vector.x, (int) vector.y, cellSize, cellSize);
-        }
+        for(Vector2D vector : hit)
+            g2d.drawImage(Images.HIT, (int) vector.x, (int) vector.y, null);
+
+        for(Vector2D vector : miss)
+            g2d.drawImage(Images.MISS, (int) vector.x, (int) vector.y, null);
 
     }
 
