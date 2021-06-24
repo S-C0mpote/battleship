@@ -23,16 +23,16 @@ public class PopupWaiting {
         this.engine = engine;
 
         background = new PopupBackground(engine, 0);
-        cancelButton = new Button(190, 49, "Annuler", new Color(0x6A5800));
+        cancelButton = new Button(190, 49, "Annuler", new Color(0x973E00));
         modal = new ModalWaiting(engine, cancelButton);
 
         modal.setSize(new Dimension(500, 220));
         modal.setPosition(new Vector2D(1280 / 2d - modal.getSize().width / 2d, 720));
 
-        cancelButton.setClassicImg(Images.BUTTON_YELLOW);
-        cancelButton.setOverImg(Images.BUTTON_YELLOW_OVER);
-        cancelButton.setPressImg(Images.BUTTON_YELLOW_PRESS);
-        cancelButton.setPosition(new Vector2D(modal.getPosition().x + modal.getSize().width - 210, modal.getPosition().y + 150));
+        cancelButton.setClassicImg(Images.BUTTON_RED);
+        cancelButton.setOverImg(Images.BUTTON_RED_OVER);
+        cancelButton.setPressImg(Images.BUTTON_RED_PRESS);
+        cancelButton.setPosition(new Vector2D(modal.getPosition().x + modal.getSize().width - 210, 720));
 
         cancelButton.setListener(() -> {
             background.close();

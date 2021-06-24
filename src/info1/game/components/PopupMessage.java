@@ -12,14 +12,14 @@ import info1.game.utils.Vector2D;
 
 import java.awt.*;
 
-public class PopupAlert{
+public class PopupMessage {
 
     private final PopupBackground background;
     private final ModalAlert modal;
     private final Button validateButton;
     private final Scene menu = Scenes.MENU;
 
-    public PopupAlert(GameEngine engine, String message) {
+    public PopupMessage(GameEngine engine, String message) {
 
         background = new PopupBackground(engine, 0);
 

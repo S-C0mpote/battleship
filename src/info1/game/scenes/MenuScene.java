@@ -1,7 +1,7 @@
 package info1.game.scenes;
 
 import info1.game.Game;
-import info1.game.components.PopupAlert;
+import info1.game.components.PopupMessage;
 import info1.game.components.PopupSignIn;
 import info1.game.components.PopupWaiting;
 import info1.game.engine.GameEngine;
@@ -80,7 +80,7 @@ public class MenuScene extends Scene {
         joinParty.setListener(() -> {
             if (codeInput.getText().equals("") ||
                !codeInput.getText().matches("[0-9]*")) {
-                new PopupAlert(engine, "Code non valide");
+                new PopupMessage(engine, "Code non valide");
                 return;
             }
 

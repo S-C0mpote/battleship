@@ -5,6 +5,7 @@ import info1.game.engine.listeners.NetworkListener;
 import info1.network.BadIdException;
 import info1.network.Game;
 import info1.network.Network;
+import info1.network.Player;
 import info1.ships.BadCoordException;
 import info1.ships.ICoord;
 import info1.ships.UncompleteFleetException;
@@ -16,8 +17,7 @@ public class NetworkManager {
     private static final String API = "http://37.187.38.219/api/v0";
 
     private final GamePlayer user;
-    private GamePlayer enemy;
-    private GamePlayer playerTurn;
+    private Player enemy;
 
     private Game currentGame;
     private NetworkListener listener;
@@ -67,7 +67,6 @@ public class NetworkManager {
                 switch (status) {
                     case 10, -10 -> {
                         if(!onPlayerJoinSent) {
-                            System.out.println("Party starting...");
                             onPlayerJoin = true;
                             onPlayerJoinSent = true;
                         }
@@ -76,14 +75,10 @@ public class NetworkManager {
                             onEnemyTurnSent = false;
                             onPlayerTurnSent = true;
                             onPlayerTurn = true;
-
-                            playerTurn = user;
                         } else if(status == -10 && !onEnemyTurnSent) {
                             onEnemyTurnSent = true;
                             onPlayerTurnSent = false;
                             onEnemyTurn = true;
-
-                            playerTurn = enemy;
                         }
                     }
 
@@ -109,6 +104,7 @@ public class NetworkManager {
 
     public void update() {
         if(onPlayerJoin) {
+            enemy = currentGame.getGuest();
             listener.onEnemyJoin();
             onPlayerJoin = false;
         }
@@ -154,11 +150,9 @@ public class NetworkManager {
 
             if(game.isEmpty()) return false;
             currentGame = game.get();
+            enemy = currentGame.getInitiator();
             onPlayerJoinSent = true;
-
-            boolean ret = Network.joinGame(API, currentGame, user.getPlayer(), user.getNavyFleet());
-            System.out.println(currentGame);
-            return ret;
+            return Network.joinGame(API, currentGame, user.getPlayer(), user.getNavyFleet());
         } catch (UnirestException | UncompleteFleetException | BadCoordException e) { e.printStackTrace(); }
         return false;
     }
@@ -179,6 +173,7 @@ public class NetworkManager {
 
     public Game getCurrentGame() { return currentGame; }
     public GamePlayer getUser() { return user; }
+    public Player getEnemy() { return enemy; }
 
     public NetworkListener getListener() { return listener; }
     public void setListener(NetworkListener listener) { this.listener = listener; }

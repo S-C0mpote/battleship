@@ -2,6 +2,7 @@ package info1.game.engine.gameobjects;
 
 import com.mashape.unirest.http.exceptions.UnirestException;
 import info1.game.engine.GameEngine;
+import info1.game.engine.Scenes;
 import info1.game.engine.listeners.InteractiveGameObject;
 import info1.game.network.GamePlayer;
 import info1.game.resources.Fonts;
@@ -26,6 +27,9 @@ public class InteractiveGrid extends InteractiveGameObject {
     private List<Vector2D> hit = new ArrayList<>();
     private List<Vector2D> miss = new ArrayList<>();
 
+    private boolean isOver = false;
+    private boolean isTurn = false;
+
     public InteractiveGrid(GameEngine engine){this.engine = engine;}
 
     @Override
@@ -37,8 +41,9 @@ public class InteractiveGrid extends InteractiveGameObject {
         int posy = (int) position.y;
 
         g2d.setFont(Fonts.MAIN.deriveFont(12f));
-        g2d.setColor(new Color(255, 255, 255, 50));
 
+        if(!isTurn) g2d.setColor(new Color(125, 125, 125, 50));
+        else g2d.setColor(new Color(255, 255, 255, 50));
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.fillRoundRect((int) position.x , (int) position.y, size.width, size.height, 10, 10);
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
@@ -72,6 +77,18 @@ public class InteractiveGrid extends InteractiveGameObject {
         for(Vector2D vector : miss)
             g2d.drawImage(Images.MISS, (int) vector.x, (int) vector.y, null);
 
+
+        if(engine.getMousePosition() != null && isOver && isTurn) {
+            int xCoord = (engine.getMousePosition().x - (int) position.x) / cellSize;
+            int yCoord = (engine.getMousePosition().y - (int) position.y) / cellSize;
+
+            g2d.setColor(new Color(1f, 1f, 1f, 0.2f));
+            g2d.fillRect(
+                    xCoord * cellSize + (int) position.x,
+                    yCoord * cellSize + (int) position.y,
+                    cellSize, cellSize);
+        }
+
     }
 
     @Override
@@ -80,12 +97,9 @@ public class InteractiveGrid extends InteractiveGameObject {
         cellSize = size.width / 10;
     }
 
-    public int getCellSize() {
-        return cellSize;
-    }
-
     @Override
     public void mousePressed(MouseEvent event){
+        if(!isTurn) return;
 
         int coordXclicked = (engine.getMousePosition().x - (int) position.x) / cellSize + 1;
         int coordYclicked = (engine.getMousePosition().y - (int) position.y) / cellSize + 1;
@@ -101,19 +115,29 @@ public class InteractiveGrid extends InteractiveGameObject {
             if(play == 0){
                 miss.add(cellClicked);
                 System.out.println("raté");
-            }
-            if(play == 1 || play == 10 || play == 100){
+                Scenes.GAME.enemyTurn();
+            } else if(play == 1 || play == 10 || play == 100){
                 hit.add(cellClicked);
                 System.out.println("touché");
-            }
-            if(play == -10){
-                System.out.println();
+                Scenes.GAME.enemyTurn();
+
+                if(play == 10) System.out.println("coulé");
+                if(play == 100) System.out.println("gagné");
             }
 
         } catch (BadCoordException | UnirestException e) {
             e.printStackTrace();
         }
+    }
 
+    @Override
+    public void mouseOver() {
+        isOver = true;
+    }
+
+    @Override
+    public void mouseExit() {
+        isOver = false;
     }
 
     public void clear() {
@@ -127,5 +151,9 @@ public class InteractiveGrid extends InteractiveGameObject {
 
     public ICoord getSelectedCoords(){
         return coord;
+    }
+
+    public void setTurn(boolean turn) {
+        isTurn = turn;
     }
 }

@@ -1,20 +1,16 @@
 package info1.game.components;
 
 import info1.game.engine.GameEngine;
-import info1.game.engine.Scene;
 import info1.game.engine.Scenes;
 import info1.game.engine.gameobjects.Button;
 import info1.game.engine.gameobjects.Input;
 import info1.game.engine.gameobjects.popup.PopupBackground;
 import info1.game.engine.gameobjects.popup.ModalWelcome;
-import info1.game.engine.listeners.NetworkListener;
 import info1.game.network.NetworkEvents;
 import info1.game.network.NetworkManager;
 import info1.game.network.GamePlayer;
 import info1.game.resources.Images;
-import info1.game.scenes.GameScene;
 import info1.game.scenes.MenuScene;
-import info1.game.scenes.SetupScene;
 import info1.game.utils.Vector2D;
 
 import java.awt.*;
@@ -47,7 +43,7 @@ public class PopupSignIn {
 
         button.setListener(() -> {
             if (input.getText().equals("")) {
-                new PopupAlert(engine, "Pseudo non valide");
+                new PopupMessage(engine, "Pseudo non valide");
                 return;
             }
 

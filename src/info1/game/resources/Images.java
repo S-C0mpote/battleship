@@ -10,6 +10,9 @@ public final class Images {
     public static BufferedImage BUTTON_YELLOW;
     public static BufferedImage BUTTON_YELLOW_OVER;
     public static BufferedImage BUTTON_YELLOW_PRESS;
+    public static BufferedImage BUTTON_RED;
+    public static BufferedImage BUTTON_RED_OVER;
+    public static BufferedImage BUTTON_RED_PRESS;
 
     public static BufferedImage MENU_LOGO;
 
@@ -27,6 +30,9 @@ public final class Images {
             BUTTON_YELLOW = ImageIO.read(new File("assets/ui/buttons/yellow_button.png"));
             BUTTON_YELLOW_OVER = ImageIO.read(new File("assets/ui/buttons/yellow_button_over.png"));
             BUTTON_YELLOW_PRESS = ImageIO.read(new File("assets/ui/buttons/yellow_button_press.png"));
+            BUTTON_RED = ImageIO.read(new File("assets/ui/buttons/red_button.png"));
+            BUTTON_RED_OVER = ImageIO.read(new File("assets/ui/buttons/red_button_over.png"));
+            BUTTON_RED_PRESS = ImageIO.read(new File("assets/ui/buttons/red_button_press.png"));
 
             MENU_LOGO = ImageIO.read(new File("assets/ui/logo.png"));
 

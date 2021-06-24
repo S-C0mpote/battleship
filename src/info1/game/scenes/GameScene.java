@@ -21,7 +21,7 @@ public class GameScene extends Scene {
     private LabelIndicator gameId;
     private LabelCenter turn;
     private Grid userGrid;
-    private InteractiveGrid ennemyGrid;
+    private InteractiveGrid enemyGrid;
     private final List<GraphicShipObject> shipObjects = new ArrayList<>();
 
     public GameScene() {
@@ -33,16 +33,16 @@ public class GameScene extends Scene {
         Scene inGameScene = Scenes.GAME;
 
         Button quit = new Button(190,49,"Quitter", new Color(0x6A5800));
-        quit.setClassicImg(Images.BUTTON_YELLOW);
-        quit.setOverImg(Images.BUTTON_YELLOW_OVER);
-        quit.setPressImg(Images.BUTTON_YELLOW_PRESS);
+        quit.setClassicImg(Images.BUTTON_RED);
+        quit.setOverImg(Images.BUTTON_RED_OVER);
+        quit.setPressImg(Images.BUTTON_RED_PRESS);
         quit.setPosition(new Vector2D(10, 660));
         quit.setListener(() -> {
                     engine.getNetwork().leaveGame();
                     engine.setScene(Scenes.MENU);
         });
 
-        ennemyGrid = new InteractiveGrid(engine);
+        enemyGrid = new InteractiveGrid(engine);
         userGrid = new Grid(engine.getNetwork().getUser());
 
         userGrid.setSize(new Dimension(300, 300));
@@ -50,8 +50,8 @@ public class GameScene extends Scene {
                 1280 / 4d - userGrid.getSize().width / 2d - 120,
                 720 / 3d - userGrid.getSize().height / 2d));
 
-        ennemyGrid.setSize(new Dimension(500, 500));
-        ennemyGrid.setPosition(new Vector2D(
+        enemyGrid.setSize(new Dimension(500, 500));
+        enemyGrid.setPosition(new Vector2D(
                 1280 / 2d,
                 userGrid.getPosition().y));
 
@@ -64,7 +64,7 @@ public class GameScene extends Scene {
 
         inGameScene.addGameObject(-1, Scenes.MENU.getBackground());
         inGameScene.addGameObject(userGrid);
-        inGameScene.addGameObject(ennemyGrid);
+        inGameScene.addGameObject(enemyGrid);
         inGameScene.addGameObject(turn);
         inGameScene.addGameObject(gameId);
         inGameScene.addGameObject(quit);
@@ -84,14 +84,16 @@ public class GameScene extends Scene {
         }
 
         // Clear de la grille
-        ennemyGrid.clear();
+        enemyGrid.clear();
     }
 
     public void playerTurn() {
         turn.setText("à vous de jouer !");
+        enemyGrid.setTurn(true);
     }
 
     public void enemyTurn() {
         turn.setText("à l'adversaire de jouer !");
+        enemyGrid.setTurn(false);
     }
 }
