@@ -10,6 +10,7 @@ public class NetworkEvents implements NetworkListener {
 
     private static NetworkEvents instance;
     private final GameScene gameScene = Scenes.GAME;
+    private boolean reload = true;
 
     @Override
     public void onEnemyJoin() {
@@ -29,12 +30,21 @@ public class NetworkEvents implements NetworkListener {
 
     @Override
     public void onPlayerWin() {
-        new PopupMessage(Game.engine, "Tu as gagné !", Scenes.GAME);
+        if (reload){
+            new PopupMessage(Game.engine, "Tu as gagné !", Scenes.GAME);
+            reload = false;
+        }
+
     }
 
     @Override
     public void onPlayerLoose() {
-        new PopupMessage(Game.engine, "Tu as perdu !", Scenes.GAME);
+
+        if (reload){
+            new PopupMessage(Game.engine, "Tu as perdu !", Scenes.GAME);
+            reload = false;
+        }
+
     }
 
     public static NetworkEvents getInstance() {
