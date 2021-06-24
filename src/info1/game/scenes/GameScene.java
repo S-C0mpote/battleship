@@ -41,7 +41,7 @@ public class GameScene {
                     engine.setScene(Scenes.MENU.getScene());
         });
 
-        ennemyGrid = new InteractiveGrid();
+        ennemyGrid = new InteractiveGrid(engine);
         userGrid = new Grid(engine.getNetwork().getUser());
 
         userGrid.setSize(new Dimension(300, 300));

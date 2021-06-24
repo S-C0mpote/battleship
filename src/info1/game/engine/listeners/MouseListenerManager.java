@@ -2,6 +2,7 @@ package info1.game.engine.listeners;
 
 import info1.game.engine.GameEngine;
 import info1.game.utils.Vector2D;
+import info1.ships.BadCoordException;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
