@@ -23,6 +23,7 @@ public class GameScene extends Scene {
     private LabelRight userLabel, opponentLabel;
     private Grid userGrid;
     private InteractiveGrid enemyGrid;
+    private StartAnimation startAnimation;
     private final List<GraphicShipObject> shipObjects = new ArrayList<>();
 
     public GameScene() {
@@ -31,7 +32,7 @@ public class GameScene extends Scene {
     }
 
     public void load(){
-        Scene inGameScene = Scenes.GAME;
+        Scene gameScene = Scenes.GAME;
 
         Button quit = new Button(190,49,"Quitter", new Color(0x973E00));
         quit.setClassicImg(Images.BUTTON_RED);
@@ -39,9 +40,11 @@ public class GameScene extends Scene {
         quit.setPressImg(Images.BUTTON_RED_PRESS);
         quit.setPosition(new Vector2D(10, 660));
         quit.setListener(() -> {
-                    engine.getNetwork().leaveGame();
-                    engine.setScene(Scenes.MENU);
+            engine.getNetwork().leaveGame();
+            engine.setScene(Scenes.MENU);
         });
+
+        startAnimation = new StartAnimation();
 
         enemyGrid = new InteractiveGrid(engine);
         userGrid = new Grid(engine.getNetwork().getUser());
@@ -72,22 +75,30 @@ public class GameScene extends Scene {
         userLabel.setPosition(new Vector2D(userGrid.getPosition().x, userGrid.getPosition().y + userGrid.getSize().height + 10));
         userLabel.setSize(new Dimension(userGrid.getSize().width, 15));
 
-        inGameScene.addGameObject(-1, Scenes.MENU.getBackground());
-        inGameScene.addGameObject(userGrid);
-        inGameScene.addGameObject(enemyGrid);
-        inGameScene.addGameObject(turn);
-        inGameScene.addGameObject(gameId);
-        inGameScene.addGameObject(userLabel);
-        inGameScene.addGameObject(opponentLabel);
-        inGameScene.addGameObject(quit);
+        gameScene.addGameObject(-1, Scenes.MENU.getBackground());
+        gameScene.addGameObject(userGrid);
+        gameScene.addGameObject(enemyGrid);
+        gameScene.addGameObject(turn);
+        gameScene.addGameObject(gameId);
+        gameScene.addGameObject(userLabel);
+        gameScene.addGameObject(opponentLabel);
+        gameScene.addGameObject(quit);
+        gameScene.addGameObject(startAnimation);
     }
 
     public void start() {
         System.out.println("Start");
         gameId.setText("GameID: " + engine.getNetwork().getCurrentGame().getId());
 
-        userLabel.setText(engine.getNetwork().getUser().getPlayer().getName());
-        opponentLabel.setText(engine.getNetwork().getEnemy().getName());
+        String userName = engine.getNetwork().getUser().getPlayer().getName();
+        String enemyName = engine.getNetwork().getEnemy().getName();
+
+        userLabel.setText(userName);
+        opponentLabel.setText(enemyName);
+
+        startAnimation.setUsername1(userName);
+        startAnimation.setUsername2(enemyName);
+
 
         // Affichage des bateaux
         for(GraphicShipObject ship : shipObjects) Scenes.SETUP.removeGameObject(ship);
@@ -103,13 +114,11 @@ public class GameScene extends Scene {
     }
 
     public void playerTurn() {
-        System.out.println("PLAYER");
         turn.setText("à vous de jouer !");
         enemyGrid.setTurn(true);
     }
 
     public void enemyTurn() {
-        System.out.println("ENEMY");
         turn.setText("à l'adversaire de jouer !");
         enemyGrid.setTurn(false);
     }
