@@ -17,10 +17,12 @@ public class PopupMessage {
     private final PopupBackground background;
     private final ModalAlert modal;
     private final Button validateButton;
-    private final Scene menu = Scenes.MENU;
 
     public PopupMessage(GameEngine engine, String message) {
+        this(engine, message, Scenes.MENU);
+    }
 
+    public PopupMessage(GameEngine engine, String message, Scene scene) {
         background = new PopupBackground(engine, 0);
 
         validateButton = new Button(190, 49, "Ok", new Color(0x6A5800));
@@ -38,11 +40,23 @@ public class PopupMessage {
             modal.close();
         });
 
-        menu.addGameObject(3000, background);
-        menu.addGameObject(3001, modal);
-        menu.addGameObject(3002, validateButton);
+        scene.addGameObject(3000, background);
+        scene.addGameObject(3001, modal);
+        scene.addGameObject(3002, validateButton);
 
         background.open();
         modal.open();
+    }
+
+    public Button getButton() {
+        return validateButton;
+    }
+
+    public ModalAlert getModal() {
+        return modal;
+    }
+
+    public PopupBackground getBackground() {
+        return background;
     }
 }

@@ -1,6 +1,7 @@
 package info1.game.network;
 
 import info1.game.Game;
+import info1.game.components.PopupMessage;
 import info1.game.engine.Scenes;
 import info1.game.engine.listeners.NetworkListener;
 import info1.game.scenes.GameScene;
@@ -28,12 +29,24 @@ public class NetworkEvents implements NetworkListener {
 
     @Override
     public void onPlayerWin() {
-        System.out.println("You WIN !");
+        PopupMessage popupMessage = new PopupMessage(Game.engine, "You WIN", Scenes.GAME);
+        popupMessage.getButton().setListener(() -> {
+            popupMessage.getBackground().close();
+            popupMessage.getModal().close();
+
+            Game.engine.setScene(Scenes.MENU);
+        });
     }
 
     @Override
     public void onPlayerLoose() {
-        System.out.println("You LOOSE !");
+        PopupMessage popupMessage = new PopupMessage(Game.engine, "You LOOSE", Scenes.GAME);
+        popupMessage.getButton().setListener(() -> {
+            popupMessage.getBackground().close();
+            popupMessage.getModal().close();
+
+            Game.engine.setScene(Scenes.MENU);
+        });
     }
 
     public static NetworkEvents getInstance() {
