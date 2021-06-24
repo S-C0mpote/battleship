@@ -6,7 +6,9 @@ import info1.game.engine.Scene;
 import info1.game.engine.Scenes;
 import info1.game.engine.gameobjects.Button;
 import info1.game.engine.gameobjects.*;
+import info1.game.engine.gameobjects.Label;
 import info1.game.resources.Images;
+import info1.game.utils.Direction;
 import info1.game.utils.Vector2D;
 import info1.ships.IShip;
 import info1.ships.NavyFleet;
@@ -51,10 +53,11 @@ public class SetupScene extends Scene {
         valider.setPosition(new Vector2D(1280 - 200, 660));
         valider.setListener(() -> engine.setScene(Scenes.MENU));
 
-        LabelCenter instruction = new LabelCenter("Placez vos bateaux", Color.WHITE, 35f);
+        Label instruction = new Label("Placez vos bateaux", Color.WHITE, 35f, Direction.CENTER);
         instruction.setSize(new Dimension(1280, 100));
 
-        LabelIndicator indicator = new LabelIndicator("Choix de configuration :", Color.WHITE, 15f, 10, 630);
+        Label indicator = new Label("Choix de configuration :", Color.WHITE, 15f);
+        indicator.setLocation(10, 630);
 
         grid = new Grid(engine.getNetwork().getUser());
         grid.setSize(new Dimension(500, 500));
@@ -77,8 +80,9 @@ public class SetupScene extends Scene {
 
         addShips();
 
-        LabelIndicator commands = new LabelIndicator("Commandes :" + "\n\n" + "gauche : bouger" + "\n" + "droite : tourner",
-                Color.WHITE, 20f, 10, (int) (720 / 2d - grid.getSize().height / 2d));
+        Label commands = new Label("Commandes :" + "\n\n" + "gauche : bouger" + "\n" + "droite : tourner",
+                Color.WHITE, 20f);
+        commands.setLocation(10, (int) (720 / 2d - grid.getSize().height / 2d));
 
         setup.addGameObject(-1, Scenes.MENU.getBackground());
         setup.addGameObject(fr_lang);

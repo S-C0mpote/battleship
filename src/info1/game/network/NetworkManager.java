@@ -45,7 +45,7 @@ public class NetworkManager {
         this.user = user;
 
         Network.setProxy("srv-proxy-etu-2.iut-nantes.univ-nantes.prive", 3128);
-        Network.enableProxy(true);
+        Network.enableProxy(false);
 
         new Thread(() -> {
             try {

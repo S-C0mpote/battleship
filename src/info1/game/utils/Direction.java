@@ -4,7 +4,8 @@ public enum Direction {
     BOTTOM,
     TOP,
     LEFT,
-    RIGHT;
+    RIGHT,
+    CENTER;
 
     public Direction getNext() {
         switch (this) {

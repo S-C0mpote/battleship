@@ -9,7 +9,9 @@ import info1.game.engine.Scene;
 import info1.game.engine.Scenes;
 import info1.game.engine.gameobjects.Button;
 import info1.game.engine.gameobjects.*;
+import info1.game.engine.gameobjects.Label;
 import info1.game.resources.Images;
+import info1.game.utils.Direction;
 import info1.game.utils.Vector2D;
 
 import java.awt.*;
@@ -64,7 +66,7 @@ public class MenuScene extends Scene {
         TitleMenu title = new TitleMenu(engine);
         menu.addGameObject(title);
 
-        LabelCenter version = new LabelCenter("Maxandre GROCHEFORT, Léo ROCHARD, Morgann LERAY, Elouan NAQUIN", Color.WHITE, 10f);
+        Label version = new Label("Maxandre GROCHEFORT, Léo ROCHARD, Morgann LERAY, Elouan NAQUIN", Color.WHITE, 10f, Direction.CENTER);
         version.setPosition(new Vector2D(10, 700));
         version.setSize(new Dimension(1280, 20));
         menu.addGameObject(version);

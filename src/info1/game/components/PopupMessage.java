@@ -4,7 +4,6 @@ import info1.game.engine.GameEngine;
 import info1.game.engine.Scene;
 import info1.game.engine.Scenes;
 import info1.game.engine.gameobjects.Button;
-import info1.game.engine.gameobjects.LabelCenter;
 import info1.game.engine.gameobjects.popup.ModalAlert;
 import info1.game.engine.gameobjects.popup.PopupBackground;
 import info1.game.resources.Images;

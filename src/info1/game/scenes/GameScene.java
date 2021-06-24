@@ -6,7 +6,9 @@ import info1.game.engine.Scene;
 import info1.game.engine.Scenes;
 import info1.game.engine.gameobjects.*;
 import info1.game.engine.gameobjects.Button;
+import info1.game.engine.gameobjects.Label;
 import info1.game.resources.Images;
+import info1.game.utils.Direction;
 import info1.game.utils.Vector2D;
 import info1.ships.IShip;
 import info1.ships.Ship;
@@ -18,9 +20,7 @@ import java.util.List;
 public class GameScene extends Scene {
 
     private GameEngine engine;
-    private LabelIndicator gameId;
-    private LabelCenter turn;
-    private LabelRight userLabel, opponentLabel;
+    private Label turn, userLabel, opponentLabel, gameId;
     private Grid userGrid;
     private InteractiveGrid enemyGrid;
     private StartAnimation startAnimation;
@@ -59,19 +59,20 @@ public class GameScene extends Scene {
                 1280 / 2d,
                 userGrid.getPosition().y));
 
-        turn =  new LabelCenter("", new Color(0xF0F0F0), 20f);
+        turn =  new Label("", new Color(0xF0F0F0), 20f, Direction.CENTER);
 
         turn.setPosition(new Vector2D(1280 / 2d - 75, 20));
         turn.setSize(new Dimension(1280 / 2, 50));
 
-        gameId = new LabelIndicator("", Color.WHITE, 15f, 10, 10);
+        gameId = new Label("", Color.WHITE, 15f);
+        gameId.setLocation(10, 10);
 
-        opponentLabel = new LabelRight("", Color.WHITE, 15f);
+        opponentLabel = new Label("", Color.WHITE, 15f, Direction.RIGHT);
         opponentLabel.setPosition(new Vector2D(enemyGrid.getPosition().x, enemyGrid.getPosition().y + enemyGrid.getSize().height + 10));
         opponentLabel.setSize(new Dimension(enemyGrid.getSize().width, 15));
 
 
-        userLabel = new LabelRight("", Color.WHITE, 15f);
+        userLabel = new Label("", Color.WHITE, 15f, Direction.RIGHT);
         userLabel.setPosition(new Vector2D(userGrid.getPosition().x, userGrid.getPosition().y + userGrid.getSize().height + 10));
         userLabel.setSize(new Dimension(userGrid.getSize().width, 15));
 
