@@ -10,41 +10,57 @@ public class StartAnimation extends GameObject {
     private boolean animated = true;
     private Vector2D leftPart = new Vector2D(0, 0);
     private String username1, username2;
-    private double vitesse = 0.5;
+    private double vitesse = 200;
+    private double vitesse2 = 10;
+    private int part = 1;
+
 
     public StartAnimation() {
-        leftPart.y = 720 / 2d - 200;
+        leftPart.y = 720 / 2d - 300;
         leftPart.x = -1280;
     }
 
     @Override
     public void update(double delta) {
-       if(animated) {
-            if(leftPart.y > 720 / 2d - 100) {
+        if(animated) {
+            if(leftPart.y >= 720 / 2d - 300) {
 
-                if(leftPart.y < 720 / 2d - 90){
-                    leftPart.y += delta * vitesse;
-                    vitesse -= 0.0004 * delta;
-                }else{
-                    leftPart.x -= delta * 2;
-                    leftPart.y += delta / 10d;
+            System.out.println("condition 1 : " + leftPart.y);
+
+            if(leftPart.y < 720 / 2d && leftPart.y > 720 / 2d - 20){
+                leftPart.y += delta * (delta/ vitesse);
+                vitesse *= 1.00001 ;
+            }else{
+                leftPart.y += delta * 1.005;
+                if(leftPart.y >= 720 / 2d)
+                    leftPart.x -= vitesse / delta;
+            }
+
+
+            if(leftPart.x <= -1280) {
+                leftPart.x = -1280;
+                animated = false;
+                part = 1;
+            }
+        }else{
+                System.out.println("condition 2 : " + leftPart.y);
+                if(leftPart.y == 720 / 2d - 300) {
+                if (leftPart.x > -1280 + 640 - 10) {
+                    leftPart.x += delta * (delta / vitesse2);
+                    vitesse2 *= 1.001;
+                } else {
+                    leftPart.x += vitesse2 / delta;
                 }
 
 
-                if(leftPart.x <= -1280) {
-                    leftPart.x = -1280;
-                    animated = false;
-                }
-            } else {
-                leftPart.x += delta * 2;
-                leftPart.y += delta / 20d;
-
-                if(leftPart.x > -1280 / 2d) {
+                if (leftPart.x > -1280 / 2d) {
                     leftPart.x = -1280 / 2d;
                 }
             }
         }
+       }
     }
+
 
     @Override
     public void draw(Graphics2D g2d) {
