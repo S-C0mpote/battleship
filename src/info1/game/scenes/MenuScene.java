@@ -72,7 +72,7 @@ public class MenuScene {
 
         joinParty.setListener(() -> {
             if (codeInput.getText().equals("") ||
-               !codeInput.getText().matches("[0-9]")) {
+               !codeInput.getText().matches("[0-9]*")) {
                 return;
             }
             int code = Integer.parseInt(codeInput.getText());

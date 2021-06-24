@@ -46,6 +46,7 @@ public class PopupSignIn {
 
         button.setListener(() -> {
             if (input.getText().equals("")) return;
+
             NetworkManager network = new NetworkManager(new GamePlayer(input.getText()));
             engine.setNetwork(network);
 
