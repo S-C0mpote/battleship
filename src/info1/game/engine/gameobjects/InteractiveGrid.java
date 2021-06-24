@@ -118,6 +118,11 @@ public class InteractiveGrid extends InteractiveGameObject {
 
     }
 
+    public void clear() {
+        hit.clear();
+        miss.clear();
+    }
+
     private String intPosToStr(int x, int y) {
         return String.valueOf((char) (x + 64)) + y;
     }

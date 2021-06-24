@@ -7,9 +7,7 @@ import info1.game.engine.gameobjects.*;
 import info1.game.engine.gameobjects.Button;
 import info1.game.resources.Images;
 import info1.game.utils.Vector2D;
-import info1.network.Network;
 import info1.ships.IShip;
-import info1.ships.NavyFleet;
 import info1.ships.Ship;
 
 import java.awt.*;
@@ -77,7 +75,18 @@ public class GameScene {
     public static void start() {
         System.out.println("Start");
         gameId.setText("GameID: " + engine.getNetwork().getCurrentGame().getId());
-        setShips();
+
+        // Affichage des bateaux
+        for(GraphicShipObject ship : shipObjects) Scenes.SETUP.getScene().removeGameObject(ship);
+
+        for(IShip ship : engine.getNetwork().getUser().getNavyFleet().getShips()) {
+            GraphicShipObject shipObject = new GraphicShipObject(userGrid, (Ship) ship, engine);
+            shipObjects.add(shipObject);
+            Scenes.IN_GAME.getScene().addGameObject(shipObject);
+        }
+
+        // Clear de la grille
+        ennemyGrid.clear();
     }
 
     public static void playerTurn() {
@@ -86,13 +95,5 @@ public class GameScene {
 
     public static void enemyTurn() {
         turn.setText("à l'adversaire de jouer !");
-    }
-
-    private static void setShips() {
-        for(IShip ship : engine.getNetwork().getUser().getNavyFleet().getShips()) {
-            GraphicShipObject shipObject = new GraphicShipObject(userGrid, (Ship) ship, engine);
-            shipObjects.add(shipObject);
-            Scenes.IN_GAME.getScene().addGameObject(shipObject);
-        }
     }
 }
