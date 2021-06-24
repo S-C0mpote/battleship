@@ -4,6 +4,8 @@ import info1.game.engine.GameEngine;
 import info1.game.engine.Scene;
 import info1.game.engine.Scenes;
 import info1.game.engine.gameobjects.*;
+import info1.game.engine.gameobjects.Button;
+import info1.game.resources.Images;
 import info1.game.utils.Vector2D;
 import info1.network.Network;
 import info1.ships.IShip;
@@ -28,6 +30,16 @@ public class GameScene {
         GameScene.engine = engine;
 
         Scene ingame = Scenes.IN_GAME.getScene();
+
+        Button quit = new Button(190,49,"Quitter", new Color(0x6A5800));
+        quit.setClassicImg(Images.BUTTON_YELLOW);
+        quit.setOverImg(Images.BUTTON_YELLOW_OVER);
+        quit.setPressImg(Images.BUTTON_YELLOW_PRESS);
+        quit.setPosition(new Vector2D(10, 660));
+        quit.setListener(() -> {
+                    engine.getNetwork().leaveGame();
+                    engine.setScene(Scenes.MENU.getScene());
+        });
 
         ennemyGrid = new InteractiveGrid();
         userGrid = new Grid(engine.getNetwork().getUser());
@@ -59,6 +71,7 @@ public class GameScene {
         ingame.addGameObject(turn);
         ingame.addGameObject(gameId);
         ingame.addGameObject(cellRemaining);
+        ingame.addGameObject(quit);
     }
 
     public static void start() {
