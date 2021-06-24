@@ -46,7 +46,10 @@ public class PopupSignIn {
         button.setPosition(new Vector2D(modal.getPosition().x + modal.getSize().width - 210, modal.getPosition().y + 150));
 
         button.setListener(() -> {
-            if (input.getText().equals("")) return;
+            if (input.getText().equals("")) {
+                new PopupAlert(engine, "Pseudo non valide");
+                return;
+            }
 
             NetworkManager network = new NetworkManager(new GamePlayer(input.getText()));
             engine.setNetwork(network);

@@ -80,6 +80,7 @@ public class MenuScene extends Scene {
         joinParty.setListener(() -> {
             if (codeInput.getText().equals("") ||
                !codeInput.getText().matches("[0-9]*")) {
+                new PopupAlert(engine, "Code non valide");
                 return;
             }
 
