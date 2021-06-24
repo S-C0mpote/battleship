@@ -12,7 +12,7 @@ import java.util.List;
 
 public class MouseListenerManager implements MouseListener {
 
-    private GameEngine gameEngine;
+    private final GameEngine gameEngine;
 
     public MouseListenerManager(GameEngine gameEngine) {
         this.gameEngine = gameEngine;

@@ -65,7 +65,7 @@ public class GameEngine {
             if (frameTime >= 1) {
                 window.setTitle("BattleShip - " + frameCount + "FPS");
 
-                frameTime = 0;
+                frameTime %= 1;
                 frameCount = 0;
             }
 

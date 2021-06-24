@@ -82,8 +82,8 @@ public class SetupScene extends Scene {
 
         Label commands = new Label("Commandes :" + "\n\n" + "       bouger" + "\n\n" + "       tourner",
                 Color.WHITE, 20f);
-        commands.setLocation(10, (int) (720 / 2d - grid.getSize().height / 2d));
-        commands.setSize(new Dimension(100, 100));
+        commands.setLocation(10, (720 / 2 - grid.getSize().height / 2));
+        commands.setSize(new Dimension(300, 300));
 
         Image leftClick = new Image();
         leftClick.setSize(new Dimension(32, 32));

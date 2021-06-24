@@ -1,6 +1,5 @@
 package info1.game.engine.gameobjects;
 
-import info1.game.engine.GameEngine;
 import info1.game.utils.Direction;
 
 import info1.ships.Ship;
@@ -12,6 +11,7 @@ public class GraphicShipObject extends GameObject {
 
     private Grid grid;
     private Ship ship;
+    private AffineTransform transform;
 
     public GraphicShipObject(Grid grid, Ship ship){
         this.grid = grid;
@@ -26,16 +26,15 @@ public class GraphicShipObject extends GameObject {
     @Override
     public void draw(Graphics2D g2d) {
         AffineTransform save = g2d.getTransform();
-        g2d.setTransform(this.getTransform());
+        g2d.setTransform(transform);
         g2d.drawImage(ship.getImage(), 0, 0, null);
         g2d.setTransform(save);
     }
 
-    public AffineTransform getTransform() {
+    public AffineTransform calcTransform() {
         AffineTransform af = new AffineTransform();
 
         double theta = 0;
-
         switch (ship.getOrientation()) {
             case LEFT -> {
                 theta = -(Math.PI / 2);
@@ -53,32 +52,9 @@ public class GraphicShipObject extends GameObject {
             }
             case BOTTOM -> {
                 theta = Math.PI;
-                af.translate(position.x + (size.width - grid.getCellSize()),
-                        position.y + (size.height - grid.getCellSize() * ship.getSize()));
+                af.translate(position.x + (size.width - grid.getCellSize()) + 13,
+                        position.y + (size.height - grid.getCellSize()) + 13);
             }
-        }
-
-        if(ship.getOrientation() == Direction.LEFT) theta = -(Math.PI / 2);
-        else if(ship.getOrientation() == Direction.RIGHT) theta = (Math.PI / 2);
-        else if(ship.getOrientation() == Direction.TOP) theta = 0;
-        else if(ship.getOrientation() == Direction.BOTTOM) theta = Math.PI;
-
-        if(ship.getOrientation() == Direction.LEFT) {
-            af.translate(
-                    position.x,
-                    position.y + 13);
-        } else if(ship.getOrientation() == Direction.TOP){
-            af.translate(
-                    position.x + (size.width - grid.getCellSize()),
-                    position.y + (size.height - grid.getCellSize() * ship.getSize()));
-        } else if(ship.getOrientation() == Direction.BOTTOM){
-            af.translate(
-                    position.x + (size.width - grid.getCellSize()) + 13,
-                    position.y + (size.height - grid.getCellSize()) + 13);
-        } else if(ship.getOrientation() == Direction.RIGHT){
-            af.translate(
-                    position.x + (size.width - grid.getCellSize()) + 13,
-                    position.y + (size.height - grid.getCellSize()));
         }
 
         af.scale(grid.getCellSize() / 50d, grid.getCellSize() / 50d);
@@ -104,6 +80,8 @@ public class GraphicShipObject extends GameObject {
             size.height = ship.getSize() * grid.getCellSize();
             size.width = grid.getCellSize();
         }
+
+        transform = calcTransform();
     }
 
 

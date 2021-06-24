@@ -18,6 +18,7 @@ public class ShipObject extends InteractiveGameObject {
     private GameEngine engine;
     private boolean drag = false;
     private Vector2D marginPosition = new Vector2D(0,0);
+    private AffineTransform transform;
 
     public ShipObject(Grid grid, Ship ship, GameEngine engine){
         this.engine = engine;
@@ -39,22 +40,26 @@ public class ShipObject extends InteractiveGameObject {
             position.y = Math.min(
                     Math.max(engine.getMousePosition().y - marginPosition.y, grid.getPosition().y),
                     grid.getPosition().y + grid.getSize().height - size.height);
+
+            transform = calcTransform();
         }
 
         AffineTransform save = g2d.getTransform();
-        g2d.setTransform(this.getTransform());
+        g2d.setTransform(transform);
         g2d.drawImage(ship.getImage(), 0, 0, null);
         g2d.setTransform(save);
     }
 
-    public AffineTransform getTransform() {
+    public AffineTransform calcTransform() {
         AffineTransform af = new AffineTransform();
 
         double theta = 0;
-        if(ship.getOrientation() == Direction.LEFT) theta = -(Math.PI / 2);
-        else if(ship.getOrientation() == Direction.RIGHT) theta = (Math.PI / 2);
-        else if(ship.getOrientation() == Direction.TOP) theta = 0;
-        else if(ship.getOrientation() == Direction.BOTTOM) theta = Math.PI;
+        switch (ship.getOrientation()) {
+            case LEFT   -> theta = -(Math.PI / 2);
+            case RIGHT  -> theta = (Math.PI / 2);
+            case TOP    -> theta = 0;
+            case BOTTOM -> theta = Math.PI;
+        }
 
         if(ship.getOrientation() == Direction.LEFT || ship.getOrientation() == Direction.TOP) {
             af.translate(position.x, position.y);
@@ -86,6 +91,8 @@ public class ShipObject extends InteractiveGameObject {
             size.height = ship.getSize() * grid.getCellSize();
             size.width = grid.getCellSize();
         }
+
+        transform = calcTransform();
     }
 
     @Override
@@ -95,10 +102,7 @@ public class ShipObject extends InteractiveGameObject {
             int y = (int) Math.round((position.y - grid.getPosition().y) / grid.getCellSize());
 
             try {
-                Direction from = ship.getOrientation();
-                Direction to = from.getNext();
-
-                ship.move(x + 1, y + 1, to, grid.getFleet());
+                ship.move(x + 1, y + 1, ship.getOrientation().getNext(), grid.getFleet());
             } catch (BadCoordException ignored) {}
 
             refreshPosition();
@@ -116,7 +120,6 @@ public class ShipObject extends InteractiveGameObject {
 
     @Override
     public void mouseReleased(MouseEvent e) {
-
         if(e.getButton() == 3) {
             this.setPressed(true);
             return;
@@ -130,7 +133,6 @@ public class ShipObject extends InteractiveGameObject {
 
         try {
             ship.move(x + 1, y + 1, ship.getOrientation(), grid.getFleet());
-
         } catch (BadCoordException ignored) {}
 
         refreshPosition();

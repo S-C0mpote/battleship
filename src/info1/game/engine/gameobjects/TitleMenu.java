@@ -26,8 +26,7 @@ public class TitleMenu extends GameObject{
             speed = 90;
         }
 
-        if(direction == 1) position.y -= (delta / (double) speed);
-        if(direction == -1) position.y += (delta / (double) speed);
+        position.y += (delta / (double) speed) * -direction;
 
         if((position.y >= 15 && direction == -1) || (position.y <= 15 && direction == 1)) speed += delta / 11;
         if((position.y < 15 && direction == -1) || (position.y > 15 && direction == 1)) speed -= delta / 10;

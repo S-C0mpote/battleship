@@ -68,7 +68,6 @@ public class Grid extends GameObject {
         cellSize = size.width / 10;
     }
 
-
     public int getCellSize() {
         return cellSize;
     }

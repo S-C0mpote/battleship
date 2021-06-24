@@ -20,13 +20,13 @@ import java.util.List;
 
 public class InteractiveGrid extends InteractiveGameObject {
 
-    private int cellSize;
     private final Color lineColor = new Color(0xF1F1F1);
+
+    private int cellSize;
     private ICoord coord;
     private GameEngine engine;
     private List<Vector2D> hit = new ArrayList<>();
     private List<Vector2D> miss = new ArrayList<>();
-
     private boolean isOver = false;
     private boolean isTurn = false;
 

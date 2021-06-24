@@ -40,7 +40,7 @@ public class Label extends GameObject {
             switch (direction) {
                 case LEFT -> {
                     xf = 0;
-                    yf = (size.height - metrics.getAscent());
+                    yf = 0;
                 }
                 case CENTER -> {
                     xf = (size.width - metrics.stringWidth(text)) / 2;
@@ -64,6 +64,9 @@ public class Label extends GameObject {
             yTemp += fontHeight;
         }
 
+        // DEBUG (Voir les zones de textes):
+        // g2d.setColor(Color.RED);
+        // g2d.fillRect((int) position.x, (int) position.y, size.width, size.height);
     }
 
     public void setText(String text) {
