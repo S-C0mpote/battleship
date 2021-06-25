@@ -9,6 +9,7 @@ public class Game {
     public static GameEngine engine = new GameEngine();
 
     public static void main(String[] args) {
+
         engine.getGameCanvas().setFont(Fonts.MAIN);
 
         Scenes.MENU.load();

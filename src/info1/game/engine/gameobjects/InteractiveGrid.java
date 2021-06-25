@@ -3,10 +3,12 @@ package info1.game.engine.gameobjects;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import info1.game.engine.GameEngine;
 import info1.game.engine.Scenes;
+import info1.game.engine.gameobjects.ui.Label;
 import info1.game.engine.listeners.InteractiveGameObject;
 import info1.game.network.GamePlayer;
 import info1.game.resources.Fonts;
 import info1.game.resources.Images;
+import info1.game.utils.Direction;
 import info1.game.utils.Vector2D;
 import info1.ships.BadCoordException;
 import info1.ships.Coord;
@@ -29,7 +31,6 @@ public class InteractiveGrid extends InteractiveGameObject {
     private List<Vector2D> miss = new ArrayList<>();
     private boolean isOver = false;
     private boolean isTurn = false;
-
     public InteractiveGrid(GameEngine engine){this.engine = engine;}
 
     @Override
@@ -116,13 +117,16 @@ public class InteractiveGrid extends InteractiveGameObject {
 
             if(play == 0){
                 miss.add(cellClicked);
-                System.out.println("raté");
+                Scenes.GAME.getLabelCoule().setText("Manqué");
             } else if(play == 1 || play == 10 || play == 100){
                 hit.add(cellClicked);
-                System.out.println("touché");
+                Scenes.GAME.getLabelCoule().setText("Touché");
 
-                if(play == 10) System.out.println("coulé");
-                if(play == 100) System.out.println("gagné");
+                if(play == 10){
+                    Scenes.GAME.getLabelCoule().setText("Coulé");
+                }
+                if(play == 100){
+                }
             }
 
             Scenes.GAME.enemyTurn();
