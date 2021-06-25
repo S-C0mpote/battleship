@@ -80,7 +80,7 @@ public class GameScene extends Scene {
         userLabel.setSize(new Dimension(userGrid.getSize().width, 15));
 
         labelCoule = new Label("", Color.WHITE, 15f, Direction.LEFT);
-        labelCoule.setPosition(new Vector2D(enemyGrid.getPosition().x, enemyGrid.getPosition().y + enemyGrid.getSize().height + 10));
+        labelCoule.setPosition(new Vector2D(enemyGrid.getPosition().x, enemyGrid.getPosition().y + enemyGrid.getSize().height + 25));
         labelCoule.setSize(new Dimension(enemyGrid.getSize().width, 15));
 
         gameScene.addGameObject(-1, Scenes.MENU.getBackground());
