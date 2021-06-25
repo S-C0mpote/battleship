@@ -6,7 +6,7 @@ import info1.game.resources.Fonts;
 
 public class Game {
 
-    public static final boolean USE_PROXY = true;
+    public static final boolean USE_PROXY = true; //Activer ou désactiver le proxy
 
     public static GameEngine engine = new GameEngine();
 

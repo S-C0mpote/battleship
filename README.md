@@ -1,111 +1,65 @@
-# Projet S2 : Bataille Navale
+# Projet S2 : Bataille Navale en java
 
-![French_battleship_Brennus_NH_64443](img/French_battleship_Brennus_NH_64443.jpg)
+![Image Bateau](assets/ui/read_ship.jpg)
 
-## Présentation rapide 
+## Lancer le code
 
-Il va s'agir de développer une application cliente permettant de jouer 
-en réseau à la bataille navale : https://fr.wikipedia.org/wiki/Bataille_navale_(jeu)
-
-Un serveur de jeu est accessible en ligne sous la forme d'une API Rest
- (http://37.187.38.219/api/v0) et une librairie Java 
- interfaçant le serveur vous est fournie (en partie).
-
-**En cas de questions / bugs / etc. privilégiez les _issues_ de ce dépôt git.**
-
-
-## Travail à faire
-
-### initialisation du projet
-
-1. créez un git spécifique à votre groupe sur le gitlab de l'université : 
- https://gitlab.univ-nantes.fr/ avec la convention de nommage suivante :
-`projetS2-2021-NUM_GROUPE-INITIALES_ENSEIGNANT` ; `exemple projetS2-03-AL`
- 
+La classe principale pour lancer le programme (Game) est située dans info1/game/Game.
  
 
-2. ajoutez comme "maintainer" votre enseignant-référent et M. Arnaud Lanoix    
-
-3. déposez sur votre git, l'ensemble des sources récupérées ici :
-https://gitlab.univ-nantes.fr/iut.info1.project/battleship-student-project-2021/-/archive/master/battleship-student-project-2021-master.zip
-OU faites un fork de ce dépot.
+**Une fenêtre avec une demande de votre pseudo devrait apparaître.**
 
 
+### Entrez votre pseudo
 
- **Vous respecterez la structure imposée en terme de dossiers/paquetages**
- 
-  NB :le source récupéré contient un repertoire lib/ 
-     contenant une archive jar `battleship-library-1.x.jar`
-     
-  il faut ajouter ce .jar comme une librairie dans votre IDE préféré
-     
-  il s'agit de code qui vous est fourni, que vous devrez utiliser
-  mais que vous ne pouvez pas modifier
+Votre pseudo peut contenir au maximum 20 caractères (vous avez la liberté de prendre des caractères spéciaux).
+
+###Menu
+
+Vous devriez arriver sur la fenêtre ci-dessous :
 
 
-### implémentation de `ships.*`
+![image](assets/ui/menu_capture.png)
 
-2. il vous faut (terminer de) développer le modèle de données représentant 
-la flotte de bateaux ; pour cela, il vous faut coder 
-les classes suivantes (dans `src/info1/ships/`) : 
-    *  `Coord` implémentant `ICoord`
-    *  `Ship` implémentant `IShip` et (si nécessaire) modifier les classes "filles" fournies
-    *  `NavyFleet` implémentant `INavyFleet`
-    
-Les interfaces à implémenter sont présentes dans `battleship-library-1.x.jar` ; 
-elles sont sont documentées dans la javadoc fournie (documentation/javadoc).
+###Disposition de votre flotte
 
-NB :des cas de tests écrit en Junit 5.4 vous 
-permettront de valider votre implémentation :
-   * `CoordTest`
-   * `NavyFleetTest`
-   * `ShipTest`
+Votre flotte est modulable à l'aide du bouton "Gerer ma flotte" en bas à droite.
+Vous pouvez choisir la composition France ou Belgique. Elle est de base réglée sur France.
 
-![package ships](documentation/package_ships.png)
+L'aide est situé sur la gauche de l'écran.
+
+Validez votre disposition en bas à droite sur le bouton "Valider".
+
+###Créer et rejoindre une partie
+
+Lorsque vous cliquez sur créer une partie, une popup d'attente d'affiche.
+Vous entrerez en jeu lorsqu'un joueur aura rejoint cette partie.
 
 
-### utilisation de `info1.network.Network` ...
+Pour rejoindre une partie créee par votre ami(e), marquez dans le champ de texte au dessus le numéro de partie et la rejoindre.
+Attention à ne pas avoir le même pseudo que votre ami !
+
+Si vous avez un problème de proxy, allez dans la catégorie `Aide`.
 
 
-vous pouvez maintenant utiliser la classe `Network` pour échanger avec le serveur, 
-càd créer ou rejoindre une partie, puis jouer, càd effectuer un tir 
-sur une coordonnée précise.
+###Jouer
 
-![package network](documentation/package_network.png)
+A gauche se trouve votre grille de bateau, à droite la grille de votre ennemi.
 
-La classe `Network` est documentée dans la javadoc fournie (documentation/javadoc).
+Le premier à jouer sera toujours le créateur de la partie ! 
 
-Plus de détail sur l'usage de la classe Network dans ![HowToUseNetwork](documentation/HowtoUseNetwork.md).
+Ensuite, lorsque vous cliquez sur une case, en bas de la grille adverse vous avez l'information si vous avez touché, coulé etc...
+Vous pouvez également savoir si vous avez touché ou raté à l'aide des symboles :) .
 
-La classe de tests `RunningGameTest` illustre également l'utilisation de `info1.network.Network` ; elle devrait 
-fonctionner une fois que vous avez correctement implémenter les classes du package `ships.*`.s
-
-### ... et développement d'une interface graphique
-
-Développez une interface graphique en Swing vous permettant de jouer, cad
-
-1. positionner des bateaux
-
-2. créer une flotte de bateaux
-
-3. initialiser une partie sur le serveur
-
-4. rejoindre une partie initialisée sur le serveur
-
-5. jouer via le serveur
-
-6. gagner ;-)
-
-
-
-## Remarques 
-
-Chaque groupe aura un enseignant-référent qui passera
-vous voir régulièrement afin de vous assister 
-mais aussi évaluer votre travail.
+Le bouton annuler en bas à gauche permet de quitter la partie.
 
 
 
 
+##Aide
 
-_Image du bateau issue de https://en.wikipedia.org/wiki/French_battleship_Brennus_
+###Vous avez une erreur lors de la création de la partie ou de la création de votre pseudo
+
+C'est dû au proxy. Si vous êtes à l'IUT, allez dans info1/game/Game, et activer le proxy (true).
+
+##Explication des packages
