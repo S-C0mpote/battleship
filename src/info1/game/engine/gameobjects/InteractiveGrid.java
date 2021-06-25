@@ -77,8 +77,8 @@ public class InteractiveGrid extends InteractiveGameObject {
 
 
         if(engine.getMousePosition() != null && isOver && isTurn) {
-            int xCoord = (engine.getMousePosition().x - (int) position.x) / cellSize;
-            int yCoord = (engine.getMousePosition().y - (int) position.y) / cellSize;
+            int xCoord = (engine.getMousePosition().x - 1 - (int) position.x) / cellSize;
+            int yCoord = (engine.getMousePosition().y - 1 - (int) position.y) / cellSize;
 
             g2d.setColor(new Color(1f, 1f, 1f, 0.2f));
             g2d.fillRect(
@@ -99,8 +99,8 @@ public class InteractiveGrid extends InteractiveGameObject {
     public void mousePressed(MouseEvent event){
         if(!isTurn) return;
 
-        int coordXclicked = (engine.getMousePosition().x - (int) position.x) / cellSize + 1;
-        int coordYclicked = (engine.getMousePosition().y - (int) position.y) / cellSize + 1;
+        int coordXclicked = (engine.getMousePosition().x - 1 - (int) position.x) / cellSize + 1;
+        int coordYclicked = (engine.getMousePosition().y - 1 - (int) position.y) / cellSize + 1;
 
         Vector2D cellClicked = new Vector2D(coordXclicked * cellSize + position.x - cellSize,
                                 coordYclicked * cellSize + position.y - cellSize);
