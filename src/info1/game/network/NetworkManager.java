@@ -27,10 +27,8 @@ public class NetworkManager {
     private boolean onPlayerJoinSent = false;
 
     private boolean onEnemyTurn = false;
-    private boolean onEnemyTurnSent = false;
 
     private boolean onPlayerTurn = false;
-    private boolean onPlayerTurnSent = false;
 
     private boolean onPlayerWin = false;
     private boolean onPlayerWinSent = false;
@@ -141,6 +139,7 @@ public class NetworkManager {
 
     public void leaveGame() {
         currentGame = null;
+        onPlayerJoinSent = false;
     }
 
     public boolean joinGame(int code) {
