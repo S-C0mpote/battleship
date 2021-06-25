@@ -14,7 +14,7 @@ La classe principale pour lancer le programme (Game) est située dans info1/game
 
 Votre pseudo peut contenir au maximum 20 caractères (vous avez la liberté de prendre des caractères spéciaux).
 
-###Menu
+###Menu 
 
 Vous devriez arriver sur la fenêtre ci-dessous :
 
@@ -42,7 +42,7 @@ Attention à ne pas avoir le même pseudo que votre ami !
 Si vous avez un problème de proxy, allez dans la catégorie `Aide`.
 
 
-###Jouer
+###Jouer 
 
 A gauche se trouve votre grille de bateau, à droite la grille de votre ennemi.
 
@@ -56,17 +56,17 @@ Le bouton annuler en bas à gauche permet de quitter la partie.
 
 
 
-##Aide
+##Aide 
 
 ###Vous avez une erreur lors de la création de la partie ou de la création de votre pseudo
 
 C'est dû au proxy. Si vous êtes à l'IUT, allez dans info1/game/Game, et activer le proxy (true).
 
 ##Explication des packages
-###game
+### info1.game 
 Il contient tout notre travail effectué, dont la classe principale
 
-###engine
+### info1.game.engine 
 
 Il contient notre moteur de jeu, GameEngine.
 
@@ -74,25 +74,25 @@ C'est lui qui permet de dessiner à l'écran, de limiter les FPS, de diriger les
 
 Nos scenes sont contenues dans la classe enum Scenes, et chaque scène hérite de la classe Scene. 
 
-###components
+### info1.game.components 
 
 contient les popups
 
-###gameobjects
+### info1.game.engine.gameobjects 
 
 Il contient tout les objets interactifs sur la scene.
 
-###listeners
+### info1.game.engine.listeners 
 C'est là où on ajoute les listeners aux gameobjects
 
-###network
+### info1.game.network 
 Gestion du serveur
 
-###resources
+### info1.game.resources 
 Ici nous gérons nos fonts et nos Images. Cela permet de les charger une fois et de les réutiliser après.
 
-###scenes
+### info1.game.scenes 
 Contient la classe Menu, Game et Setup(gestion des bateaux).
 
-###utils
+### info1.game.utils 
 Permet de setup des positions avec des vecteurs
