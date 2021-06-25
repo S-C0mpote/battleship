@@ -140,6 +140,7 @@ public class NetworkManager {
     public void leaveGame() {
         currentGame = null;
         onPlayerJoinSent = false;
+        onPlayerJoin = false;
     }
 
     public boolean joinGame(int code) {
