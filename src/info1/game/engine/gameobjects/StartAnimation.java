@@ -11,7 +11,8 @@ public class StartAnimation extends GameObject {
     private Vector2D leftPart = new Vector2D(0, 0);
     private Vector2D rightPart = new Vector2D(0, 0);
     private String username1, username2;
-    private Vector2D speed = new Vector2D(10, 200);
+    private Vector2D speed = new Vector2D(10, 10);
+    private double acc = 0;
 
     public StartAnimation() {
         leftPart.y = 720 / 2d - 300;
@@ -21,16 +22,6 @@ public class StartAnimation extends GameObject {
 
     @Override
     public void update(double delta) {
-        /*
-         * TODO: NE PAS MULTIPLIER PAR DELTA LES SPEED.X +=
-         * TODO: NE PAS MULTIPLIER PAR DELTA LES SPEED.X +=
-         * TODO: NE PAS MULTIPLIER PAR DELTA LES SPEED.X +=
-         * TODO: NE PAS MULTIPLIER PAR DELTA LES SPEED.X +=
-         * TODO: NE PAS MULTIPLIER PAR DELTA LES SPEED.X +=
-         * TODO: NE PAS MULTIPLIER PAR DELTA LES SPEED.X +=
-         * TODO: NE PAS MULTIPLIER PAR DELTA LES SPEED.X +=
-         */
-
         if(animated) {
             if(leftPart.y == 720 / 2d - 300) {
                 if (leftPart.x > -1280 / 2d - 40) {
@@ -46,12 +37,17 @@ public class StartAnimation extends GameObject {
             }else {
                 if (leftPart.y < 720 / 2d - 100 && leftPart.y > 720 / 2d - 120) {
                     leftPart.y += delta / speed.y;
-                    speed.y += 0.000001 * delta;
+                    speed.y += 0.0001 * delta;
                 } else {
-                    leftPart.y += delta * 1.005 * 4;
-
                     if (leftPart.y >= 720 / 2d - 100) {
-                        leftPart.x -= (delta / 2.1) * 4;
+                        if(acc >= 1500) {
+                            leftPart.y += delta * 1.005 * 4;
+                            leftPart.x -= (delta / 2.1) * 4;
+                        } else {
+                            acc += delta;
+                        }
+                    } else {
+                        leftPart.y += delta * 1.005;
                     }
                 }
 

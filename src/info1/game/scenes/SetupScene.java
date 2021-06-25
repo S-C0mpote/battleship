@@ -82,17 +82,17 @@ public class SetupScene extends Scene {
 
         Label commands = new Label("Commandes :" + "\n\n" + "       bouger" + "\n\n" + "       tourner",
                 Color.WHITE, 20f);
-        commands.setLocation(10, (720 / 2 - grid.getSize().height / 2));
+        commands.setLocation(10, (720 / 2 - grid.getSize().height / 2) + 20);
         commands.setSize(new Dimension(300, 300));
 
         Image leftClick = new Image();
         leftClick.setSize(new Dimension(32, 32));
-        leftClick.setPosition(new Vector2D(10, commands.getSize().height * 2 + 15));
+        leftClick.setPosition(new Vector2D(10, commands.getPosition().x + 145));
         leftClick.setImage(Images.LEFT_CLICK);
 
         Image rightClick = new Image();
         rightClick.setSize(new Dimension(32, 32));
-        rightClick.setPosition(new Vector2D(10, commands.getSize().height * 2 + 60));
+        rightClick.setPosition(new Vector2D(10, commands.getPosition().x + 190d));
         rightClick.setImage(Images.RIGHT_CLICK);
 
         setup.addGameObject(-1, Scenes.MENU.getBackground());
