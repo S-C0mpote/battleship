@@ -94,8 +94,6 @@ public abstract class Ship implements IShip {
             }
         }
 
-        System.out.println(coords);
-
         if(!fleet.canBePlaced(coords, this)) throw new BadCoordException();
 
         this.direction = direction;

@@ -57,7 +57,7 @@ public class SetupScene extends Scene {
         instruction.setSize(new Dimension(1280, 100));
 
         Label indicator = new Label("Choix de configuration :", Color.WHITE, 15f);
-        indicator.setLocation(10, 660);
+        indicator.setLocation(10, 640);
 
         grid = new Grid(engine.getNetwork().getUser());
         grid.setSize(new Dimension(500, 500));
