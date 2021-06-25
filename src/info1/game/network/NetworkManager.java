@@ -88,10 +88,6 @@ public class NetworkManager {
                             onPlayerLoose = true;
                         }
                     }
-
-                    default -> {
-                        System.out.println("Status inconnu : " + status);
-                    }
                 }
             }
         }).start();
