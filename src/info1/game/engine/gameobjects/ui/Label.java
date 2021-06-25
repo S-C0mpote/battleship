@@ -73,10 +73,6 @@ public class Label extends GameObject {
         this.text = text;
         build = false;
     }
+
     public String getText(){ return this.text; }
-    public void setLocation(int x, int y){
-        this.position.x = x;
-        this.position.y = y;
-    }
-    public Vector2D getLocation(){return new Vector2D(this.position.x, this.position.y);}
 }

@@ -65,7 +65,7 @@ public class GameScene extends Scene {
         turn.setSize(new Dimension(1280 / 2, 50));
 
         gameId = new Label("", Color.WHITE, 15f);
-        gameId.setLocation(10, 10);
+        gameId.setPosition(new Vector2D(10, 20));
 
         opponentLabel = new Label("", Color.WHITE, 15f, Direction.RIGHT);
         opponentLabel.setPosition(new Vector2D(enemyGrid.getPosition().x, enemyGrid.getPosition().y + enemyGrid.getSize().height + 10));
@@ -88,7 +88,6 @@ public class GameScene extends Scene {
     }
 
     public void start() {
-        System.out.println("Start");
         gameId.setText("GameID: " + engine.getNetwork().getCurrentGame().getId());
 
         String userName = engine.getNetwork().getUser().getPlayer().getName();
