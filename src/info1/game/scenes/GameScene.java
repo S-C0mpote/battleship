@@ -20,12 +20,13 @@ import java.util.List;
 
 public class GameScene extends Scene {
 
+    private final List<GraphicShipObject> shipObjects = new ArrayList<>();
+
     private GameEngine engine;
     private Label turn, userLabel, opponentLabel, gameId;
     private Grid userGrid;
     private InteractiveGrid enemyGrid;
     private StartAnimation startAnimation;
-    private final List<GraphicShipObject> shipObjects = new ArrayList<>();
 
     public GameScene() {
         super("Game");
@@ -73,7 +74,6 @@ public class GameScene extends Scene {
         opponentLabel = new Label("", Color.WHITE, 15f, Direction.RIGHT);
         opponentLabel.setPosition(new Vector2D(enemyGrid.getPosition().x, enemyGrid.getPosition().y + enemyGrid.getSize().height + 10));
         opponentLabel.setSize(new Dimension(enemyGrid.getSize().width, 15));
-
 
         userLabel = new Label("", Color.WHITE, 15f, Direction.RIGHT);
         userLabel.setPosition(new Vector2D(userGrid.getPosition().x, userGrid.getPosition().y + userGrid.getSize().height + 10));

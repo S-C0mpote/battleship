@@ -1,19 +1,20 @@
 package info1.game.engine.gameobjects;
 
 
+import info1.game.engine.gameobjects.ui.Label;
 import info1.game.utils.Vector2D;
 import java.awt.*;
+import java.util.Arrays;
 
 
 public class StartAnimation extends GameObject {
 
-    private boolean animated = true;
+    private boolean animated = false;
     private Vector2D leftPart = new Vector2D(0, 0);
     private Vector2D rightPart = new Vector2D(0, 0);
     private String username1, username2;
     private Vector2D speed = new Vector2D(10, 10);
     private double acc = 0;
-
 
     @Override
     public void update(double delta) {
@@ -60,9 +61,22 @@ public class StartAnimation extends GameObject {
 
     @Override
     public void draw(Graphics2D g2d) {
-        g2d.setColor(new Color(0, 0, 0, .5f));
+        g2d.setColor(new Color(0f, 0f, 0f, .7f));
         g2d.fillPolygon(getPolygon(leftPart));
         g2d.fillPolygon(getPolygon(rightPart));
+
+        Font test = g2d.getFont().deriveFont(50f);
+        FontMetrics metrics = g2d.getFontMetrics(test);
+
+        int username1Width = (metrics.stringWidth(username1));
+        int yf = ((250 - metrics.getHeight()) / 2) + metrics.getAscent();
+
+        g2d.setFont(test);
+
+        g2d.setColor(new Color(0x007BFF));
+        g2d.drawString(username1, (int) (leftPart.x + 1200 - username1Width), (int) leftPart.y + yf);
+        g2d.setColor(new Color(0xD73434));
+        g2d.drawString(username2, (int) rightPart.x, (int) rightPart.y + yf);
     }
 
     public Polygon getPolygon(Vector2D location) {
@@ -71,6 +85,7 @@ public class StartAnimation extends GameObject {
         polygon.addPoint((int) location.x + 1280, (int) location.y);
         polygon.addPoint((int) location.x + 1180, (int) location.y + 250);
         polygon.addPoint((int) location.x + -100, (int) location.y + 250);
+
         return polygon;
     }
 

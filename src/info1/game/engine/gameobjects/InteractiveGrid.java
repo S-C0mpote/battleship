@@ -20,7 +20,7 @@ import java.util.List;
 
 public class InteractiveGrid extends InteractiveGameObject {
 
-    private final Color lineColor = new Color(0xF1F1F1);
+    private final Color lineColor = new Color(215, 52, 52);
 
     private int cellSize;
     private ICoord coord;
@@ -42,8 +42,8 @@ public class InteractiveGrid extends InteractiveGameObject {
 
         g2d.setFont(Fonts.MAIN.deriveFont(12f));
 
-        if(!isTurn) g2d.setColor(new Color(125, 125, 125, 50));
-        else g2d.setColor(new Color(255, 255, 255, 50));
+        if(!isTurn) g2d.setColor(new Color(153, 17, 17, 100));
+        else g2d.setColor(new Color(215, 52, 52, 100));
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.fillRoundRect((int) position.x , (int) position.y, size.width, size.height, 10, 10);
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
@@ -55,7 +55,7 @@ public class InteractiveGrid extends InteractiveGameObject {
             }
 
             g2d.setColor(new Color(0xF1F1F1));
-            g2d.drawString((i + 1) + "", posx - ((int) position.x / 20) - cellSize / 2, posy + cellSize / 2 + 5);
+            g2d.drawString((i + 1) + "", posx - ((int) position.x / 20) + cellSize - 35, posy + cellSize / 2 + 5);
             posy += cellSize;
         }
 
@@ -66,7 +66,7 @@ public class InteractiveGrid extends InteractiveGameObject {
                 g2d.drawLine(posx, (int) position.y, posx, (int) position.y + size.height - 1);
             }
             g2d.setColor(new Color(0xF1F1F1));
-            g2d.drawString(valeur + "", posx + cellSize / 2 - 3, (int) position.y - ((int) position.y / 20));
+            g2d.drawString(valeur + "", posx + cellSize / 2 - 3, (int) position.y - ((int) position.y / 20) - 5);
             posx += cellSize;
             valeur++;
         }
