@@ -1,7 +1,6 @@
 package info1.game.engine.listeners;
 
 import info1.game.engine.gameobjects.GameObject;
-import info1.ships.BadCoordException;
 
 import java.awt.event.MouseEvent;
 

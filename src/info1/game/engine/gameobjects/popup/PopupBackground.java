@@ -11,6 +11,10 @@ public class PopupBackground extends InteractiveGameObject {
     private boolean closing = false, opening;
     private float opacity;
 
+    /**
+     * Affiche un fond noir, utilisé par chaque Popup
+     * Il étend de {@link InteractiveGameObject} ce qui signifie que les autres {@link InteractiveGameObject} placés dessous ne seront pas déclenché.
+     */
     public PopupBackground(GameEngine engine) {
         this(engine, 0.5f);
     }

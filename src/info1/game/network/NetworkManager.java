@@ -59,10 +59,7 @@ public class NetworkManager {
                 try { Thread.sleep(500); }
                 catch (InterruptedException e) {e.printStackTrace();}
 
-                if(currentGame == null) {
-                    System.out.println("En attente de jeu...");
-                    continue;
-                }
+                if(currentGame == null) continue;
 
                 int status = getStatus();
 

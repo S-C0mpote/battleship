@@ -1,11 +1,11 @@
 package info1.game.engine.gameobjects.popup;
 
 import info1.game.engine.GameEngine;
-import info1.game.engine.gameobjects.ui.Button;
 import info1.game.engine.gameobjects.GameObject;
+import info1.game.engine.gameobjects.ui.Button;
 import info1.game.engine.gameobjects.ui.Input;
-import info1.game.utils.Vector2D;
 import info1.game.resources.Fonts;
+import info1.game.utils.Vector2D;
 
 import java.awt.*;
 
@@ -19,6 +19,9 @@ public class ModalWelcome extends GameObject {
     private Button buttonLinked;
     private Input inputLinked;
 
+    /**
+     * Modal utilisé pour afficher le message de bienvenue et la zone de texte
+     */
     public ModalWelcome(GameEngine engine, Button buttonLinked, Input inputLinked) {
         this.engine = engine;
         this.buttonLinked = buttonLinked;

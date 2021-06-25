@@ -5,6 +5,9 @@ import info1.game.engine.gameobjects.GameObject;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * Affiche une image de taille {@link GameObject#getSize()} et de position {@link GameObject#getPosition()} ()}
+ */
 public class Image extends GameObject {
 
     private BufferedImage image;

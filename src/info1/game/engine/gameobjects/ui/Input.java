@@ -22,6 +22,9 @@ public class Input extends InteractiveGameObject implements KeyListener {
     private boolean active = false;
     private int limit = 100;
 
+    /**
+     * Zone de texte
+     */
     public Input(GameEngine engine) {
         this.engine = engine;
     }

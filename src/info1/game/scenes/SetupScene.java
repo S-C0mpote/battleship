@@ -5,7 +5,7 @@ import info1.game.engine.GameEngine;
 import info1.game.engine.Scene;
 import info1.game.engine.Scenes;
 import info1.game.engine.gameobjects.Grid;
-import info1.game.engine.gameobjects.ShipObject;
+import info1.game.engine.gameobjects.InteractiveShipObject;
 import info1.game.engine.gameobjects.ui.Button;
 import info1.game.engine.gameobjects.ui.Image;
 import info1.game.engine.gameobjects.ui.Label;
@@ -22,10 +22,13 @@ import java.util.List;
 
 public class SetupScene extends Scene {
 
-    private final List<ShipObject> shipObjects = new ArrayList<>();
+    private final List<InteractiveShipObject> shipObjects = new ArrayList<>();
     private GameEngine engine;
     private Grid grid;
 
+    /**
+     * Scène du setup
+     */
     public SetupScene() {
         super("Setup");
         this.engine = Game.engine;
@@ -107,12 +110,12 @@ public class SetupScene extends Scene {
     }
 
     private void removeShips() {
-        for(ShipObject ship : shipObjects) Scenes.SETUP.removeGameObject(ship);
+        for(InteractiveShipObject ship : shipObjects) Scenes.SETUP.removeGameObject(ship);
     }
 
     private void addShips() {
         for(IShip ship : engine.getNetwork().getUser().getNavyFleet().getShips()) {
-            ShipObject shipObject = new ShipObject(grid, (Ship) ship, engine);
+            InteractiveShipObject shipObject = new InteractiveShipObject(grid, (Ship) ship, engine);
             shipObjects.add(shipObject);
             Scenes.SETUP.addGameObject(shipObject);
         }

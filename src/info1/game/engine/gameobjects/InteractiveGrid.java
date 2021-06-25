@@ -31,6 +31,10 @@ public class InteractiveGrid extends InteractiveGameObject {
     private List<Vector2D> miss = new ArrayList<>();
     private boolean isOver = false;
     private boolean isTurn = false;
+
+    /**
+     * Grille utilisé dans {@link info1.game.scenes.GameScene} pour le choix des cases de l'adversaire
+     */
     public InteractiveGrid(GameEngine engine){this.engine = engine;}
 
     @Override

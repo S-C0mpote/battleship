@@ -20,7 +20,7 @@ import java.util.List;
 
 public class GameScene extends Scene {
 
-    private final List<GraphicShipObject> shipObjects = new ArrayList<>();
+    private final List<ShipObject> shipObjects = new ArrayList<>();
 
     private GameEngine engine;
     private Label turn, userLabel, opponentLabel, gameId, labelCoule;
@@ -28,6 +28,9 @@ public class GameScene extends Scene {
     private InteractiveGrid enemyGrid;
     private StartAnimation startAnimation;
 
+    /**
+     * Scène du jeu
+     */
     public GameScene() {
         super("Game");
         this.engine = Game.engine;
@@ -109,10 +112,10 @@ public class GameScene extends Scene {
         startAnimation.start();
 
         // Affichage des bateaux
-        for(GraphicShipObject ship : shipObjects) Scenes.GAME.removeGameObject(ship);
+        for(ShipObject ship : shipObjects) Scenes.GAME.removeGameObject(ship);
 
         for(IShip ship : engine.getNetwork().getUser().getNavyFleet().getShips()) {
-            GraphicShipObject shipObject = new GraphicShipObject(userGrid, (Ship) ship);
+            ShipObject shipObject = new ShipObject(userGrid, (Ship) ship);
             shipObjects.add(shipObject);
             Scenes.GAME.addGameObject(shipObject);
         }

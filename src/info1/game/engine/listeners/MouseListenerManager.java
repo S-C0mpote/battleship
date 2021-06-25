@@ -2,12 +2,11 @@ package info1.game.engine.listeners;
 
 import info1.game.engine.GameEngine;
 import info1.game.utils.Vector2D;
-import info1.ships.BadCoordException;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MouseListenerManager implements MouseListener {
@@ -18,6 +17,10 @@ public class MouseListenerManager implements MouseListener {
         this.gameEngine = gameEngine;
     }
 
+    /**
+     * Appelé avant chaque {@link GameEngine#draw()}
+     * Si la souris se trouve sur une {@link InteractiveGameObject} cela déclenche {@link InteractiveGameObject#mouseOver()} puis quand il sort {@link InteractiveGameObject#mouseExit()}
+     */
     public void updateMousePosition() {
         Point p = gameEngine.getMousePosition();
 
@@ -41,6 +44,11 @@ public class MouseListenerManager implements MouseListener {
         }
     }
 
+    /**
+     * Lors d'un appuis, on parcours les {@link InteractiveGameObject} dans l'ordre décroissant
+     * Si il l'appuis a été fais sur un bouton, cela annule les autres {@link InteractiveGameObject} placé derrière
+     * On appelle {@link InteractiveGameObject#mousePressed(MouseEvent)}
+     */
     @Override
     public void mousePressed(MouseEvent e) {
         List<InteractiveGameObject> igos = new ArrayList<>(gameEngine.getCurrentScene().getInteractiveGO().values());
@@ -57,6 +65,9 @@ public class MouseListenerManager implements MouseListener {
         }
     }
 
+    /**
+     * Lors d'un relachement, on parcours les {@link InteractiveGameObject} et si on l'avais pressé avant on appelle {@link InteractiveGameObject#mouseReleased(MouseEvent)}
+     */
     @Override
     public void mouseReleased(MouseEvent e) {
         List<InteractiveGameObject> igos = new ArrayList<>(gameEngine.getCurrentScene().getInteractiveGO().values());

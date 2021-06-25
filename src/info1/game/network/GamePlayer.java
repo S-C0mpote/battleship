@@ -9,6 +9,9 @@ public class GamePlayer {
     private Player player;
     private INavyFleet navyFleet;
 
+    /**
+     * Classe regroupant {@link Player} avec le {@link info1.ships.NavyFleet} du {@link Player}
+     */
     public GamePlayer(String name) {
         this.player = new Player(name);
         this.navyFleet = NavyFleetConfiguration.getFrenchDefault();

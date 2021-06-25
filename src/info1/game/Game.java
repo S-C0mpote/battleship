@@ -6,10 +6,16 @@ import info1.game.resources.Fonts;
 
 public class Game {
 
-    public static final boolean USE_PROXY = true; //Activer ou désactiver le proxy
+    // Activer ou désactiver le proxy :
+    public static final boolean USE_PROXY = true;
 
     public static GameEngine engine = new GameEngine();
 
+    /**
+     * On définit la police sur la police préchargé en cache.
+     * On charge la scène menu.
+     * On démarre le moteur sur la scène menu.
+     */
     public static void main(String[] args) {
         engine.getGameCanvas().setFont(Fonts.MAIN);
 

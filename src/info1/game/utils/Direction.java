@@ -1,5 +1,8 @@
 package info1.game.utils;
 
+/**
+ * Simple énumération de Direction
+ */
 public enum Direction {
     BOTTOM,
     TOP,

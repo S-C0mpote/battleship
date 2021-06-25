@@ -3,6 +3,9 @@ package info1.game.utils;
 
 import java.util.Objects;
 
+/**
+ * Simple classe de vecteur
+ */
 public class Vector2D {
 
     public double x;

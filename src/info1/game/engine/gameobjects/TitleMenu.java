@@ -10,6 +10,9 @@ public class TitleMenu extends GameObject{
     private int direction = 1;
     private float speed = 100;
 
+    /**
+     * Affichage du logo avec animation de haut - bas
+     */
     public TitleMenu(GameEngine gameEngine) {
         this.position.x = (gameEngine.getGameCanvas().getWidth() / 2d) - 405 / 2d;
     }

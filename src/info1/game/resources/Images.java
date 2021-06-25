@@ -5,6 +5,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Chargement des Images au préalable
+ */
 public final class Images {
 
     public static BufferedImage BUTTON_YELLOW;

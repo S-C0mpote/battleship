@@ -26,6 +26,14 @@ public class Button extends InteractiveGameObject {
     private BufferedImage overImg;
     private BufferedImage pressImg;
 
+    /**
+     * Affiche un bouton de taille, nom et couleur customisable
+     *
+     * @param width Largeur du bouton
+     * @param height Hauteur du bouton
+     * @param name Texte affiché sur le bouton
+     * @param color Couleur du texte du bouton
+     */
     public Button(int width, int height, String name, Color color) {
         this.size = new Dimension(width, height);
         this.name = name;
@@ -88,15 +96,24 @@ public class Button extends InteractiveGameObject {
         this.listener = listener;
     }
 
+    /**
+     * @param overImg Image affiché lorsque la souris est placé dessus
+     */
     public void setOverImg(BufferedImage overImg) {
         this.overImg = overImg;
     }
 
+    /**
+     * @param classicImg Image affiché par défaut
+     */
     public void setClassicImg(BufferedImage classicImg) {
         this.classicImg = classicImg;
         this.currentImg = classicImg;
     }
 
+    /**
+     * @param pressImg Image affiché lors d'un clique
+     */
     public void setPressImg(BufferedImage pressImg) {
         this.pressImg = pressImg;
     }

@@ -6,10 +6,12 @@ import info1.game.engine.listeners.InteractiveGameObject;
 
 import java.awt.event.KeyListener;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * Une scène contient des {@link GameObject} et ces gameobjects sont dessiné / actualisé quand cette scène est paramétré dans le {@link GameEngine}
+ */
 public class Scene {
 
     private final String name;

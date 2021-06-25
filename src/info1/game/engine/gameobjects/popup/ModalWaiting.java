@@ -1,8 +1,8 @@
 package info1.game.engine.gameobjects.popup;
 
 import info1.game.engine.GameEngine;
-import info1.game.engine.gameobjects.ui.Button;
 import info1.game.engine.gameobjects.GameObject;
+import info1.game.engine.gameobjects.ui.Button;
 import info1.game.resources.Fonts;
 import info1.game.utils.Vector2D;
 
@@ -22,6 +22,9 @@ public class ModalWaiting extends GameObject {
     private double acc = 0;
     private int speed;
 
+    /**
+     * Modal utilisé pour afficher le code d'une partie créée
+     */
     public ModalWaiting(GameEngine engine, Button buttonLinked, int speed) {
         this.engine = engine;
         this.buttonLinked = buttonLinked;

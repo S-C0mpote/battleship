@@ -1,8 +1,8 @@
 package info1.game.engine.gameobjects.popup;
 
 import info1.game.engine.GameEngine;
-import info1.game.engine.gameobjects.ui.Button;
 import info1.game.engine.gameobjects.GameObject;
+import info1.game.engine.gameobjects.ui.Button;
 import info1.game.resources.Fonts;
 import info1.game.utils.Vector2D;
 
@@ -19,6 +19,9 @@ public class ModalAlert extends GameObject {
     private boolean build = false;
     private int xf, yf;
 
+    /**
+     * Modal utilisé pour afficher un message personnalisé
+     */
     public ModalAlert(GameEngine engine, Button buttonLinked, String message) {
         this.engine = engine;
         this.buttonLinked = buttonLinked;

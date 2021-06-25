@@ -3,7 +3,6 @@ package info1.game.engine.gameobjects.ui;
 import info1.game.engine.gameobjects.GameObject;
 import info1.game.resources.Fonts;
 import info1.game.utils.Direction;
-import info1.game.utils.Vector2D;
 
 import java.awt.*;
 
@@ -17,6 +16,23 @@ public class Label extends GameObject {
     private boolean build = false;
     private int xf, yf, fontHeight;
 
+    /**
+     * Affiche un texte de position {@link GameObject#getPosition()} et permet de choisir l'orientation du texte grace à une {@link Direction}
+     * Il se place par rapport à {@link GameObject#getSize()} (La taille ne modifiera pas la taille du texte mais la taille de la "limite")
+     *
+     * Exemple :
+     * Label de valeur "EXEMPLE", de taille WIDTH, HEIGHT et de {@link Direction#CENTER}
+     *
+     *          WIDTH
+     * ************************
+     * *       EXEMPLE        * HEIGHT
+     * ************************
+     *
+     * @param text Valeur du texte à afficher
+     * @param color Couleur du texte
+     * @param size Taille du texte
+     * @param direction Direction du texte
+     */
     public Label(String text, Color color, float size, Direction direction) {
         this.text = text;
         this.color = color;

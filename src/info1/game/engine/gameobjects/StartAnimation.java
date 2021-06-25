@@ -1,12 +1,14 @@
 package info1.game.engine.gameobjects;
 
 
-import info1.game.engine.gameobjects.ui.Label;
 import info1.game.utils.Vector2D;
+
 import java.awt.*;
-import java.util.Arrays;
 
-
+/**
+ * Animation super stylée au début d'une {@link info1.network.Game}
+ * Affichant les deux noms des joueurs
+ */
 public class StartAnimation extends GameObject {
 
     private boolean animated = false;

@@ -2,13 +2,13 @@ package info1.game.components;
 
 import info1.game.engine.GameEngine;
 import info1.game.engine.Scenes;
+import info1.game.engine.gameobjects.popup.ModalWelcome;
+import info1.game.engine.gameobjects.popup.PopupBackground;
 import info1.game.engine.gameobjects.ui.Button;
 import info1.game.engine.gameobjects.ui.Input;
-import info1.game.engine.gameobjects.popup.PopupBackground;
-import info1.game.engine.gameobjects.popup.ModalWelcome;
+import info1.game.network.GamePlayer;
 import info1.game.network.NetworkEvents;
 import info1.game.network.NetworkManager;
-import info1.game.network.GamePlayer;
 import info1.game.resources.Images;
 import info1.game.scenes.MenuScene;
 import info1.game.utils.Vector2D;
@@ -23,6 +23,12 @@ public class PopupSignIn {
     private final Button button;
     private final MenuScene menu = Scenes.MENU;
 
+    /**
+     * Création d'une fenêtre à partir de {@link ModalWelcome}
+     * Apparait au lancement du jeu pour demander le nom du joueur.
+     * Lors de l'inscription du nom, les autres scènes se chargent.
+     * @param engine L'engine où est lancé le jeu
+     */
     public PopupSignIn(GameEngine engine) {
         background = new PopupBackground(engine);
         input = new Input(engine);

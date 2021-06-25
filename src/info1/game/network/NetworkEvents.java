@@ -2,7 +2,6 @@ package info1.game.network;
 
 import info1.game.Game;
 import info1.game.components.PopupMessage;
-import info1.game.engine.Scene;
 import info1.game.engine.Scenes;
 import info1.game.engine.listeners.NetworkListener;
 import info1.game.scenes.GameScene;

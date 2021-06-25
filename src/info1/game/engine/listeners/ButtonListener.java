@@ -1,7 +1,9 @@
 package info1.game.engine.listeners;
 
-import java.io.IOException;
-
 public interface ButtonListener {
+
+    /**
+     * Déclenché lors d'un clique sur un bouton
+     */
     void onClick();
 }

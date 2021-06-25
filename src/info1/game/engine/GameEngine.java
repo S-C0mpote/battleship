@@ -6,13 +6,11 @@ import info1.game.network.NetworkManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
 
 public class GameEngine {
 
     private final int WIDTH = 1280, HEIGHT = 720;
-    private final int FPS_LIMIT = 60;
     private final GameCanvas gameCanvas = new GameCanvas(WIDTH, HEIGHT);
     private final JFrame window = new JFrame("BattleShip");
     private final MouseListenerManager mouseListener;
@@ -22,6 +20,10 @@ public class GameEngine {
     private Scene scene = null;
     private Point mousePosition = gameCanvas.getMousePosition();
 
+    /**
+     * On crée la {@link JFrame} on y ajoute le {@link GameCanvas} (un héritage de Canvas)
+     * On ajoute le {@link MouseListenerManager}
+     */
     public GameEngine() {
         window.add(gameCanvas);
         window.pack();
@@ -35,10 +37,18 @@ public class GameEngine {
         gameCanvas.addMouseListener(mouseListener);
     }
 
+    /**
+     * Initialisation du {@link GameCanvas}
+     * Démarrage de la boucle principale du jeu, limitation à 60 FPS
+     * On appelle {@link GameEngine#update(double delta)} à chaque tour de la boucle
+     * On appelle {@link GameEngine#draw()} toutes les 1 / 60 secondes
+     * @param startScene Scène de départ
+     */
     public void start(Scene startScene) {
         gameCanvas.init();
         setScene(startScene);
 
+        final int FPS_LIMIT = 60;
         double frameCount = 0;
         double firstTime, frameTime = 0;
         double lastTime = System.nanoTime() / 1e9;
@@ -73,6 +83,10 @@ public class GameEngine {
         }
     }
 
+    /**
+     * @param delta Différence de temps entre les updates (plus un pc est lent plus le delta sera haut,
+     *              ce qui permet par exemple de garder une vitesse d'animations constante. (Même après un lag)
+     */
     synchronized public void update(double delta)  {
         if(network != null) network.update();
 
@@ -80,6 +94,9 @@ public class GameEngine {
             gameObject.update(delta);
     }
 
+    /**
+     * Dessine la canvas, un fois dessiner on affiche le buffer
+     */
     synchronized public void draw() {
         Graphics2D g2d = gameCanvas.getGraphics2D();
 
@@ -92,6 +109,10 @@ public class GameEngine {
         gameCanvas.getBufferStrategy().show();
     }
 
+    /**
+     * Permet de définir une scène
+     * @param scene Scène à définir
+     */
     public void setScene(Scene scene) {
         if(this.scene != null) this.scene.disableListeners();
         this.scene = scene;

@@ -23,6 +23,9 @@ public class MenuScene extends Scene {
     private GameEngine engine;
     private MenuBackground background;
 
+    /**
+     * Scène du menu
+     */
     public MenuScene() {
         super("Menu");
         this.engine = Game.engine;

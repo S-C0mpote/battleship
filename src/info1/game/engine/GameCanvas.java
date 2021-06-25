@@ -7,6 +7,11 @@ public class GameCanvas extends Canvas {
 
     private Graphics2D g2d;
 
+    /**
+     * Création du canvas, définis la taille du canvas aux paramêtres donnés
+     * @param width Largeur du canvas
+     * @param height Hauteur du canvas
+     */
     public GameCanvas(int width, int height) {
         setBackground(Color.BLACK);
 
@@ -17,6 +22,12 @@ public class GameCanvas extends Canvas {
         setMinimumSize(size);
     }
 
+    /**
+     * Initialisation du Canvas.
+     * Création d'un double buffering.
+     * Récupération du graphics2d provenant du buffer.
+     * Définitions des variables de rendu (ex: Antialiasing, Text_Antialiasing)
+     */
     public void init() {
         createBufferStrategy(2);
         BufferStrategy bs = getBufferStrategy();

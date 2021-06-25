@@ -17,6 +17,12 @@ public class PopupMessage {
     private final ModalAlert modal;
     private final Button validateButton;
 
+    /**
+     * Création d'une fenêtre à partir de {@link ModalAlert}
+     *
+     * @param engine L'engine où est lancé le jeu
+     * @param message Message à afficher
+     */
     public PopupMessage(GameEngine engine, String message) {
         this(engine, message, Scenes.MENU);
     }

@@ -10,6 +10,9 @@ public class MenuBackground extends GameObject {
 
     private static BufferedImage img;
 
+    /**
+     * Fond déroulant vers la droite avec comme image l'image background
+     */
     public MenuBackground() {
         if(img == null) {
             try { img = ImageIO.read(new File("assets/ui/background.jpg")); }

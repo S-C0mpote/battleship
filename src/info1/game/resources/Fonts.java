@@ -4,6 +4,9 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Chargement des Fonts au préalable
+ */
 public final class Fonts {
 
     public static Font MAIN;

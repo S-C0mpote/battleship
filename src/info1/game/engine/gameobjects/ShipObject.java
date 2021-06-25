@@ -1,27 +1,24 @@
 package info1.game.engine.gameobjects;
 
-import info1.game.engine.GameEngine;
-import info1.game.engine.listeners.InteractiveGameObject;
 import info1.game.utils.Direction;
-import info1.game.utils.Vector2D;
-import info1.ships.BadCoordException;
 import info1.ships.Ship;
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
 
-public class ShipObject extends InteractiveGameObject {
+public class ShipObject extends GameObject {
 
     private Grid grid;
     private Ship ship;
-    private GameEngine engine;
-    private boolean drag = false;
-    private Vector2D marginPosition = new Vector2D(0,0);
     private AffineTransform transform;
 
-    public ShipObject(Grid grid, Ship ship, GameEngine engine){
-        this.engine = engine;
+    /**
+     * Dessine un bateau aux bonnes coordonées par rapport à la grille
+     *
+     * @param grid Grille associé au bateau
+     * @param ship Bateau à dessiner
+     */
+    public ShipObject(Grid grid, Ship ship){
         this.grid = grid;
         this.ship = ship;
 
@@ -33,17 +30,6 @@ public class ShipObject extends InteractiveGameObject {
 
     @Override
     public void draw(Graphics2D g2d) {
-        if(drag && engine.getMousePosition() != null){
-            position.x = Math.min(
-                    Math.max(engine.getMousePosition().x - marginPosition.x, grid.getPosition().x),
-                    grid.getPosition().x + grid.getSize().width - size.width);
-            position.y = Math.min(
-                    Math.max(engine.getMousePosition().y - marginPosition.y, grid.getPosition().y),
-                    grid.getPosition().y + grid.getSize().height - size.height);
-
-            transform = calcTransform();
-        }
-
         AffineTransform save = g2d.getTransform();
         g2d.setTransform(transform);
         g2d.drawImage(ship.getImage(), 0, 0, null);
@@ -55,20 +41,28 @@ public class ShipObject extends InteractiveGameObject {
 
         double theta = 0;
         switch (ship.getOrientation()) {
-            case LEFT   -> theta = -(Math.PI / 2);
-            case RIGHT  -> theta = (Math.PI / 2);
-            case TOP    -> theta = 0;
-            case BOTTOM -> theta = Math.PI;
+            case LEFT -> {
+                theta = -(Math.PI / 2);
+                af.translate(position.x, position.y + 13);
+            }
+            case RIGHT -> {
+                theta = (Math.PI / 2);
+                af.translate(position.x + (size.width - grid.getCellSize()) + 13,
+                        position.y + (size.height - grid.getCellSize()));
+            }
+            case TOP -> {
+                theta = 0;
+                af.translate(position.x + (size.width - grid.getCellSize()),
+                        position.y + (size.height - grid.getCellSize() * ship.getSize()));
+            }
+            case BOTTOM -> {
+                theta = Math.PI;
+                af.translate(position.x + (size.width - grid.getCellSize()) + 13,
+                        position.y + (size.height - grid.getCellSize()) + 13);
+            }
         }
 
-        if(ship.getOrientation() == Direction.LEFT || ship.getOrientation() == Direction.TOP) {
-            af.translate(position.x, position.y);
-        }else {
-            af.translate(
-                    position.x + (size.width - grid.getCellSize()),
-                    position.y + (size.height - grid.getCellSize()));
-        }
-
+        af.scale(grid.getCellSize() / 50d, grid.getCellSize() / 50d);
         af.rotate(theta, (grid.getCellSize() / 2d), (grid.getCellSize() / 2d));
 
         return af;
@@ -95,58 +89,6 @@ public class ShipObject extends InteractiveGameObject {
         transform = calcTransform();
     }
 
-    @Override
-    public void mousePressed(MouseEvent e) {
-        if(e.getButton() == 3 && !drag) {
-            int x = (int) Math.round((position.x - grid.getPosition().x) / grid.getCellSize());
-            int y = (int) Math.round((position.y - grid.getPosition().y) / grid.getCellSize());
-
-            try {
-                ship.move(x + 1, y + 1, ship.getOrientation().getNext(), grid.getFleet());
-            } catch (BadCoordException ignored) {}
-
-            refreshPosition();
-        }
-
-        if(engine.getMousePosition() == null) return;
-
-        if(e.getButton() == 1) {
-            drag = true;
-            refreshPosition();
-            engine.getGameCanvas().setCursor(new Cursor(Cursor.MOVE_CURSOR));
-            marginPosition = new Vector2D(engine.getMousePosition().x - position.x, engine.getMousePosition().y - position.y);
-        }
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        if(e.getButton() == 3) {
-            this.setPressed(true);
-            return;
-        }
-
-        engine.getGameCanvas().setCursor(Cursor.getDefaultCursor());
-        drag = false;
-
-        int x = (int) Math.round((position.x - grid.getPosition().x) / grid.getCellSize());
-        int y = (int) Math.round((position.y - grid.getPosition().y) / grid.getCellSize());
-
-        try {
-            ship.move(x + 1, y + 1, ship.getOrientation(), grid.getFleet());
-        } catch (BadCoordException ignored) {}
-
-        refreshPosition();
-    }
-
-    @Override
-    public void mouseOver() {}
-
-    @Override
-    public void mouseExit() {}
-
-    public boolean isDrag() {
-        return drag;
-    }
 
 
 }

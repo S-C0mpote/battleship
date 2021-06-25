@@ -3,9 +3,9 @@ package info1.game.components;
 import info1.game.engine.GameEngine;
 import info1.game.engine.Scene;
 import info1.game.engine.Scenes;
-import info1.game.engine.gameobjects.ui.Button;
 import info1.game.engine.gameobjects.popup.ModalWaiting;
 import info1.game.engine.gameobjects.popup.PopupBackground;
+import info1.game.engine.gameobjects.ui.Button;
 import info1.game.resources.Images;
 import info1.game.utils.Vector2D;
 
@@ -21,6 +21,11 @@ public class PopupWaiting {
     private final Scene menu = Scenes.MENU;
     private final GameEngine engine;
 
+    /**
+     * Création d'une fenêtre à partir de {@link ModalWaiting}
+     * Affiche le code de la partie créée et attends qu'un joueur se connecte
+     * @param engine L'engine où est lancé le jeu
+     */
     public PopupWaiting(GameEngine engine) {
         this.engine = engine;
         currentPopup = this;
