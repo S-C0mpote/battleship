@@ -14,11 +14,6 @@ public class StartAnimation extends GameObject {
     private Vector2D speed = new Vector2D(10, 10);
     private double acc = 0;
 
-    public StartAnimation() {
-        leftPart.y = 720 / 2d - 300;
-        leftPart.x = -1280;
-    }
-
 
     @Override
     public void update(double delta) {
@@ -28,7 +23,7 @@ public class StartAnimation extends GameObject {
                     leftPart.x += delta / speed.x;
                     speed.x += 0.07 * delta;
                 } else {
-                    leftPart.x += speed.x / delta; // TODO: A VOIR
+                    leftPart.x += speed.x / delta;
                 }
 
                 if (leftPart.x > -1280 / 2d - 20) {
@@ -88,6 +83,8 @@ public class StartAnimation extends GameObject {
     }
 
     public void start() {
+        leftPart.y = 720 / 2d - 300;
+        leftPart.x = -1280;
         animated = true;
     }
 
