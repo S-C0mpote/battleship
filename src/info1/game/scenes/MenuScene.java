@@ -94,6 +94,8 @@ public class MenuScene extends Scene {
             if(engine.getNetwork().joinGame(code)) {
                 Scenes.GAME.start();
                 engine.setScene(Scenes.GAME);
+            }else {
+                new PopupMessage(engine, "Code non attribué");
             }
         });
     }

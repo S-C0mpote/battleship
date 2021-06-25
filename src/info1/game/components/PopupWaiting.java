@@ -13,6 +13,8 @@ import java.awt.*;
 
 public class PopupWaiting {
 
+    public static PopupWaiting currentPopup;
+
     private final ModalWaiting modal;
     private final PopupBackground background;
     private final Button cancelButton;
@@ -21,10 +23,11 @@ public class PopupWaiting {
 
     public PopupWaiting(GameEngine engine) {
         this.engine = engine;
+        currentPopup = this;
 
         background = new PopupBackground(engine, 0);
         cancelButton = new Button(190, 49, "Annuler", new Color(0x973E00));
-        modal = new ModalWaiting(engine, cancelButton);
+        modal = new ModalWaiting(engine, cancelButton, 3);
 
         modal.setSize(new Dimension(500, 220));
         modal.setPosition(new Vector2D(1280 / 2d - modal.getSize().width / 2d, 720));
@@ -49,5 +52,11 @@ public class PopupWaiting {
         background.open();
         modal.open(code);
     }
+
+    public void close(){
+        background.close();
+        modal.close();
+    }
+    public void setSpeed(int speed){modal.setSpeed(speed);}
 
 }

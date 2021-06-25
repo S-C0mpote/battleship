@@ -1,6 +1,7 @@
 package info1.game.scenes;
 
 import info1.game.Game;
+import info1.game.components.PopupWaiting;
 import info1.game.engine.GameEngine;
 import info1.game.engine.Scene;
 import info1.game.engine.Scenes;
@@ -41,6 +42,8 @@ public class GameScene extends Scene {
         quit.setPosition(new Vector2D(10, 660));
         quit.setListener(() -> {
             engine.getNetwork().leaveGame();
+            PopupWaiting.currentPopup.setSpeed(100);
+            PopupWaiting.currentPopup.close();
             engine.setScene(Scenes.MENU);
         });
 

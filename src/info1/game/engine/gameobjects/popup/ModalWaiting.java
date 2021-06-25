@@ -20,16 +20,18 @@ public class ModalWaiting extends GameObject {
     private Button buttonLinked;
     private String dots = "";
     private double acc = 0;
+    private int speed;
 
-    public ModalWaiting(GameEngine engine, Button buttonLinked) {
+    public ModalWaiting(GameEngine engine, Button buttonLinked, int speed) {
         this.engine = engine;
         this.buttonLinked = buttonLinked;
+        this.speed = 3;
     }
 
     @Override
     public void update(double delta) {
         if(closing) {
-            position.y += delta * 3;
+            position.y += delta * speed;
 
             buttonLinked.setPosition(new Vector2D(position.x + size.width - 210, position.y + 150));
 
@@ -74,13 +76,11 @@ public class ModalWaiting extends GameObject {
         }
     }
 
-    public void close() {
-        this.closing = true;
-    }
+    public void close() {this.closing = true;}
 
     public void open(int code) {
         this.opening = true;
         this.code = String.valueOf(code);
     }
-
+    public void setSpeed(int speed){this.speed = speed;}
 }
