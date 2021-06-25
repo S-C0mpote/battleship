@@ -25,7 +25,8 @@ public class NetworkEvents implements NetworkListener {
 
     @Override
     public void onEnemyTurn() {
-        //gameScene.enemyTurn();
+        //System.out.println(Game.engine.getNetwork().getCurrentGame().getGuest());
+        //gameScene.setEnemyName(Game.engine.getNetwork().getEnemy().getName());
     }
 
     @Override

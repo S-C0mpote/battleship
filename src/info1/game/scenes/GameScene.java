@@ -102,7 +102,7 @@ public class GameScene extends Scene {
         startAnimation.start();
 
         // Affichage des bateaux
-        for(GraphicShipObject ship : shipObjects) Scenes.SETUP.removeGameObject(ship);
+        for(GraphicShipObject ship : shipObjects) Scenes.GAME.removeGameObject(ship);
 
         for(IShip ship : engine.getNetwork().getUser().getNavyFleet().getShips()) {
             GraphicShipObject shipObject = new GraphicShipObject(userGrid, (Ship) ship);
@@ -122,5 +122,9 @@ public class GameScene extends Scene {
     public void enemyTurn() {
         turn.setText("à l'adversaire de jouer !");
         enemyGrid.setTurn(false);
+    }
+
+    public void setEnemyName(String name) {
+        opponentLabel.setText(name);
     }
 }

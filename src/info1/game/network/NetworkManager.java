@@ -109,6 +109,7 @@ public class NetworkManager {
         }
 
         if(onEnemyTurn) {
+            enemy = currentGame.getGuest();
             listener.onEnemyTurn();
             onEnemyTurn = false;
         }
