@@ -85,6 +85,7 @@ public class StartAnimation extends GameObject {
     public void start() {
         leftPart.y = 720 / 2d - 300;
         leftPart.x = -1280;
+        acc = 0;
         animated = true;
     }
 
