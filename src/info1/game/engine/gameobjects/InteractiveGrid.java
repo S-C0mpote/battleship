@@ -117,9 +117,11 @@ public class InteractiveGrid extends InteractiveGameObject {
                 Scenes.GAME.getLabelCoule().setText("Manqué");
             } else if(play == 1 || play == 10 || play == 100){
                 hit.add(cellClicked);
+                Scenes.GAME.getLabelRemaining().setText("" + hit.size() + " / 20");
                 Scenes.GAME.getLabelCoule().setText("Touché");
 
                 if(play == 10){
+                    Scenes.GAME.getLabelRemaining().setText("" + hit.size() + " / 20");
                     Scenes.GAME.getLabelCoule().setText("Coulé");
                 }
                 if(play == 100){
