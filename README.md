@@ -1,6 +1,6 @@
 # Projet S2 : Bataille Navale en java
 
-![Image Bateau](assets/ui/read_ship.jpg)
+![Image Bateau](img/read_ship.jpg)
 
 ## Lancer le code
 
@@ -19,7 +19,7 @@ Votre pseudo peut contenir au maximum 20 caractères (vous avez la liberté de p
 Vous devriez arriver sur la fenêtre ci-dessous :
 
 
-![image](assets/ui/menu_capture.png)
+![image](img/menu_capture.png)
 
 ###Disposition de votre flotte
 
@@ -63,3 +63,36 @@ Le bouton annuler en bas à gauche permet de quitter la partie.
 C'est dû au proxy. Si vous êtes à l'IUT, allez dans info1/game/Game, et activer le proxy (true).
 
 ##Explication des packages
+###game
+Il contient tout notre travail effectué, dont la classe principale
+
+###engine
+
+Il contient notre moteur de jeu, GameEngine.
+
+C'est lui qui permet de dessiner à l'écran, de limiter les FPS, de diriger les scènes etc...
+
+Nos scenes sont contenues dans la classe enum Scenes, et chaque scène hérite de la classe Scene. 
+
+###components
+
+contient les popups
+
+###gameobjects
+
+Il contient tout les objets interactifs sur la scene.
+
+###listeners
+C'est là où on ajoute les listeners aux gameobjects
+
+###network
+Gestion du serveur
+
+###resources
+Ici nous gérons nos fonts et nos Images. Cela permet de les charger une fois et de les réutiliser après.
+
+###scenes
+Contient la classe Menu, Game et Setup(gestion des bateaux).
+
+###utils
+Permet de setup des positions avec des vecteurs

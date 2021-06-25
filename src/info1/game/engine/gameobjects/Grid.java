@@ -3,14 +3,9 @@ package info1.game.engine.gameobjects;
 
 import info1.game.network.GamePlayer;
 import info1.game.resources.Fonts;
-import info1.game.utils.Vector2D;
-import info1.ships.INavyFleet;
-import info1.ships.IShip;
 import info1.ships.NavyFleet;
 
-import javax.swing.border.StrokeBorder;
 import java.awt.*;
-import java.util.List;
 
 public class Grid extends GameObject {
     private GamePlayer player;
