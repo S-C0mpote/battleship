@@ -23,7 +23,7 @@ public class GameScene extends Scene {
     private final List<ShipObject> shipObjects = new ArrayList<>();
 
     private GameEngine engine;
-    private Label turn, userLabel, opponentLabel, gameId, labelCoule;
+    private Label turn, userLabel, opponentLabel, gameId, labelCoule, remaining;
     private Grid userGrid;
     private InteractiveGrid enemyGrid;
     private StartAnimation startAnimation;
@@ -86,6 +86,12 @@ public class GameScene extends Scene {
         labelCoule.setPosition(new Vector2D(enemyGrid.getPosition().x, enemyGrid.getPosition().y + enemyGrid.getSize().height + 25));
         labelCoule.setSize(new Dimension(enemyGrid.getSize().width, 15));
 
+        remaining =  new Label("", Color.WHITE, 15f, Direction.RIGHT);
+        remaining.setPosition(new Vector2D(opponentLabel.getPosition().x, opponentLabel.getPosition().y + opponentLabel.getSize().height));
+        remaining.setSize(new Dimension(enemyGrid.getSize().width, 15));
+
+
+
         gameScene.addGameObject(-1, Scenes.MENU.getBackground());
         gameScene.addGameObject(userGrid);
         gameScene.addGameObject(enemyGrid);
@@ -93,6 +99,7 @@ public class GameScene extends Scene {
         gameScene.addGameObject(gameId);
         gameScene.addGameObject(userLabel);
         gameScene.addGameObject(opponentLabel);
+        gameScene.addGameObject(remaining);
         gameScene.addGameObject(labelCoule);
         gameScene.addGameObject(quit);
         gameScene.addGameObject(startAnimation);
@@ -106,6 +113,7 @@ public class GameScene extends Scene {
 
         userLabel.setText(userName);
         opponentLabel.setText(enemyName);
+        remaining.setText("0 / 20");
 
         startAnimation.setUsername1(userName);
         startAnimation.setUsername2(enemyName);
@@ -140,5 +148,9 @@ public class GameScene extends Scene {
 
     public Label getLabelCoule() {
         return labelCoule;
+    }
+
+    public Label getLabelRemaining() {
+        return remaining;
     }
 }

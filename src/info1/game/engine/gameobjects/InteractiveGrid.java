@@ -3,12 +3,9 @@ package info1.game.engine.gameobjects;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import info1.game.engine.GameEngine;
 import info1.game.engine.Scenes;
-import info1.game.engine.gameobjects.ui.Label;
 import info1.game.engine.listeners.InteractiveGameObject;
-import info1.game.network.GamePlayer;
 import info1.game.resources.Fonts;
 import info1.game.resources.Images;
-import info1.game.utils.Direction;
 import info1.game.utils.Vector2D;
 import info1.ships.BadCoordException;
 import info1.ships.Coord;
@@ -84,8 +81,8 @@ public class InteractiveGrid extends InteractiveGameObject {
 
 
         if(engine.getMousePosition() != null && isOver && isTurn) {
-            int xCoord = (engine.getMousePosition().x - (int) position.x) / cellSize;
-            int yCoord = (engine.getMousePosition().y - (int) position.y) / cellSize;
+            int xCoord = (engine.getMousePosition().x - 1 - (int) position.x) / cellSize;
+            int yCoord = (engine.getMousePosition().y - 1 - (int) position.y) / cellSize;
 
             g2d.setColor(new Color(1f, 1f, 1f, 0.2f));
             g2d.fillRect(
@@ -106,8 +103,8 @@ public class InteractiveGrid extends InteractiveGameObject {
     public void mousePressed(MouseEvent event){
         if(!isTurn) return;
 
-        int coordXclicked = (engine.getMousePosition().x - (int) position.x) / cellSize + 1;
-        int coordYclicked = (engine.getMousePosition().y - (int) position.y) / cellSize + 1;
+        int coordXclicked = (engine.getMousePosition().x - 1 - (int) position.x) / cellSize + 1;
+        int coordYclicked = (engine.getMousePosition().y - 1 - (int) position.y) / cellSize + 1;
 
         Vector2D cellClicked = new Vector2D(coordXclicked * cellSize + position.x - cellSize,
                                 coordYclicked * cellSize + position.y - cellSize);
@@ -124,9 +121,11 @@ public class InteractiveGrid extends InteractiveGameObject {
                 Scenes.GAME.getLabelCoule().setText("Manqué");
             } else if(play == 1 || play == 10 || play == 100){
                 hit.add(cellClicked);
+                Scenes.GAME.getLabelRemaining().setText("" + hit.size() + " / 20");
                 Scenes.GAME.getLabelCoule().setText("Touché");
 
                 if(play == 10){
+                    Scenes.GAME.getLabelRemaining().setText("" + hit.size() + " / 20");
                     Scenes.GAME.getLabelCoule().setText("Coulé");
                 }
                 if(play == 100){
