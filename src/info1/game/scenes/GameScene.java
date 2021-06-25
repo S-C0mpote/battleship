@@ -55,7 +55,7 @@ public class GameScene extends Scene {
 
         userGrid.setSize(new Dimension(300, 300));
         userGrid.setPosition(new Vector2D(
-                1280 / 4d - userGrid.getSize().width / 2d - 120,
+                1280 / 4d - userGrid.getSize().width / 2d - 50,
                 720 / 3d - userGrid.getSize().height / 2d));
 
         enemyGrid.setSize(new Dimension(500, 500));
