@@ -6,10 +6,11 @@ import info1.game.resources.Fonts;
 
 public class Game {
 
+    public static final boolean USE_PROXY = true;
+
     public static GameEngine engine = new GameEngine();
 
     public static void main(String[] args) {
-
         engine.getGameCanvas().setFont(Fonts.MAIN);
 
         Scenes.MENU.load();

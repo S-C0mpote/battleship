@@ -31,6 +31,9 @@ public class RunningGameTest {
 
     @BeforeAll
     public static void init() throws Exception {
+        Network.setProxy("srv-proxy-etu-2.iut-nantes.univ-nantes.prive", 3128);
+        Network.enableProxy(info1.game.Game.USE_PROXY);
+
         joueur1 = new Player("Joueur"+Math.random());
         joueur2 = new Player("Joueur"+Math.random());
 
