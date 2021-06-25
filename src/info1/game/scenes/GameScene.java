@@ -46,8 +46,7 @@ public class GameScene extends Scene {
         quit.setPosition(new Vector2D(10, 660));
         quit.setListener(() -> {
             engine.getNetwork().leaveGame();
-            PopupWaiting.currentPopup.setSpeed(100);
-            PopupWaiting.currentPopup.close();
+            PopupWaiting.currentPopup.closeWithoutAnimation();
             engine.setScene(Scenes.MENU);
         });
 

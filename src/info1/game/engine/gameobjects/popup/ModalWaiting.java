@@ -85,5 +85,4 @@ public class ModalWaiting extends GameObject {
         this.opening = true;
         this.code = String.valueOf(code);
     }
-    public void setSpeed(int speed){this.speed = speed;}
 }

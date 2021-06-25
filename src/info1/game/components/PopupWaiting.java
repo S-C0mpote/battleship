@@ -62,6 +62,10 @@ public class PopupWaiting {
         background.close();
         modal.close();
     }
-    public void setSpeed(int speed){modal.setSpeed(speed);}
 
+    public void closeWithoutAnimation() {
+        menu.removeGameObject(background);
+        menu.removeGameObject(modal);
+        menu.removeGameObject(cancelButton);
+    }
 }
