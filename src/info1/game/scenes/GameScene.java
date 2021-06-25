@@ -101,7 +101,7 @@ public class GameScene extends Scene {
         gameScene.addGameObject(remaining);
         gameScene.addGameObject(labelCoule);
         gameScene.addGameObject(quit);
-        gameScene.addGameObject(startAnimation);
+        gameScene.addGameObject(2000, startAnimation);
     }
 
     public void start() {
